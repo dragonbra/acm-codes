@@ -4,7 +4,7 @@ HANDLE: [dragon_bra](https://codeforces.com/profile/dragon_bra)
 
 RATING: 1714  //welcome to add me as a friend, will reply on CF
 
-![image-20191217114859377](C:\Users\dragon_bra\AppData\Roaming\Typora\typora-user-images\image-20191217114859377.png)
+![](H:\GitHub\Codeforces\Ratings\Rd.606.png)
 
 ---
 
