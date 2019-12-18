@@ -2,23 +2,24 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
-#include <cstring>
 #include <map>
 #include <set>
 #include <queue>
 #include <string>
 #include <vector>
 using namespace std;
+
 typedef long long ll;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
 const double eps = 1e-5;
-const int N = 1e5+10;
+const int N = 1e5 + 5;
 
+#define LOCAL
 void redirect() {
     #ifdef LOCAL
-        freopen("test.txt","r",stdin);
-        //freopen("out.txt","w",stdout);
+        freopen("1.in","r",stdin);
+        freopen("1.out","w",stdout);
     #endif
 }
 
@@ -30,8 +31,9 @@ inline ll read() {
 }
 
 int main() {
-	redirect();
-	
+    redirect();
+    
+    return 0;
 }
 
 /*
@@ -39,4 +41,3 @@ int main() {
 author:dragon_bra
 -----------------
 */
-
