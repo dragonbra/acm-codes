@@ -1,9 +1,42 @@
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <cstring>
+#include <map>
+#include <set>
+#include <queue>
+#include <string>
+#include <vector>
 using namespace std;
-typedef long long LL;
-const int N = 1e6+10;
+typedef long long ll;
+const int INF = 0x3f3f3f3f;
+const int mod = 1e9+7;
+const double eps = 1e-5;
+const int N = 1e5+10;
 
-int main(){
-	
-	return 0;
+void redirect() {
+    #ifdef LOCAL
+        freopen("test.txt","r",stdin);
+        //freopen("out.txt","w",stdout);
+    #endif
 }
+
+inline ll read() {
+    ll f=1,x=0;char ch;
+    do {ch=getchar(); if(ch=='-') f=-1;} while (ch<'0'||ch>'9');
+    do {x=x*10+ch-'0'; ch=getchar(); } while (ch>='0'&&ch<='9');
+    return x*f;
+}
+
+int main() {
+	redirect();
+	
+}
+
+/*
+-----------------
+author:dragon_bra
+-----------------
+*/
+
