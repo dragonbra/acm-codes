@@ -78,7 +78,6 @@ int main() {
 			if(vis[1][i] == 0 && vis[2][i] == 1 && i!=s1) c1++;
 			if(vis[1][i] == 1 && vis[2][i] == 0 && i!=s2) c3++;
 		}
-		c2 = n - 2 - c1 - c3;
 		
 		ll ans = c1*c3;
 		printf("%lld%c",ans,T==0?' ':'\n');
