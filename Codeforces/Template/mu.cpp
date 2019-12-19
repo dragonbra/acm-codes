@@ -32,7 +32,7 @@ inline ll read() {
 
 int main() {
     redirect();
-    int a,b; cin>>a>>b; cout<<a+b<<endl;
+    
     return 0;
 }
 

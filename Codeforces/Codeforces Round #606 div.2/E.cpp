@@ -15,10 +15,11 @@ const int mod = 1e9+7;
 const double eps = 1e-5;
 const int N = 2e5+10;
 
+#define LOCAL
 void redirect() {
     #ifdef LOCAL
-        freopen("test.txt","r",stdin);
-        //freopen("out.txt","w",stdout);
+        freopen("1.in","r",stdin);
+        freopen("1.out","w",stdout);
     #endif
 }
 
@@ -39,11 +40,10 @@ queue<int> Q;
 vector<int> G[N];
 
 int n,m,s1,s2;
-
 int vis[3][N],f[N];
 
 int main() {
-	//redirect();
+	redirect();
 	int T; scanf("%d",&T);
 	while(T--){
 		scanf("%d%d%d%d",&n,&m,&s1,&s2);
@@ -62,7 +62,6 @@ int main() {
 			
 			for(int i=0;i<G[t].size();i++){
 				if( vis[1][ G[t][i] ] == 0 && G[t][i] != s1 ) Q.push( G[t][i] ), vis[1][ G[t][i] ] = 1, f[ G[t][i] ] = t;
-				//cout<<G[t][i]<<' ';cout<<endl;
 			}
 		}
 		
@@ -71,22 +70,18 @@ int main() {
 			int t = Q.front(); Q.pop();
 			for(int i=0;i<G[t].size();i++){
 				if( vis[2][ G[t][i] ] == 0 && G[t][i] != s2 ) Q.push( G[t][i] ), vis[2][ G[t][i] ] = 1, f[ G[t][i] ] = t;
-				//cout<<G[t][i]<<' ';cout<<endl;
 			}
 		}
 		
 		ll c1 = 0, c2 = 0, c3 = 0;
 		for(int i=1;i<=n;i++){
-			//printf("%d ",vis[1][i]);
 			if(vis[1][i] == 0 && vis[2][i] == 1 && i!=s1) c1++;
 			if(vis[1][i] == 1 && vis[2][i] == 0 && i!=s2) c3++;
 		}
 		c2 = n - 2 - c1 - c3;
 		
-		//cout<<endl; cout<<c1<<' '<<c2<<' '<<c3<<endl;
-		
 		ll ans = c1*c3;
-		printf("%lld\n",ans);
+		printf("%lld%c",ans,T==0?' ':'\n');
 	}
 }
 
@@ -95,4 +90,3 @@ int main() {
 author:dragon_bra
 -----------------
 */
-
