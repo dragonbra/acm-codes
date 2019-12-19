@@ -4,7 +4,7 @@ Codeforces HANDLE: [dragon_bra](https://codeforces.com/profile/dragon_bra)
 
 RATING: 1714  //welcome to add me as a friend, will reply soon
 
-![image](https://github.com/dragonbra/acm-codes/blob/master/Codeforces/Ratings/Rd.606.png)
+![image](https://github.com/dragonbra/acm-codes/blob/master/2019/Codeforces/Ratings/Rd.606.png)
 
 ---
 
