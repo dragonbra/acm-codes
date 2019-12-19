@@ -1,0 +1,10 @@
+:loop
+
+rand.exe
+II.exe
+IIC.exe
+
+fc 21.txt 22.txt
+if errorlevel==1 pause
+
+goto loop
