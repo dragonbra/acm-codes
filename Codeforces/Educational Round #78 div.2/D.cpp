@@ -35,7 +35,7 @@ struct node{
     int l,r; int idx;
 } a[N], b[N];
 
-bool vis[N]; int ans=0; int f[N]; bool flag = true;
+bool vis[N]; int ans=0; int pos[N], f[N]; bool flag = true;
 
 bool cmp(node a,node b){
     return a.l<b.l;
