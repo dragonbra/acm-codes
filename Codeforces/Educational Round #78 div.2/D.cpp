@@ -75,6 +75,13 @@ void dfs(int x){
         if(a[mid].l < a[x].l) l = mid+1;
         else if(a[mid].l > a[x].r) r = mid;
     }
+    if(f[x]==l) l++;
+
+    if(vis[l]) {
+        flag = false; return;
+    } else {
+        ans++; f[l] = x; vis[l] = true; dfs(l); if(!flag) return;
+    }
 
     return;
 }
