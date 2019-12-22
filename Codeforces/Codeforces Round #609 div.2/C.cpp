@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
+#include <cstring>
 #include <map>
 #include <set>
 #include <queue>
@@ -13,7 +14,7 @@ typedef long long ll;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
 const double eps = 1e-5;
-const int N = 2e3 + 5;
+const int N = 2e5 + 5;
 
 #define LOCAL
 void redirect() {
@@ -30,31 +31,38 @@ inline ll read() {
     return x*f;
 }
 
-int n,m;
-int a[N], b[N];
+char a[N], b[N];
+int n,m,k;
 
 int main() {
     redirect();
-    scanf("%d%d",&n,&m);
-    for(int i=0;i<n;i++) scanf("%d",&a[i]);
-    for(int i=0;i<n;i++) scanf("%d",&b[i]);
-    sort(a,a+n); sort(b,b+n);
-
-    int ans = 0;
+    scanf("%d%d",&n,&k);
+    scanf("%s",a);
     for(int i=0;i<n;i++){
-        bool flag = true;
-        //cout<<bb[i].num<<' '<<bb[i].cnt<<endl;
-        ans = b[i] + m - a[0]; ans %= m;
-        for(int j=0;j<n;j++){
-            //cout<<aa[(i+j)%acnt].cnt<<' '<<bb[j].cnt<<endl;
-            if( (a[j] + ans) % m != b[(i+j)%n] ){
-                flag = false; break;
-            }
-        }
-        if(flag) break;
+        b[i] = a[i];
     }
 
-    printf("%d\n",ans);
+    bool flag = true;
+    for(int i=0;i<n-k;i++){
+        if(a[i+k]!=a[i]) {
+            flag = false; break;
+        }
+    }
+
+    if(!flag){
+        for(int i=0;i<n-k;i++) a[i+k] = a[i];
+        if( strcmp(a,b) < 0 ) {
+            a[k-1]++; 
+            int t = k-1;
+            while(a[t]=='9'+1){
+                a[t]='0'; a[t-1]++; t--;
+            }
+            for(int i=0;i<n-k;i++) a[i+k] = a[i];
+        }
+    }
+
+    cout<<n<<endl;
+    cout<<a<<endl;
 
     return 0;
 }
