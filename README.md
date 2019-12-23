@@ -10,7 +10,9 @@ RATING: 1714  //welcome to add me as a friend, will reply soon
 
 2019
 
-12.19 Educational Round #78 div.2
+12.21 Codeforces Round #609 div.2   1705→1655   Rank: 1806
+
+12.19 Educational Round #78 div.2   1714→1705   Rank: 1271
 
 12.15 Codeforces Round #606 div.2	1648→1714	Rank: 341
 

@@ -50,20 +50,16 @@ struct Car *search(struct Car *head, char *p){
     return head;
 }
 
-void f(float* , float);
-
 int main() {
     redirect();
     
-    float a[10],b=1;
-    f(a,b);
+    double a = 1.0;
+    a++;
+    cout<<a<<endl;
 
     return 0;
 }
 
-void f(float a[],float b){
-    
-}
 
 /*
 -----------------
