@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cmath>
+#include <cstring>
 #include <map>
 #include <set>
 #include <queue>
@@ -30,10 +31,38 @@ inline ll read() {
     return x*f;
 }
 
+struct Car{
+    char color[30], type[30], plateNumber[30], driverName[30];
+    struct Car * next;
+};
+
+struct Car *add( struct Car *head, struct Car *p ){
+    p->next = head;
+    head = p;
+    return head;
+}
+
+struct Car *search(struct Car *head, char *p){
+    while(head!=NULL){
+        if(strcmp(head->driverName,p)==0||strcmp(head->plateNumber,p)==0) return head;
+        head = head->next;
+    }
+    return head;
+}
+
+void f(float* , float);
+
 int main() {
     redirect();
     
+    float a[10],b=1;
+    f(a,b);
+
     return 0;
+}
+
+void f(float a[],float b){
+    
 }
 
 /*
