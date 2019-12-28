@@ -31,36 +31,17 @@ inline ll read() {
     return x*f;
 }
 
-struct Car{
-    char color[30], type[30], plateNumber[30], driverName[30];
-    struct Car * next;
-};
-
-struct Car *add( struct Car *head, struct Car *p ){
-    p->next = head;
-    head = p;
-    return head;
-}
-
-struct Car *search(struct Car *head, char *p){
-    while(head!=NULL){
-        if(strcmp(head->driverName,p)==0||strcmp(head->plateNumber,p)==0) return head;
-        head = head->next;
-    }
-    return head;
-}
-
 int main() {
     redirect();
-
-    int a = 0;
-    const int * const p = &a; a++;
-    cout<<a<<endl;
-    cout<<*p<<endl;
+    int T; scanf("%d",&T);
+    int a[12]={0,1,0,0,0,1,5,33,245,2053,19137,196705};
+    while(T--){
+        int n; scanf("%d",&n);
+        cout<<a[n]<<endl;
+    }
 
     return 0;
 }
-
 
 /*
 -----------------
