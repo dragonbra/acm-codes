@@ -76,7 +76,9 @@ int main() {
                 ans++;
                 for(int j=i+1;j<=n;j++)
                     if(a[j].l<=a[i].r) vis[j]=1;
+                    else break;
             }
+            
             cout<<ans<<endl;
         }
         
