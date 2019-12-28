@@ -61,12 +61,32 @@ ll dfs(int x,int k)
     //不取x
     dp[b[x]][k] = dfs(b[x],k);
     dp[x][k] = dp[b[x]][k];
-        int y=k-w[x];
-        for(int i=0;i<=y;i++){
-            dp[c[x]][y-i] = dfs(c[x],y-i);
-            dp[b[x]][i] = dfs(b[x],i);
-            dp[x][k] = max( dp[x][k] , v[x]+dp[c[x]][y-i]+dp[b[x]][i] );
-        }
+
+    int y=k-w[x];
+    for(int i=0;i<=y;i++){
+        dp[c[x]][y-i] = dfs(c[x],y-i);
+        dp[b[x]][i] = dfs(b[x],i);
+        dp[x][k] = max( dp[x][k] , v[x]+dp[c[x]][y-i]+dp[b[x]][i] );
+    }
+
+    return(dp[x][k]);
+}
+
+ll dfs(int x,int k)
+{
+    if( dp[x][k]>0 )    return(dp[x][k]);
+    if( x==0 || k<=0 )    return(0);
+    //不取x
+    dp[b[x]][k] = dfs(b[x],k);
+    dp[x][k] = dp[b[x]][k];
+
+    int y=k-w[x];
+    for(int i=0;i<=y;i++){
+        dp[c[x]][y-i] = dfs(c[x],y-i);
+        dp[b[x]][i] = dfs(b[x],i);
+        dp[x][k] = max( dp[x][k] , v[x]+dp[c[x]][y-i]+dp[b[x]][i] );
+    }
+
     return(dp[x][k]);
 }
 

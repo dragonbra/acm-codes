@@ -72,22 +72,17 @@ ll dfs(int x,int k)
     return(dp[x][k]);
 }
 
-ll dfs(int x,int k)
-{
-    if( dp[x][k]>0 )    return(dp[x][k]);
-    if( x==0 || k<=0 )    return(0);
-    //不取x
-    dp[b[x]][k] = dfs(b[x],k);
-    dp[x][k] = dp[b[x]][k];
-
-    int y=k-w[x];
-    for(int i=0;i<=y;i++){
-        dp[c[x]][y-i] = dfs(c[x],y-i);
-        dp[b[x]][i] = dfs(b[x],i);
-        dp[x][k] = max( dp[x][k] , v[x]+dp[c[x]][y-i]+dp[b[x]][i] );
+void dfs(int u) {
+    if (vis[u]) return;
+    vis[u] = true;
+    for (int x : G[u]) {
+        for (int i = 0; i <= s; i++) {
+            if (i >= w[x]) dp[x][i] = dp[u][i - w[x]] + v[x];
+            else dp[x][i] = -1e18;
+        }
+        dfs(x);
+        for (int i = 0; i <= s; i++) dp[u][i] = max(dp[u][i],dp[x][i]);
     }
-
-    return(dp[x][k]);
 }
 
 int main() {
