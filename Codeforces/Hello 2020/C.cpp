@@ -14,9 +14,9 @@ typedef long long ll;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
 const double eps = 1e-5;
-const int N = 100 + 5;
+const int N = 3e5 + 5;
 
-#define LOCAL
+//#define LOCAL
 void redirect() {
     #ifdef LOCAL
         freopen("1.in","r",stdin);
@@ -31,21 +31,24 @@ inline ll read() {
     return x*f;
 }
 
-int n,m,q;
-string a[N],b[N];
+ll n,m;
+ll f[N];
 
 int main() {
     redirect();
-    scanf("%d%d",&n,&m);
-    for(int i=0;i<n;i++) cin>>a[i];
-    for(int i=0;i<m;i++) cin>>b[i];
-    scanf("%d",&q);
-    for(int i=1;i<=q;i++){
-        int cur; scanf("%d",&cur);
-        string ans; cur -= 1;
-        ans = a[cur%n] + b[cur%m];
-        cout<<ans<<endl;
+    scanf("%lld%lld",&n,&m);
+
+    f[1]=1;
+    for(int i=2;i<=n;i++){
+        f[i] = f[i-1]*i; f[i]%=m;
     }
+
+    ll ans = 0;
+    for(int i=1;i<=n;i++){
+        ans += (f[i] * (f[n-i+1]*(n-i+1)%m) ) % m; ans %= m;
+    }
+
+    printf("%lld\n",ans);
 
     return 0;
 }
