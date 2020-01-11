@@ -2,9 +2,17 @@
 
 Codeforces HANDLE: [dragon_bra](https://codeforces.com/profile/dragon_bra) 
 
-RATING: 1655  //welcome to add me as a friend, will reply soon
+RATING: 1668  //welcome to add me as a friend, will reply soon
 
 ![image](https://github.com/dragonbra/acm-codes/blob/master/Codeforces/Ratings/Rd.609.png)
+
+---
+
+2020
+
+1.10 Codeforces Round #613 div.2    1661→1668   Rank: 1407
+
+1.4 Hello 2020                      1655→1661   Rank: 2417
 
 ---
 
