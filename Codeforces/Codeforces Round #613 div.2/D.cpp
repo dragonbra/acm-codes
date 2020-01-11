@@ -32,28 +32,31 @@ inline ll read() {
 
 int n; int ans = 0;
 string a[N]; 
-bool vis[N];//0-29
+bool vis[35];//0-29
+bool avis[35];
 
 void find(int ll,int rr,int pos){
-    if(pos==30) return;
+    if(pos==30){
+        for(int i=0;i<30;i++){
+            if(avis[i]==1 && vis[i]==0) break;
+            avis[i] = vis[i];
+        } 
+        return;
+    } 
+
     int l=ll, r=rr;
-    while(l<r){
-        int mid = (l+r)/2;
-        if(a[mid][pos] == a[mid+1][pos]){
+    if(a[l][pos] == a[r][pos]) {
+        vis[pos] = 1; find(l,r,pos+1); vis[pos] = 0;
+    } else {
+        while(l<r){
+            int mid = (l+r)/2;
             if(a[mid][pos] == '0') l = mid+1;
             else r = mid;
-        } else{
-            l = mid; r = mid+1; break;
         }
+        //cout<<l<<r<<endl;
+        find(ll,l-1,pos+1);
+        find(r,rr,pos+1);
     }
-
-    cout<<l<<' '<<r<<endl;
-
-    if(a[l][pos] == a[r][pos]){
-        vis[pos] = 1;
-    }
-    find(ll,l,pos+1);
-    find(r,rr,pos+1);
 }
 
 int main() {
@@ -68,6 +71,7 @@ int main() {
             if(t%2==1) s[pos] = '1';
             pos--; t/=2;
         }
+        a[i] = s;
     }
 
     sort(a+1,a+n+1);
@@ -76,12 +80,12 @@ int main() {
 
     int res = 1;
     for(int i=29;i>=0;i--){
-        cout<<vis[i];
-        if(!vis[i]) ans += res;
+        //cout<<avis[i];
+        if(!avis[i]) ans += res;
         res*=2;
-    }
+    } //cout<<endl;
 
-    cout<<ans<<endl;
+    printf("%d\n",ans);
     
     return 0;
 }
