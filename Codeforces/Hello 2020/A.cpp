@@ -14,7 +14,7 @@ typedef long long ll;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
 const double eps = 1e-5;
-const int N = 1e5 + 5;
+const int N = 100 + 5;
 
 #define LOCAL
 void redirect() {
@@ -31,36 +31,24 @@ inline ll read() {
     return x*f;
 }
 
-struct Car{
-    char color[30], type[30], plateNumber[30], driverName[30];
-    struct Car * next;
-};
-
-struct Car *add( struct Car *head, struct Car *p ){
-    p->next = head;
-    head = p;
-    return head;
-}
-
-struct Car *search(struct Car *head, char *p){
-    while(head!=NULL){
-        if(strcmp(head->driverName,p)==0||strcmp(head->plateNumber,p)==0) return head;
-        head = head->next;
-    }
-    return head;
-}
+int n,m,q;
+string a[N],b[N];
 
 int main() {
     redirect();
-
-    int a = 0;
-    const int * const p = &a; a++;
-    cout<<a<<endl;
-    cout<<*p<<endl;
+    scanf("%d%d",&n,&m);
+    for(int i=0;i<n;i++) cin>>a[i];
+    for(int i=0;i<m;i++) cin>>b[i];
+    scanf("%d",&q);
+    for(int i=1;i<=q;i++){
+        int cur; scanf("%d",&cur);
+        string ans; cur -= 1;
+        ans = a[cur%n] + b[cur%m];
+        cout<<ans<<endl;
+    }
 
     return 0;
 }
-
 
 /*
 -----------------

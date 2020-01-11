@@ -14,9 +14,9 @@ typedef long long ll;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
 const double eps = 1e-5;
-const int N = 1e5 + 5;
+const int N = 3e5 + 5;
 
-#define LOCAL
+//#define LOCAL
 void redirect() {
     #ifdef LOCAL
         freopen("1.in","r",stdin);
@@ -31,36 +31,27 @@ inline ll read() {
     return x*f;
 }
 
-struct Car{
-    char color[30], type[30], plateNumber[30], driverName[30];
-    struct Car * next;
-};
-
-struct Car *add( struct Car *head, struct Car *p ){
-    p->next = head;
-    head = p;
-    return head;
-}
-
-struct Car *search(struct Car *head, char *p){
-    while(head!=NULL){
-        if(strcmp(head->driverName,p)==0||strcmp(head->plateNumber,p)==0) return head;
-        head = head->next;
-    }
-    return head;
-}
+ll n,m;
+ll f[N];
 
 int main() {
     redirect();
+    scanf("%lld%lld",&n,&m);
 
-    int a = 0;
-    const int * const p = &a; a++;
-    cout<<a<<endl;
-    cout<<*p<<endl;
+    f[1]=1;
+    for(int i=2;i<=n;i++){
+        f[i] = f[i-1]*i; f[i]%=m;
+    }
+
+    ll ans = 0;
+    for(int i=1;i<=n;i++){
+        ans += (f[i] * (f[n-i+1]*(n-i+1)%m) ) % m; ans %= m;
+    }
+
+    printf("%lld\n",ans);
 
     return 0;
 }
-
 
 /*
 -----------------

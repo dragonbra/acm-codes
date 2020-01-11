@@ -31,36 +31,37 @@ inline ll read() {
     return x*f;
 }
 
-struct Car{
-    char color[30], type[30], plateNumber[30], driverName[30];
-    struct Car * next;
-};
-
-struct Car *add( struct Car *head, struct Car *p ){
-    p->next = head;
-    head = p;
-    return head;
-}
-
-struct Car *search(struct Car *head, char *p){
-    while(head!=NULL){
-        if(strcmp(head->driverName,p)==0||strcmp(head->plateNumber,p)==0) return head;
-        head = head->next;
-    }
-    return head;
-}
+int n;
+struct node{
+    int a; string b;
+} a[N];
+string b[10];
 
 int main() {
     redirect();
+    scanf("%d",&n);
+    for(int i=1;i<=n;i++){
+        scanf("%d",&a[i].a);
+    }
+    for(int i=1;i<=n;i++){
+        cin>>a[i].b;
+    }
+    b[1] = "do";
+    b[2] = "re";
+    b[3] = "mi";
+    b[4] = "fa";
+    b[5] = "sol";
+    b[6] = "la";
+    b[7] = "si";
 
-    int a = 0;
-    const int * const p = &a; a++;
-    cout<<a<<endl;
-    cout<<*p<<endl;
+    int ans = 0;
+    for(int i=1;i<=n;i++){
+        if(a[i].b!=b[a[i].a]) ans++;
+    }
+    cout<<ans<<endl;
 
     return 0;
 }
-
 
 /*
 -----------------
