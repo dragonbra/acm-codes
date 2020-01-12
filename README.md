@@ -10,6 +10,8 @@ RATING: 1668  //welcome to add me as a friend, will reply soon
 
 2020
 
+1.12 CCPC Wannafly Camp Day1 div.2 
+
 1.10 Codeforces Round #613 div.2    1661→1668   Rank: 1407
 
 1.4 Hello 2020                      1655→1661   Rank: 2417
