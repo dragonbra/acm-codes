@@ -2,9 +2,9 @@
 
 rand.exe
 A.exe
-AA.exe
+A2.exe
 
-fc ans.txt cmp.txt
+fc 1.out baoli.cout
 if errorlevel==1 pause
 
 goto loop

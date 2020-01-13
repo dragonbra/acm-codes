@@ -22,13 +22,13 @@ inline ll read() {
     return x*f;
 }
 
-
+bool vis[N];
 
 int main() {
     redirect();
 
-    int n = 1e6;
-    for(int i=1;i<=n;i++) printf("%c",rand()%26+'a');
+    int n = 6; cout<<n<<endl;
+    for(int i=1;i<=n;i++) 
     cout<<endl;
 
     return 0;
