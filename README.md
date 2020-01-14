@@ -4,7 +4,7 @@ Codeforces HANDLE: [dragon_bra](https://codeforces.com/profile/dragon_bra)
 
 RATING: 1668  //welcome to add me as a friend, will reply soon
 
-![image](https://github.com/dragonbra/acm-codes/blob/master/Codeforces/Ratings/Rd.609.png)
+![image](https://github.com/dragonbra/acm-codes/blob/master/Codeforces/Ratings/Rd.613.png)
 
 ---
 
@@ -12,7 +12,7 @@ RATING: 1668  //welcome to add me as a friend, will reply soon
 
 1.14 CCPC Wannafly Camp Day3    Solved: 2/10
 
-1.13 CCPC Wannafly Camp Day2    Solved: 3/11    Upsolved: E
+1.13 CCPC Wannafly Camp Day2    Solved: 2/11    Upsolved: E, shen-K
 
 1.12 CCPC Wannafly Camp Day1    Solved: 3/10
 
