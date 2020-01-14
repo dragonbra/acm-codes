@@ -2,9 +2,6 @@
 using namespace std;
 
 typedef long long ll;
-const int INF = 0x3f3f3f3f;
-const int mod = 1e9+7;
-const double eps = 1e-5;
 const int N = 1e5 + 5;
 
 void redirect() {
@@ -21,7 +18,7 @@ ll ans[N], rans[N];
 vector<int> G[N];
 set<ll> S[N];
 
-void merge(int a,int b,bool fg){
+void merge(int a,int b) {
     while(!S[b].empty()){
         ll t = *( S[b].begin() ); S[b].erase( t );
 
@@ -40,8 +37,6 @@ void merge(int a,int b,bool fg){
 
         S[a].insert(t);
     }
-    
-    if(fg) rans[a] = ans[a];
 }
 
 void dfs1(ll u, ll fa) {//记录了所有子树的size 和 每个节点的重儿子
@@ -67,11 +62,12 @@ void dfs2(ll u,ll fa,bool keep,bool isson){
     if( keep ) {
         for( auto v:G[fa] ) {
             if( u==v ) continue;
-            merge( u, v, 0 );
+            merge( u, v );
         }
 
         if( S[fa].size() < S[u].size() ) S[fa].swap(S[u]), swap(ans[fa],ans[u]);
-        merge( fa, u, 1 );
+        merge( fa, u ); 
+        rans[fa] = ans[fa];
     }
 }
 
