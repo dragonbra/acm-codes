@@ -1,3 +1,17 @@
+/*
+
+DSU-on-tree
+树上启发式合并
+重点：{
+    dfs1()：找出所有节点的重儿子，记录每个节点的子树大小
+    dfs2()：搜索下去更新答案，
+        如果是重儿子，
+            将兄弟所有的集合合并到重儿子，并将重儿子的答案合并到父亲节点
+        else 如果是轻儿子
+            寻找他的重儿子并先把答案合并到自己
+}
+
+*/
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -39,7 +53,7 @@ void merge(int a,int b) {
     }
 }
 
-void dfs1(ll u, ll fa) {
+void dfs1(ll u, ll fa) {//记录了所有子树的size 和 每个节点的重儿子
     size[u] = 1;
     for ( auto v:G[u] ) {
         dfs1(v, u);
