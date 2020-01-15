@@ -10,27 +10,27 @@ using namespace std;
 
 	int gameover;
 	
-	int x1,y1;//Ëæ»ú³öÀ´
+	int x1,y1;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	int x,y;
 
 	long start; 
 //========================
-//ÀàµÄÊµÏÖÓëÓ¦ÓÃinitialize
+//ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½initialize
 //========================
 
-//ÏÂÃæ¶¨ÒåÌ°³ÔÉßµÄ×ø±êÀà
+//ï¿½ï¿½ï¿½æ¶¨ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 class snake_position{
 	public:
 		
-		int x,y;//x±íÊ¾ÐÐ£¬y±íÊ¾ÁÐ 
+		int x,y;//xï¿½ï¿½Ê¾ï¿½Ð£ï¿½yï¿½ï¿½Ê¾ï¿½ï¿½ 
 		
 		snake_position(){};
 		
-		void initialize(int &);//×ø±ê³õÊ¼»¯ 
+		void initialize(int &);//ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ 
 }; 
 
-snake_position position[(N-2)*(N-2)+1];//¶¨ÒåÌ°³ÔÉß×ø±êÀàÊý×é£¬ÓÐ(N-2)*(N-2)¸ö×ø±ê
+snake_position position[(N-2)*(N-2)+1];//ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½(N-2)*(N-2)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 void snake_position::initialize(int &j){
 	x = 1;
@@ -38,18 +38,18 @@ void snake_position::initialize(int &j){
 	y = j;
 }  
 
-//ÏÂÃæ¶¨ÒåÌ°³ÔÉßµÄÆåÅÌÍ¼
+//ï¿½ï¿½ï¿½æ¶¨ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 
 class snake_map{
 	private:
 		
-		char s[N][N];//¶¨ÒåÌ°³ÔÉßÆåÅÌ£¬°üÀ¨Ç½±Ú¡£
+		char s[N][N];//ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½Ú¡ï¿½
 		
 		int grade,length;
 		
-		int gamespeed;//Ç°½øÊ±¼ä¼ä¸ô
+		int gamespeed;//Ç°ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
 		
-		char direction;//³õÊ¼Çé¿öÏÂ£¬ÏòÓÒÔË¶¯
+		char direction;//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½
 		
 		int head,tail;
 		
@@ -60,9 +60,9 @@ class snake_map{
 	public:
 	
 		snake_map(int h=4,int t=1,int l=4,char d=77,int s=0):length(l),direction(d),head(h),tail(t),score(s){}
-		//d=77 Ä¬ÈÏÏòÓÒ 
+		//d=77 Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		
-		void initialize(); //³õÊ¼»¯º¯Êý
+		void initialize(); //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 		void show_game();
 		
@@ -75,7 +75,7 @@ class snake_map{
 		void display(); 
 }; 
 
-//¶¨Òå³õÊ¼»¯º¯Êý£¬½«Ì°³ÔÉßµÄÆåÅÌÍ¼½øÐÐ³õÊ¼»¯
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ð³ï¿½Ê¼ï¿½ï¿½
 
 void snake_map::initialize(){
 	
@@ -86,20 +86,17 @@ void snake_map::initialize(){
 	
 	for(int i=1;i<=N-2;i++)
 		for(int j=1;j<=N-2;j++)
-			s[i][j]=' ';//³õÊ¼»¯Ì°³ÔÉßÆåÅÌÖÐ¼ä¿Õ°×²¿·Ö
+			s[i][j]=' ';//ï¿½ï¿½Ê¼ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½Õ°×²ï¿½ï¿½ï¿½
 			
 	for(int i=0;i<=N-1;i++)
-		s[0][i] = s[N-1][i] = '-'; //³õÊ¼»¯Ì°³ÔÉßÆåÅÌÉÏÏÂÇ½±Ú 
+		s[0][i] = s[N-1][i] = '-'; //ï¿½ï¿½Ê¼ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ 
 		
 	for(int i=1;i<=N-2;i++)
-		s[i][0] = s[i][N-1] = '|'; //³õÊ¼»¯Ì°³ÔÉßÆåÅÌ×óÓÒÇ½±Ú 
+		s[i][0] = s[i][N-1] = '|'; //ï¿½ï¿½Ê¼ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ 
 } 
 
-//================== 
-//Êä³öÌ°³ÔÉßÆåÅÌÐÅÏ¢
-
 void snake_map::show_game(){
-	system("cls"); //ÇåÆÁ
+	system("cls"); //ï¿½ï¿½ï¿½ï¿½
 	
 	cout<<endl;
 	
@@ -108,29 +105,29 @@ void snake_map::show_game(){
 		cout<<'\t';
 		
 		for(int j=0;j<N;j++)
-			cout<<s[i][j]<<' '; //Êä³öÌ°³ÔÉßÆåÅÌ
+			cout<<s[i][j]<<' '; //ï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			
-		if(i==2) cout<< "\tµÈ¼¶£º" <<grade;
+		if(i==2) cout<< "\tï¿½È¼ï¿½ï¿½ï¿½" <<grade;
 		
-		if(i==6) cout<< "\tËÙ¶È£º" <<gamespeed;
+		if(i==6) cout<< "\tï¿½Ù¶È£ï¿½" <<gamespeed;
 		
-		if(i==10) cout<<"\tµÃ·Ö£º" <<score << "·Ö";
+		if(i==10) cout<<"\tï¿½Ã·Ö£ï¿½" <<score << "ï¿½ï¿½";
 		
-		if(i==14) cout<<"\tÔÝÍ££º°´Ò»ÏÂ¿Õ¸ñ¼ü";
+		if(i==14) cout<<"\tï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Â¿Õ¸ï¿½ï¿½";
 		
-		if(i==18) cout<<"\t¼ÌÐø£º°´Á½ÏÂ¿Õ¸ñ¼ü";
+		if(i==18) cout<<"\tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¿Õ¸ï¿½ï¿½";
 		
 		cout<<endl; 
 	}
 } 
 
-//ÊäÈëÑ¡ÔñµÈ¼¶
+//ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½È¼ï¿½
 void snake_map::getgrade(){
 	
 	cin>>grade;
 	
 	while( grade>7 || grade<1 ){
-		cout << "ÇëÊäÈëÊý×Ö1-7Ñ¡ÔñµÈ¼¶£¬ÊäÈëÆäËûÊý×ÖÎÞÐ§" <<endl;
+		cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1-7Ñ¡ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§" <<endl;
 		
 		cin>>grade; 
 	}
@@ -153,18 +150,18 @@ void snake_map::getgrade(){
 	}
 }
 
-//Êä³öµÈ¼¶£¬µÃ·ÖÇé¿öÒÔ¼°³ÆºÅ
+//ï¿½ï¿½ï¿½ï¿½È¼ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½Æºï¿½
 
 void snake_map::display(){
 	
-	cout<< "\n\t\t\t\tµÈ¼¶£º" <<grade;
+	cout<< "\n\t\t\t\tï¿½È¼ï¿½ï¿½ï¿½" <<grade;
 	
-	cout<< "\n\n\n\t\t\t\tËÙ¶È£º"<<gamespeed;
+	cout<< "\n\n\n\t\t\t\tï¿½Ù¶È£ï¿½"<<gamespeed;
 	
-	cout<< "\n\n\n\t\t\t\tµÃ·Ö£º"<<score <<"·Ö"; 
+	cout<< "\n\n\n\t\t\t\tï¿½Ã·Ö£ï¿½"<<score <<"ï¿½ï¿½"; 
 } 
 
-//Ëæ»ú²úÉú Ã×£¿
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×£ï¿½
 void snake_map::setpoint(){
 	
 	srand(time(0));
@@ -179,7 +176,7 @@ void snake_map::setpoint(){
 	s[x1][y1]='*';
 } 
 
-char key,lastkey=75;//Ä¬ÈÏÏòÓÒ³ö·¢ 
+char key,lastkey=75;//Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ 
 
 int snake_map::update_game(){
 	
@@ -193,8 +190,8 @@ int snake_map::update_game(){
 
 	start = clock();
 	
-	while((gameover=(clock()-start<=gamespeed))&&!kbhit()); //kbhit - ¼üÅÌÒâÍâÊäÈë 
-	//Èç¹ûÓÐ¼ü°´ÏÂ»òÊ±¼ä³¬¹ý×Ô¶¯Ç°½øÊ±¼ä¼ä¸ôÔòÖÕÖ¹Ñ­»·
+	while((gameover=(clock()-start<=gamespeed))&&!kbhit()); //kbhit - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	//ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½Â»ï¿½Ê±ï¿½ä³¬ï¿½ï¿½ï¿½Ô¶ï¿½Ç°ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹Ñ­ï¿½ï¿½
 	
 	
 		if(gameover){
@@ -214,7 +211,7 @@ int snake_map::update_game(){
 		
 		if(key == ' ')
 		{	
-			while(getch()!=' '){};//ÕâÀïÊµÏÖµÄÊÇ°´¿Õ¸ñÔÝÍ££¬°´¿Õ¸ñ¼ÌÐøµÄ 
+			while(getch()!=' '){};//ï¿½ï¿½ï¿½ï¿½Êµï¿½Öµï¿½ï¿½Ç°ï¿½ï¿½Õ¸ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½Õ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		}
 		
 		else
@@ -223,13 +220,13 @@ int snake_map::update_game(){
 			
 			switch(direction){
 				
-				case 72: x = position[head].x-1; y = position[head].y; break; //'w'¡ü
+				case 72: x = position[head].x-1; y = position[head].y; break; //'w'ï¿½ï¿½
 				
-				case 80: x = position[head].x+1; y = position[head].y; break; //'s'¡ý
+				case 80: x = position[head].x+1; y = position[head].y; break; //'s'ï¿½ï¿½
 				
-				case 75: x = position[head].x; y = position[head].y-1; break; //'a'¡û
+				case 75: x = position[head].x; y = position[head].y-1; break; //'a'ï¿½ï¿½
 				
-				case 77: x = position[head].x; y = position[head].y+1; //'d'¡ú
+				case 77: x = position[head].x; y = position[head].y+1; //'d'ï¿½ï¿½
 			}
 			
 			if(x==0) x=N-2;
@@ -239,13 +236,13 @@ int snake_map::update_game(){
 			else if(y==N-1) y=1;
 		
 			
-			if(!(direction==72||direction==80||direction==75||direction==77)) //°´¼ü·Ç·½Ïò¼ü
+			if(!(direction==72||direction==80||direction==75||direction==77)) //ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 			
 				gameover = 0;
 			
 			
 			/*	
-			else if(x==0 || x==N-1 || y==0 || y==N-1)//Åöµ½Ç½±Ú 
+			else if(x==0 || x==N-1 || y==0 || y==N-1)//ï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ 
 			{
 				gameover = 0;
 				
@@ -253,13 +250,13 @@ int snake_map::update_game(){
 			*/
 			
 				
-			else if(s[x][y]=='*'&&!(x==x1&&y==y1)) //ÉßÍ·Åöµ½ÉßÉí 
+			else if(s[x][y]=='*'&&!(x==x1&&y==y1)) //ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 			
 				gameover = 0;
 				
 			else if(x==x1 && y==y1)
 			{
-				//³ÔÃ×£¬³¤¶È¼Ó1
+				//ï¿½ï¿½ï¿½×£ï¿½ï¿½ï¿½ï¿½È¼ï¿½1
 				
 				length ++;
 				if(length >=8 && gameauto)
@@ -271,18 +268,18 @@ int snake_map::update_game(){
 					
 					if(gamespeed>=200)
 						
-						gamespeed = 200; //¸Ä±äÌ°³ÔÉßÇ°½øËÙ¶È
+						gamespeed = 200; //ï¿½Ä±ï¿½Ì°ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ù¶ï¿½
 						
 					else
 					
 						gamespeed = 100; 
 				 } 
 				 
-				 s[x][y]= '#'; //¸üÐÂÉßÍ·
+				 s[x][y]= '#'; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·
 				 
-				 s[position[head].x][position[head].y] = '*'; //³ÔÃ×ºó½«Ô­ÏÈÉßÍ·±äÎªÉßÉí
+				 s[position[head].x][position[head].y] = '*'; //ï¿½ï¿½ï¿½×ºï¿½Ô­ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
 				 
-				 head = (head+1) % ( (N-2)*(N-2) ); //È¡ÉßÍ·×ø±ê
+				 head = (head+1) % ( (N-2)*(N-2) ); //È¡ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½
 				 
 				 position[head].x = x;
 				 
@@ -292,20 +289,20 @@ int snake_map::update_game(){
 				 
 				 gameover = 1;
 				 
-				 score +=grade*20; //¼Ó·Ö
+				 score +=grade*20; //ï¿½Ó·ï¿½
 				 
-				 setpoint(); //²úÉúÃ× 
+				 setpoint(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 				 
 			}
 			 
 			 else
-			 {//²»³ÔÃ× 
+			 {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 			 
-			 	s[position[tail].x][position[tail].y]=' ';//½«ÉßÎ²ÖÃ¿Õ
+			 	s[position[tail].x][position[tail].y]=' ';//ï¿½ï¿½ï¿½ï¿½Î²ï¿½Ã¿ï¿½
 				 
-				tail = (tail+1) % ( (N-2) * (N-2) );//¸üÐÂÉßÎ²×ø±ê
+				tail = (tail+1) % ( (N-2) * (N-2) );//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î²ï¿½ï¿½ï¿½ï¿½
 				 
-				s[position[head].x][position[head].y]='*';//½«ÉßÍ·¸üÎªÉßÉí
+				s[position[head].x][position[head].y]='*';//ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
 				
 				head = (head+1) % ( (N-2) * (N-2) );
 				
@@ -313,7 +310,7 @@ int snake_map::update_game(){
 				
 				position[head].y = y;
 				
-				s[position[head].x][position[head].y]='#';//¸üÐÂÉßÍ· 
+				s[position[head].x][position[head].y]='#';//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í· 
 				
 				gameover = 1;
 			  } 
@@ -324,7 +321,7 @@ int snake_map::update_game(){
 
 
 //====================
-//Ö÷º¯Êý²¿·Ö
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //====================
 
 int main(){
@@ -332,33 +329,33 @@ int main(){
 	
 	int nodead;
 	
-	cout<<"\n\n\n\n\n\t\t\t »¶Ó­½øÈëÌ°³ÔÉßÓÎÏ·£¡"<<endl; //»¶Ó­½çÃæ
+	cout<<"\n\n\n\n\n\t\t\t ï¿½ï¿½Ó­ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½"<<endl; //ï¿½ï¿½Ó­ï¿½ï¿½ï¿½ï¿½
 	
-	cout<<"\n\n\n\t\t\t °´ÈÎÒâ¼üÂíÉÏ¿ªÊ¼¡£¡£¡£"<<endl;//×¼±¸¿ªÊ¼
+	cout<<"\n\n\n\t\t\t ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"<<endl;//×¼ï¿½ï¿½ï¿½ï¿½Ê¼
 	
 	getch();
 	
 	while(ctn=='y')
 	{
-		system("cls"); //ÇåÆÁ
+		system("cls"); //ï¿½ï¿½ï¿½ï¿½
 		
 		snake_map snake;
 		
 		snake.initialize();
 		
-		cout<<"\n\nÇëÊäÈëÊý×ÖÑ¡ÔñÓÎÏ·µÈ¼¶£º" <<endl;
+		cout<<"\n\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ï·ï¿½È¼ï¿½ï¿½ï¿½" <<endl;
 		
-		cout<<"\n\n\n\t\t\t1.µÈ¼¶Ò»£ºËÙ¶È 120 \n\n\t\t\t2.µÈ¼¶¶þ£ºËÙ¶È 100 \n\n\t\t\t3.µÈ¼¶Èý£ºËÙ¶È 80 ";
+		cout<<"\n\n\n\t\t\t1.ï¿½È¼ï¿½Ò»ï¿½ï¿½ï¿½Ù¶ï¿½ 120 \n\n\t\t\t2.ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ 100 \n\n\t\t\t3.ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ 80 ";
 		
-		cout<<"\n\n\t\t\t4.µÈ¼¶ËÄ£ºËÙ¶È 60 \n\n\t\t\t5.µÈ¼¶Îå£ºËÙ¶È 40 \n\n\t\t\t6.µÈ¼¶Áù£ºËÙ¶È 20 \n\n\t\t\t7.×Ô¶¯Éý¼¶Ä£Ê½" <<endl;
+		cout<<"\n\n\t\t\t4.ï¿½È¼ï¿½ï¿½Ä£ï¿½ï¿½Ù¶ï¿½ 60 \n\n\t\t\t5.ï¿½È¼ï¿½ï¿½å£ºï¿½Ù¶ï¿½ 40 \n\n\t\t\t6.ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ 20 \n\n\t\t\t7.ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½" <<endl;
 		
-		snake.getgrade();//»ñÈ¡µÈ¼¶ 
+		snake.getgrade();//ï¿½ï¿½È¡ï¿½È¼ï¿½ 
 		
 		for(int i=1;i<=4;i++){
-			position[i].initialize(i);//³õÊ¼»¯×ø±ê 
+			position[i].initialize(i);//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		} 
 		
-		snake.setpoint();//²úÉúµÚÒ»¸öÃ×
+		snake.setpoint();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
 		
 		do
 		{
@@ -367,14 +364,14 @@ int main(){
 			nodead = snake.update_game();
 		}while(nodead);
 		
-		system("cls"); //ÇåÆÁ
+		system("cls"); //ï¿½ï¿½ï¿½ï¿½
 		
 		
 		cout<<"\n\n\n\t\t\t\tGameover! \n\n"<<endl;
 		
-		snake.display();//Êä³öµÈ¼¶/µÃ·ÖÇé¿ö
+		snake.display();//ï¿½ï¿½ï¿½ï¿½È¼ï¿½/ï¿½Ã·ï¿½ï¿½ï¿½ï¿½
 		
-		cout<<"\n\n\n\t\t ÊÇ·ñ¼ÌÐøÓÎÏ·£¿ÊäÈë y ¼ÌÐø£¬n ÍË³ö"<<endl;
+		cout<<"\n\n\n\t\t ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ y ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½n ï¿½Ë³ï¿½"<<endl;
 		
 		cin>>ctn; 
 	 } 
