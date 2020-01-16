@@ -10,6 +10,8 @@ RATING: 1668  //welcome to add me as a friend, will reply soon
 
 2020
 
+1.16 CCPC Wannafly Camp Day5    Solved: 2/10
+
 1.14 CCPC Wannafly Camp Day3    Solved: 2/10
 
 1.13 CCPC Wannafly Camp Day2    Solved: 2/11    Upsolved: E, shen-K
