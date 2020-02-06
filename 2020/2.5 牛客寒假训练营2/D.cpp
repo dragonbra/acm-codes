@@ -14,14 +14,12 @@ void redirect() {
     #endif
 }
 
-ll a,b,c,x,y,z;
+
 
 int main() {
     redirect();
 
-    cin>>a>>b>>c>>x>>y>>z;
-    ll ans = min(a,y) + min(b,z) + min(c,x);
-    cout<<ans<<endl;
+    
 
     return 0;
 }
