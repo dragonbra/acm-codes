@@ -42,7 +42,7 @@ int main() {
             string p = a[j].p;
             for(int k=1;k<=1<<D;k++){
                 if( k & (1<<j) == 0 ){
-                    f [i] [ k + (1<<j) ] = min ( f [i] [ k + (1<<j) ], f [i] [k] +  )
+                    f [i] [ k + (1<<j) ] = min ( f [i] [ k + (1<<j) ], f [i] [k] + 1 );
                 }
             }
         }
