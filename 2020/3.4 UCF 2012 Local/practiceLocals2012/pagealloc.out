@@ -1,0 +1,1373 @@
+Program 1
+Page 3 loaded into cell 1.
+Page 2 loaded into cell 2.
+Page 1 loaded into cell 3.
+Page 5 loaded into cell 1.
+Page 3 loaded into cell 2.
+Page 2 loaded into cell 3.
+Page 4 loaded into cell 1.
+Access page 3 in cell 2.
+Access page 2 in cell 3.
+Page 1 loaded into cell 2.
+Page 5 loaded into cell 3.
+Access page 4 in cell 1.
+There are a total of 9 page faults.
+
+Program 2
+Page 1 loaded into cell 1.
+Page 3 loaded into cell 2.
+Page 5 loaded into cell 3.
+Page 7 loaded into cell 4.
+Page 9 loaded into cell 5.
+Access page 9 in cell 5.
+Access page 7 in cell 4.
+Access page 5 in cell 3.
+Access page 1 in cell 1.
+Page 8 loaded into cell 1.
+Access page 3 in cell 2.
+Access page 5 in cell 3.
+Page 2 loaded into cell 4.
+Access page 3 in cell 2.
+Page 12 loaded into cell 5.
+Page 18 loaded into cell 3.
+There are a total of 9 page faults.
+
+Program 3
+Page 1 loaded into cell 1.
+There are a total of 1 page faults.
+
+Program 4
+Page 1 loaded into cell 1.
+Page 2 loaded into cell 2.
+Page 3 loaded into cell 3.
+Page 4 loaded into cell 1.
+Page 5 loaded into cell 2.
+Page 6 loaded into cell 3.
+Page 1 loaded into cell 1.
+Page 2 loaded into cell 2.
+Page 3 loaded into cell 3.
+There are a total of 9 page faults.
+
+Program 5
+Page 1 loaded into cell 1.
+Page 2 loaded into cell 2.
+Page 3 loaded into cell 3.
+Page 4 loaded into cell 4.
+Access page 2 in cell 2.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 4 in cell 4.
+There are a total of 4 page faults.
+
+Program 6
+Page 1 loaded into cell 1.
+Page 2 loaded into cell 2.
+Page 9 loaded into cell 3.
+Page 50 loaded into cell 4.
+There are a total of 4 page faults.
+
+Program 7
+Page 1 loaded into cell 1.
+Page 2 loaded into cell 2.
+Page 3 loaded into cell 3.
+Page 4 loaded into cell 4.
+Page 5 loaded into cell 1.
+Access page 2 in cell 2.
+Access page 5 in cell 1.
+Page 9 loaded into cell 3.
+There are a total of 6 page faults.
+
+Program 8
+Page 5 loaded into cell 1.
+Page 2 loaded into cell 1.
+Page 10 loaded into cell 1.
+Page 7 loaded into cell 1.
+Page 6 loaded into cell 1.
+There are a total of 5 page faults.
+
+Program 9
+Page 12 loaded into cell 1.
+Page 9 loaded into cell 2.
+Page 45 loaded into cell 3.
+Page 16 loaded into cell 4.
+Page 23 loaded into cell 5.
+Page 41 loaded into cell 6.
+Page 6 loaded into cell 7.
+Access page 16 in cell 4.
+Page 27 loaded into cell 8.
+Page 10 loaded into cell 9.
+Page 15 loaded into cell 10.
+Page 1 loaded into cell 11.
+Page 47 loaded into cell 12.
+Page 43 loaded into cell 13.
+Page 50 loaded into cell 14.
+Page 46 loaded into cell 15.
+Page 17 loaded into cell 16.
+Page 32 loaded into cell 17.
+Access page 12 in cell 1.
+Access page 46 in cell 15.
+Page 14 loaded into cell 18.
+Access page 41 in cell 6.
+Page 30 loaded into cell 19.
+Access page 50 in cell 14.
+Page 3 loaded into cell 20.
+Page 44 loaded into cell 21.
+Page 18 loaded into cell 22.
+Page 37 loaded into cell 23.
+Access page 12 in cell 1.
+Page 24 loaded into cell 24.
+Page 49 loaded into cell 25.
+Access page 37 in cell 23.
+Access page 24 in cell 24.
+Access page 3 in cell 20.
+Page 4 loaded into cell 26.
+Access page 50 in cell 14.
+Page 8 loaded into cell 27.
+Page 42 loaded into cell 28.
+Page 29 loaded into cell 29.
+Page 7 loaded into cell 30.
+Page 36 loaded into cell 31.
+Access page 1 in cell 11.
+Access page 43 in cell 13.
+Access page 3 in cell 20.
+Access page 14 in cell 18.
+Page 22 loaded into cell 32.
+Page 38 loaded into cell 33.
+Access page 16 in cell 4.
+Page 40 loaded into cell 34.
+Access page 8 in cell 27.
+There are a total of 34 page faults.
+
+Program 10
+Page 5 loaded into cell 1.
+Page 10 loaded into cell 2.
+Page 3 loaded into cell 3.
+Page 6 loaded into cell 4.
+Access page 3 in cell 3.
+Access page 3 in cell 3.
+Access page 10 in cell 2.
+Page 4 loaded into cell 5.
+Access page 4 in cell 5.
+Page 7 loaded into cell 6.
+Access page 3 in cell 3.
+Access page 10 in cell 2.
+Access page 10 in cell 2.
+Page 8 loaded into cell 7.
+Access page 8 in cell 7.
+Page 9 loaded into cell 8.
+Access page 10 in cell 2.
+Access page 5 in cell 1.
+Access page 7 in cell 6.
+Access page 4 in cell 5.
+Access page 10 in cell 2.
+Access page 5 in cell 1.
+Access page 10 in cell 2.
+Access page 10 in cell 2.
+Page 1 loaded into cell 1.
+There are a total of 9 page faults.
+
+Program 11
+Page 6 loaded into cell 1.
+Page 27 loaded into cell 2.
+Page 24 loaded into cell 3.
+Page 35 loaded into cell 4.
+Page 40 loaded into cell 5.
+Page 39 loaded into cell 1.
+Page 43 loaded into cell 2.
+Page 13 loaded into cell 3.
+Page 2 loaded into cell 4.
+Page 23 loaded into cell 5.
+There are a total of 10 page faults.
+
+Program 12
+Page 6 loaded into cell 1.
+Page 3 loaded into cell 2.
+Page 4 loaded into cell 3.
+Page 1 loaded into cell 4.
+Page 5 loaded into cell 5.
+Access page 1 in cell 4.
+Page 8 loaded into cell 1.
+Page 9 loaded into cell 2.
+Page 2 loaded into cell 3.
+Page 6 loaded into cell 4.
+Page 3 loaded into cell 5.
+Page 5 loaded into cell 1.
+Page 10 loaded into cell 2.
+Page 4 loaded into cell 3.
+Page 8 loaded into cell 4.
+Access page 4 in cell 3.
+Page 7 loaded into cell 5.
+Access page 10 in cell 2.
+Access page 5 in cell 1.
+Access page 10 in cell 2.
+Page 9 loaded into cell 1.
+Page 2 loaded into cell 2.
+Access page 2 in cell 2.
+Access page 4 in cell 3.
+Page 5 loaded into cell 4.
+Page 1 loaded into cell 5.
+Page 8 loaded into cell 3.
+Page 3 loaded into cell 1.
+Page 9 loaded into cell 2.
+Page 7 loaded into cell 4.
+Page 5 loaded into cell 5.
+Page 10 loaded into cell 3.
+Page 2 loaded into cell 1.
+Page 3 loaded into cell 2.
+Page 9 loaded into cell 4.
+Page 6 loaded into cell 5.
+Page 8 loaded into cell 3.
+Page 5 loaded into cell 1.
+Page 10 loaded into cell 2.
+Access page 10 in cell 2.
+Access page 10 in cell 2.
+Access page 9 in cell 4.
+Page 3 loaded into cell 5.
+Access page 10 in cell 2.
+Access page 3 in cell 5.
+Access page 10 in cell 2.
+Access page 9 in cell 4.
+Page 2 loaded into cell 3.
+Page 8 loaded into cell 1.
+Access page 3 in cell 5.
+There are a total of 35 page faults.
+
+Program 13
+Page 6 loaded into cell 1.
+Page 5 loaded into cell 2.
+Access page 5 in cell 2.
+Access page 5 in cell 2.
+Page 2 loaded into cell 3.
+Page 3 loaded into cell 4.
+Access page 3 in cell 4.
+Access page 5 in cell 2.
+Access page 5 in cell 2.
+Access page 2 in cell 3.
+Access page 5 in cell 2.
+Access page 3 in cell 4.
+Access page 3 in cell 4.
+Access page 6 in cell 1.
+Access page 6 in cell 1.
+Page 4 loaded into cell 5.
+Access page 5 in cell 2.
+Access page 5 in cell 2.
+Access page 4 in cell 5.
+Access page 5 in cell 2.
+Page 1 loaded into cell 6.
+Access page 1 in cell 6.
+Access page 2 in cell 3.
+There are a total of 6 page faults.
+
+Program 14
+Page 17 loaded into cell 1.
+Page 9 loaded into cell 2.
+Page 6 loaded into cell 3.
+Page 13 loaded into cell 4.
+Page 14 loaded into cell 5.
+Page 7 loaded into cell 6.
+Access page 17 in cell 1.
+Page 19 loaded into cell 1.
+Access page 7 in cell 6.
+Access page 9 in cell 2.
+Page 11 loaded into cell 3.
+Page 15 loaded into cell 4.
+Access page 15 in cell 4.
+Page 22 loaded into cell 5.
+Page 3 loaded into cell 2.
+Page 12 loaded into cell 6.
+Page 14 loaded into cell 1.
+Access page 15 in cell 4.
+Page 2 loaded into cell 3.
+Page 5 loaded into cell 5.
+Page 8 loaded into cell 2.
+Page 19 loaded into cell 4.
+Page 23 loaded into cell 6.
+Page 1 loaded into cell 1.
+Page 17 loaded into cell 3.
+Access page 1 in cell 1.
+Page 2 loaded into cell 5.
+Page 7 loaded into cell 2.
+Page 20 loaded into cell 4.
+Access page 1 in cell 1.
+Page 3 loaded into cell 6.
+Page 19 loaded into cell 3.
+Page 8 loaded into cell 5.
+Access page 8 in cell 5.
+Page 2 loaded into cell 1.
+Page 12 loaded into cell 2.
+Page 22 loaded into cell 4.
+Page 16 loaded into cell 6.
+Access page 16 in cell 6.
+Page 23 loaded into cell 3.
+There are a total of 31 page faults.
+
+Program 15
+Page 19 loaded into cell 1.
+Page 4 loaded into cell 2.
+Page 12 loaded into cell 3.
+Page 26 loaded into cell 4.
+Page 10 loaded into cell 5.
+Page 21 loaded into cell 6.
+There are a total of 6 page faults.
+
+Program 16
+Page 2 loaded into cell 1.
+Page 19 loaded into cell 2.
+Page 8 loaded into cell 3.
+Page 13 loaded into cell 4.
+Page 20 loaded into cell 5.
+Page 3 loaded into cell 6.
+Page 1 loaded into cell 7.
+Access page 2 in cell 1.
+Page 18 loaded into cell 8.
+Page 14 loaded into cell 9.
+Access page 2 in cell 1.
+Access page 13 in cell 4.
+Access page 3 in cell 6.
+Access page 2 in cell 1.
+Access page 3 in cell 6.
+Access page 2 in cell 1.
+Page 15 loaded into cell 10.
+Access page 1 in cell 7.
+Access page 1 in cell 7.
+Access page 18 in cell 8.
+Access page 1 in cell 7.
+Page 9 loaded into cell 1.
+Access page 19 in cell 2.
+Access page 20 in cell 5.
+Access page 14 in cell 9.
+Page 16 loaded into cell 3.
+Page 2 loaded into cell 4.
+Page 5 loaded into cell 6.
+Access page 5 in cell 6.
+Access page 5 in cell 6.
+Access page 5 in cell 6.
+Access page 9 in cell 1.
+Access page 18 in cell 8.
+Access page 15 in cell 10.
+Access page 18 in cell 8.
+Page 8 loaded into cell 7.
+Page 13 loaded into cell 2.
+Access page 9 in cell 1.
+Page 19 loaded into cell 5.
+Page 17 loaded into cell 8.
+Page 20 loaded into cell 9.
+Access page 20 in cell 9.
+Access page 17 in cell 8.
+Access page 2 in cell 4.
+Page 10 loaded into cell 10.
+Page 14 loaded into cell 3.
+Access page 19 in cell 5.
+Access page 5 in cell 6.
+Access page 19 in cell 5.
+Access page 20 in cell 9.
+There are a total of 21 page faults.
+
+Program 17
+Page 20 loaded into cell 1.
+Page 12 loaded into cell 2.
+Page 13 loaded into cell 3.
+Page 15 loaded into cell 4.
+Page 18 loaded into cell 5.
+Access page 13 in cell 3.
+Access page 13 in cell 3.
+Access page 15 in cell 4.
+Access page 15 in cell 4.
+Page 8 loaded into cell 6.
+Page 10 loaded into cell 7.
+Page 16 loaded into cell 8.
+Page 2 loaded into cell 9.
+Page 17 loaded into cell 10.
+Access page 20 in cell 1.
+Access page 2 in cell 9.
+Page 4 loaded into cell 1.
+Page 1 loaded into cell 2.
+Access page 17 in cell 10.
+Page 12 loaded into cell 3.
+Page 13 loaded into cell 4.
+Page 9 loaded into cell 5.
+Page 5 loaded into cell 6.
+Access page 17 in cell 10.
+Access page 5 in cell 6.
+Page 7 loaded into cell 7.
+Access page 16 in cell 8.
+Page 20 loaded into cell 9.
+Page 15 loaded into cell 8.
+Page 2 loaded into cell 10.
+Access page 4 in cell 1.
+Access page 15 in cell 8.
+Access page 9 in cell 5.
+Access page 1 in cell 2.
+Page 10 loaded into cell 3.
+Access page 4 in cell 1.
+Page 16 loaded into cell 4.
+Page 13 loaded into cell 6.
+Page 17 loaded into cell 7.
+Page 3 loaded into cell 9.
+Page 11 loaded into cell 2.
+Page 8 loaded into cell 5.
+Access page 10 in cell 3.
+Page 14 loaded into cell 8.
+Access page 2 in cell 10.
+Page 5 loaded into cell 1.
+Page 7 loaded into cell 4.
+Access page 2 in cell 10.
+Page 20 loaded into cell 6.
+Page 16 loaded into cell 7.
+There are a total of 32 page faults.
+
+Program 18
+Page 7 loaded into cell 1.
+Page 16 loaded into cell 2.
+Page 14 loaded into cell 3.
+Page 2 loaded into cell 4.
+Page 17 loaded into cell 5.
+Page 6 loaded into cell 6.
+Page 5 loaded into cell 7.
+Page 15 loaded into cell 8.
+Page 9 loaded into cell 9.
+Page 8 loaded into cell 10.
+Page 12 loaded into cell 1.
+Access page 14 in cell 3.
+Page 11 loaded into cell 2.
+Page 10 loaded into cell 4.
+Page 18 loaded into cell 5.
+Access page 12 in cell 1.
+Access page 14 in cell 3.
+Page 7 loaded into cell 6.
+Page 2 loaded into cell 7.
+Access page 7 in cell 6.
+Page 17 loaded into cell 8.
+Access page 12 in cell 1.
+Page 16 loaded into cell 9.
+Page 9 loaded into cell 10.
+Access page 2 in cell 7.
+Access page 16 in cell 9.
+Page 1 loaded into cell 1.
+Page 8 loaded into cell 2.
+Access page 9 in cell 10.
+Access page 9 in cell 10.
+Page 20 loaded into cell 3.
+Access page 2 in cell 7.
+Page 4 loaded into cell 4.
+Page 12 loaded into cell 5.
+Access page 7 in cell 6.
+Access page 7 in cell 6.
+Page 11 loaded into cell 8.
+Access page 1 in cell 1.
+Page 5 loaded into cell 9.
+Page 19 loaded into cell 6.
+Access page 5 in cell 9.
+Page 14 loaded into cell 7.
+Page 17 loaded into cell 10.
+Page 6 loaded into cell 1.
+Page 7 loaded into cell 2.
+Access page 5 in cell 9.
+Page 13 loaded into cell 3.
+Access page 6 in cell 1.
+Page 15 loaded into cell 4.
+Access page 17 in cell 10.
+There are a total of 33 page faults.
+
+Program 19
+Page 14 loaded into cell 1.
+Access page 14 in cell 1.
+Page 8 loaded into cell 2.
+Page 10 loaded into cell 3.
+Access page 8 in cell 2.
+Page 9 loaded into cell 4.
+Page 3 loaded into cell 5.
+Access page 3 in cell 5.
+Access page 3 in cell 5.
+Access page 14 in cell 1.
+Access page 9 in cell 4.
+Page 13 loaded into cell 6.
+Page 12 loaded into cell 7.
+Page 1 loaded into cell 8.
+Access page 13 in cell 6.
+Access page 9 in cell 4.
+Access page 9 in cell 4.
+Page 2 loaded into cell 9.
+Access page 14 in cell 1.
+Access page 12 in cell 7.
+Page 4 loaded into cell 10.
+Access page 2 in cell 9.
+Page 5 loaded into cell 1.
+Access page 1 in cell 8.
+Access page 2 in cell 9.
+Page 6 loaded into cell 2.
+Access page 5 in cell 1.
+Access page 1 in cell 8.
+Access page 6 in cell 2.
+Access page 9 in cell 4.
+Access page 10 in cell 3.
+Access page 12 in cell 7.
+Access page 4 in cell 10.
+Page 15 loaded into cell 5.
+Page 8 loaded into cell 6.
+Page 3 loaded into cell 3.
+Page 7 loaded into cell 4.
+Access page 7 in cell 4.
+Page 13 loaded into cell 7.
+Page 14 loaded into cell 8.
+Page 9 loaded into cell 9.
+Page 1 loaded into cell 10.
+Page 11 loaded into cell 1.
+Access page 11 in cell 1.
+Access page 7 in cell 4.
+Page 4 loaded into cell 2.
+Access page 15 in cell 5.
+Page 10 loaded into cell 6.
+Page 6 loaded into cell 3.
+Access page 13 in cell 7.
+There are a total of 24 page faults.
+
+Program 20
+Page 14 loaded into cell 1.
+Page 7 loaded into cell 2.
+Access page 14 in cell 1.
+Page 2 loaded into cell 3.
+Page 8 loaded into cell 4.
+Page 6 loaded into cell 5.
+Page 10 loaded into cell 6.
+Access page 14 in cell 1.
+Page 15 loaded into cell 7.
+Page 11 loaded into cell 8.
+Page 1 loaded into cell 9.
+Access page 11 in cell 8.
+Access page 14 in cell 1.
+Page 5 loaded into cell 10.
+Access page 1 in cell 9.
+Page 13 loaded into cell 1.
+Page 14 loaded into cell 2.
+Access page 14 in cell 2.
+Page 4 loaded into cell 3.
+Page 9 loaded into cell 4.
+Access page 13 in cell 1.
+Page 8 loaded into cell 5.
+Page 7 loaded into cell 6.
+Access page 4 in cell 3.
+Access page 1 in cell 9.
+Access page 1 in cell 9.
+Access page 1 in cell 9.
+Page 10 loaded into cell 7.
+Access page 7 in cell 6.
+Access page 14 in cell 2.
+Access page 14 in cell 2.
+Access page 13 in cell 1.
+Access page 13 in cell 1.
+Page 2 loaded into cell 8.
+Page 6 loaded into cell 10.
+Access page 1 in cell 9.
+Access page 4 in cell 3.
+Page 11 loaded into cell 1.
+Access page 10 in cell 7.
+Page 13 loaded into cell 2.
+Access page 4 in cell 3.
+Access page 7 in cell 6.
+Page 3 loaded into cell 4.
+Access page 4 in cell 3.
+Access page 8 in cell 5.
+Page 9 loaded into cell 8.
+Page 14 loaded into cell 9.
+Access page 3 in cell 4.
+Access page 11 in cell 1.
+Page 2 loaded into cell 10.
+There are a total of 25 page faults.
+
+Program 21
+Page 8 loaded into cell 1.
+Page 14 loaded into cell 2.
+Page 9 loaded into cell 3.
+Page 1 loaded into cell 4.
+Page 6 loaded into cell 5.
+Page 12 loaded into cell 6.
+Page 7 loaded into cell 7.
+Page 13 loaded into cell 8.
+Page 10 loaded into cell 9.
+Access page 13 in cell 8.
+Access page 14 in cell 2.
+Access page 6 in cell 5.
+Access page 14 in cell 2.
+Access page 12 in cell 6.
+Access page 12 in cell 6.
+Access page 8 in cell 1.
+Access page 13 in cell 8.
+Page 3 loaded into cell 10.
+Access page 13 in cell 8.
+Access page 7 in cell 7.
+Access page 9 in cell 3.
+Access page 10 in cell 9.
+Access page 10 in cell 9.
+Page 15 loaded into cell 1.
+Access page 13 in cell 8.
+Access page 1 in cell 4.
+Page 8 loaded into cell 2.
+Access page 7 in cell 7.
+Access page 10 in cell 9.
+Page 11 loaded into cell 3.
+Access page 12 in cell 6.
+Access page 10 in cell 9.
+Page 5 loaded into cell 5.
+Page 6 loaded into cell 10.
+Access page 15 in cell 1.
+Access page 15 in cell 1.
+Page 9 loaded into cell 4.
+Access page 10 in cell 9.
+Access page 15 in cell 1.
+Access page 15 in cell 1.
+Page 2 loaded into cell 6.
+Access page 11 in cell 3.
+Access page 11 in cell 3.
+Access page 8 in cell 2.
+Page 4 loaded into cell 7.
+Access page 13 in cell 8.
+Access page 13 in cell 8.
+Access page 10 in cell 9.
+Access page 13 in cell 8.
+Access page 9 in cell 4.
+There are a total of 18 page faults.
+
+Program 22
+Page 1 loaded into cell 1.
+Page 9 loaded into cell 1.
+Page 3 loaded into cell 1.
+Page 2 loaded into cell 1.
+Page 6 loaded into cell 1.
+There are a total of 5 page faults.
+
+Program 23
+Page 18 loaded into cell 1.
+Page 43 loaded into cell 2.
+Page 36 loaded into cell 3.
+Page 21 loaded into cell 4.
+Page 42 loaded into cell 5.
+Access page 42 in cell 5.
+Page 27 loaded into cell 6.
+Page 49 loaded into cell 7.
+Page 15 loaded into cell 8.
+Page 17 loaded into cell 9.
+Page 31 loaded into cell 10.
+Page 4 loaded into cell 11.
+Page 46 loaded into cell 12.
+Access page 27 in cell 6.
+Page 38 loaded into cell 13.
+Access page 42 in cell 5.
+Page 26 loaded into cell 14.
+Page 32 loaded into cell 15.
+Page 34 loaded into cell 16.
+Page 50 loaded into cell 17.
+Page 12 loaded into cell 18.
+Page 10 loaded into cell 19.
+Access page 50 in cell 17.
+Access page 15 in cell 8.
+Page 11 loaded into cell 20.
+Page 2 loaded into cell 21.
+Page 44 loaded into cell 22.
+Page 47 loaded into cell 23.
+Access page 26 in cell 14.
+Page 23 loaded into cell 24.
+Page 40 loaded into cell 25.
+Access page 44 in cell 22.
+Access page 49 in cell 7.
+Page 5 loaded into cell 26.
+Access page 44 in cell 22.
+Access page 27 in cell 6.
+Page 1 loaded into cell 27.
+Access page 38 in cell 13.
+Page 28 loaded into cell 28.
+Access page 4 in cell 11.
+Page 7 loaded into cell 29.
+Page 22 loaded into cell 30.
+Access page 7 in cell 29.
+Access page 7 in cell 29.
+Access page 4 in cell 11.
+Page 3 loaded into cell 31.
+Page 6 loaded into cell 32.
+Access page 4 in cell 11.
+Access page 43 in cell 2.
+Page 25 loaded into cell 33.
+There are a total of 33 page faults.
+
+Program 24
+Page 9 loaded into cell 1.
+Page 1 loaded into cell 2.
+Page 10 loaded into cell 3.
+Page 8 loaded into cell 4.
+Access page 1 in cell 2.
+Access page 10 in cell 3.
+Page 3 loaded into cell 5.
+Page 5 loaded into cell 6.
+Access page 9 in cell 1.
+Page 2 loaded into cell 7.
+Page 7 loaded into cell 8.
+Access page 7 in cell 8.
+Access page 3 in cell 5.
+Page 4 loaded into cell 1.
+Access page 8 in cell 4.
+Page 6 loaded into cell 2.
+Access page 3 in cell 5.
+Access page 3 in cell 5.
+Access page 5 in cell 6.
+Access page 6 in cell 2.
+Access page 4 in cell 1.
+Access page 7 in cell 8.
+Access page 3 in cell 5.
+Access page 8 in cell 4.
+Page 9 loaded into cell 3.
+There are a total of 11 page faults.
+
+Program 25
+Page 1 loaded into cell 1.
+Page 35 loaded into cell 2.
+Page 23 loaded into cell 3.
+Page 47 loaded into cell 4.
+Access page 23 in cell 3.
+Access page 1 in cell 1.
+Page 32 loaded into cell 5.
+Page 17 loaded into cell 1.
+Page 7 loaded into cell 2.
+Page 20 loaded into cell 3.
+There are a total of 8 page faults.
+
+Program 26
+Page 2 loaded into cell 1.
+Page 3 loaded into cell 2.
+Page 1 loaded into cell 3.
+Page 8 loaded into cell 4.
+Access page 2 in cell 1.
+Page 5 loaded into cell 5.
+Page 7 loaded into cell 1.
+Page 4 loaded into cell 2.
+Page 10 loaded into cell 3.
+Page 1 loaded into cell 4.
+Page 6 loaded into cell 5.
+Page 8 loaded into cell 1.
+Page 3 loaded into cell 2.
+Page 9 loaded into cell 3.
+Access page 1 in cell 4.
+Page 10 loaded into cell 5.
+Access page 10 in cell 5.
+Access page 9 in cell 3.
+Access page 1 in cell 4.
+Page 4 loaded into cell 1.
+Page 7 loaded into cell 2.
+Page 3 loaded into cell 3.
+Access page 4 in cell 1.
+Page 9 loaded into cell 4.
+Page 2 loaded into cell 5.
+Access page 9 in cell 4.
+Access page 9 in cell 4.
+Page 8 loaded into cell 1.
+Page 4 loaded into cell 2.
+Page 7 loaded into cell 3.
+Page 3 loaded into cell 4.
+Page 10 loaded into cell 5.
+Access page 8 in cell 1.
+Access page 7 in cell 3.
+Page 9 loaded into cell 1.
+Page 8 loaded into cell 2.
+Page 5 loaded into cell 3.
+Page 2 loaded into cell 4.
+Page 6 loaded into cell 5.
+Access page 2 in cell 4.
+Page 3 loaded into cell 1.
+Access page 3 in cell 1.
+Access page 6 in cell 5.
+Access page 6 in cell 5.
+Access page 3 in cell 1.
+Access page 5 in cell 3.
+Access page 5 in cell 3.
+Access page 5 in cell 3.
+Access page 3 in cell 1.
+Page 9 loaded into cell 2.
+There are a total of 31 page faults.
+
+Program 27
+Page 2 loaded into cell 1.
+Page 4 loaded into cell 2.
+Page 3 loaded into cell 3.
+Page 5 loaded into cell 4.
+Access page 4 in cell 2.
+Access page 5 in cell 4.
+Access page 4 in cell 2.
+Access page 4 in cell 2.
+Access page 5 in cell 4.
+Access page 5 in cell 4.
+Page 1 loaded into cell 5.
+Page 6 loaded into cell 6.
+Access page 4 in cell 2.
+Access page 1 in cell 5.
+Access page 1 in cell 5.
+Access page 6 in cell 6.
+Access page 1 in cell 5.
+Access page 2 in cell 1.
+Access page 2 in cell 1.
+Access page 1 in cell 5.
+Access page 5 in cell 4.
+Access page 4 in cell 2.
+Access page 5 in cell 4.
+There are a total of 6 page faults.
+
+Program 28
+Page 16 loaded into cell 1.
+Page 18 loaded into cell 2.
+Page 8 loaded into cell 3.
+Page 10 loaded into cell 4.
+Access page 18 in cell 2.
+Page 1 loaded into cell 5.
+Access page 8 in cell 3.
+Page 15 loaded into cell 6.
+Page 20 loaded into cell 1.
+Access page 20 in cell 1.
+Access page 15 in cell 6.
+Access page 8 in cell 3.
+Access page 8 in cell 3.
+Page 2 loaded into cell 2.
+Access page 1 in cell 5.
+Page 4 loaded into cell 4.
+Page 16 loaded into cell 3.
+Access page 15 in cell 6.
+Page 7 loaded into cell 5.
+Page 6 loaded into cell 1.
+Page 5 loaded into cell 2.
+Page 17 loaded into cell 4.
+Access page 7 in cell 5.
+Page 14 loaded into cell 6.
+Page 1 loaded into cell 3.
+Access page 5 in cell 2.
+Page 23 loaded into cell 5.
+Page 22 loaded into cell 1.
+Page 2 loaded into cell 4.
+Page 4 loaded into cell 6.
+Page 20 loaded into cell 2.
+Page 19 loaded into cell 3.
+Page 13 loaded into cell 5.
+Page 17 loaded into cell 1.
+Page 22 loaded into cell 4.
+Page 16 loaded into cell 6.
+Page 14 loaded into cell 2.
+Page 3 loaded into cell 3.
+Page 2 loaded into cell 5.
+Access page 22 in cell 4.
+There are a total of 29 page faults.
+
+Program 29
+Page 40 loaded into cell 1.
+Page 29 loaded into cell 2.
+Page 39 loaded into cell 3.
+Page 15 loaded into cell 4.
+Page 23 loaded into cell 5.
+Page 36 loaded into cell 6.
+There are a total of 6 page faults.
+
+Program 30
+Page 19 loaded into cell 1.
+Page 5 loaded into cell 2.
+Access page 19 in cell 1.
+Page 18 loaded into cell 3.
+Page 10 loaded into cell 4.
+Access page 5 in cell 2.
+Page 13 loaded into cell 5.
+Page 1 loaded into cell 6.
+Page 15 loaded into cell 7.
+Page 7 loaded into cell 8.
+Page 3 loaded into cell 9.
+Access page 18 in cell 3.
+Access page 7 in cell 8.
+Page 9 loaded into cell 10.
+Page 4 loaded into cell 1.
+Page 14 loaded into cell 2.
+Access page 15 in cell 7.
+Access page 3 in cell 9.
+Page 6 loaded into cell 3.
+Access page 1 in cell 6.
+Page 18 loaded into cell 4.
+Page 2 loaded into cell 5.
+Access page 3 in cell 9.
+Access page 15 in cell 7.
+Page 19 loaded into cell 8.
+Access page 18 in cell 4.
+Page 8 loaded into cell 10.
+Access page 8 in cell 10.
+Access page 6 in cell 3.
+Page 5 loaded into cell 6.
+Access page 14 in cell 2.
+Access page 14 in cell 2.
+Page 11 loaded into cell 7.
+Page 10 loaded into cell 9.
+Access page 11 in cell 7.
+Page 20 loaded into cell 1.
+Page 15 loaded into cell 3.
+Page 3 loaded into cell 4.
+Page 17 loaded into cell 5.
+Access page 5 in cell 6.
+Access page 15 in cell 3.
+Page 16 loaded into cell 8.
+Access page 3 in cell 4.
+Access page 16 in cell 8.
+Page 9 loaded into cell 10.
+Page 7 loaded into cell 2.
+Page 1 loaded into cell 6.
+Page 8 loaded into cell 7.
+Page 6 loaded into cell 9.
+Access page 20 in cell 1.
+There are a total of 30 page faults.
+
+Program 31
+Page 5 loaded into cell 1.
+Access page 5 in cell 1.
+Page 2 loaded into cell 2.
+Page 10 loaded into cell 3.
+Page 16 loaded into cell 4.
+Page 6 loaded into cell 5.
+Page 14 loaded into cell 6.
+Page 1 loaded into cell 7.
+Page 4 loaded into cell 8.
+Access page 4 in cell 8.
+Page 11 loaded into cell 9.
+Access page 1 in cell 7.
+Page 17 loaded into cell 10.
+Page 8 loaded into cell 1.
+Page 12 loaded into cell 2.
+Access page 4 in cell 8.
+Access page 11 in cell 9.
+Page 5 loaded into cell 3.
+Page 10 loaded into cell 4.
+Page 19 loaded into cell 5.
+Access page 17 in cell 10.
+Access page 19 in cell 5.
+Access page 10 in cell 4.
+Page 9 loaded into cell 6.
+Page 20 loaded into cell 7.
+Access page 20 in cell 7.
+Page 1 loaded into cell 8.
+Page 6 loaded into cell 9.
+Page 15 loaded into cell 10.
+Page 4 loaded into cell 1.
+Page 3 loaded into cell 2.
+Access page 20 in cell 7.
+Access page 15 in cell 10.
+Page 16 loaded into cell 3.
+Page 17 loaded into cell 4.
+Access page 4 in cell 1.
+Page 8 loaded into cell 5.
+Page 7 loaded into cell 6.
+Access page 20 in cell 7.
+Page 11 loaded into cell 7.
+Access page 3 in cell 2.
+Page 14 loaded into cell 8.
+Access page 4 in cell 1.
+Page 19 loaded into cell 9.
+Access page 8 in cell 5.
+Page 6 loaded into cell 10.
+Access page 3 in cell 2.
+Access page 6 in cell 10.
+Access page 7 in cell 6.
+Page 5 loaded into cell 3.
+There are a total of 31 page faults.
+
+Program 32
+Page 7 loaded into cell 1.
+Page 3 loaded into cell 2.
+Page 6 loaded into cell 3.
+Page 17 loaded into cell 4.
+Page 2 loaded into cell 5.
+Page 5 loaded into cell 6.
+Page 18 loaded into cell 7.
+Access page 5 in cell 6.
+Page 11 loaded into cell 8.
+Page 4 loaded into cell 9.
+Page 15 loaded into cell 10.
+Page 10 loaded into cell 1.
+Page 20 loaded into cell 2.
+Page 13 loaded into cell 3.
+Page 7 loaded into cell 4.
+Page 1 loaded into cell 5.
+Access page 4 in cell 9.
+Access page 10 in cell 1.
+Page 3 loaded into cell 6.
+Page 12 loaded into cell 7.
+Access page 3 in cell 6.
+Page 16 loaded into cell 8.
+Access page 13 in cell 3.
+Page 18 loaded into cell 10.
+Access page 1 in cell 5.
+Page 15 loaded into cell 9.
+Access page 10 in cell 1.
+Page 17 loaded into cell 2.
+Access page 18 in cell 10.
+Access page 12 in cell 7.
+Access page 15 in cell 9.
+Page 19 loaded into cell 3.
+Access page 1 in cell 5.
+Access page 1 in cell 5.
+Access page 16 in cell 8.
+Page 9 loaded into cell 4.
+Page 13 loaded into cell 6.
+Access page 9 in cell 4.
+Access page 17 in cell 2.
+Page 5 loaded into cell 1.
+Access page 9 in cell 4.
+Page 2 loaded into cell 5.
+Access page 5 in cell 1.
+Access page 18 in cell 10.
+Access page 15 in cell 9.
+Access page 13 in cell 6.
+Access page 5 in cell 1.
+Access page 2 in cell 5.
+Access page 18 in cell 10.
+Page 6 loaded into cell 7.
+There are a total of 27 page faults.
+
+Program 33
+Page 5 loaded into cell 1.
+Page 4 loaded into cell 2.
+Page 7 loaded into cell 3.
+Page 6 loaded into cell 4.
+Page 14 loaded into cell 5.
+Access page 4 in cell 2.
+Access page 4 in cell 2.
+Page 8 loaded into cell 6.
+Access page 8 in cell 6.
+Page 11 loaded into cell 7.
+Page 2 loaded into cell 8.
+Page 13 loaded into cell 9.
+Access page 4 in cell 2.
+Page 12 loaded into cell 10.
+Access page 13 in cell 9.
+Access page 6 in cell 4.
+Access page 12 in cell 10.
+Access page 2 in cell 8.
+Page 1 loaded into cell 1.
+Access page 4 in cell 2.
+Access page 6 in cell 4.
+Access page 12 in cell 10.
+Page 9 loaded into cell 3.
+Access page 13 in cell 9.
+Access page 13 in cell 9.
+Access page 4 in cell 2.
+Page 5 loaded into cell 5.
+Access page 9 in cell 3.
+Access page 11 in cell 7.
+Page 7 loaded into cell 6.
+Access page 6 in cell 4.
+Access page 12 in cell 10.
+Page 15 loaded into cell 8.
+Access page 9 in cell 3.
+Access page 6 in cell 4.
+Page 8 loaded into cell 7.
+Page 2 loaded into cell 9.
+Page 14 loaded into cell 10.
+Access page 9 in cell 3.
+Page 10 loaded into cell 1.
+Page 3 loaded into cell 2.
+Access page 10 in cell 1.
+Page 12 loaded into cell 4.
+Access page 12 in cell 4.
+Page 4 loaded into cell 5.
+Page 5 loaded into cell 6.
+Access page 4 in cell 5.
+Access page 14 in cell 10.
+Access page 15 in cell 8.
+Access page 14 in cell 10.
+There are a total of 23 page faults.
+
+Program 34
+Page 8 loaded into cell 1.
+Page 2 loaded into cell 2.
+Page 7 loaded into cell 3.
+Page 15 loaded into cell 4.
+Page 5 loaded into cell 5.
+Page 6 loaded into cell 6.
+Page 9 loaded into cell 7.
+Page 3 loaded into cell 8.
+Page 11 loaded into cell 9.
+Access page 8 in cell 1.
+Access page 11 in cell 9.
+Page 4 loaded into cell 10.
+Access page 3 in cell 8.
+Page 1 loaded into cell 1.
+Access page 3 in cell 8.
+Access page 11 in cell 9.
+Access page 6 in cell 6.
+Page 10 loaded into cell 2.
+Access page 7 in cell 3.
+Page 14 loaded into cell 4.
+Access page 5 in cell 5.
+Access page 10 in cell 2.
+Page 12 loaded into cell 7.
+Access page 11 in cell 9.
+Access page 5 in cell 5.
+Page 15 loaded into cell 10.
+Page 4 loaded into cell 3.
+Access page 11 in cell 9.
+Access page 4 in cell 3.
+Access page 14 in cell 4.
+Page 9 loaded into cell 6.
+Page 13 loaded into cell 8.
+Access page 9 in cell 6.
+Access page 10 in cell 2.
+Page 2 loaded into cell 1.
+Access page 9 in cell 6.
+Access page 13 in cell 8.
+Page 1 loaded into cell 4.
+Page 7 loaded into cell 5.
+Access page 13 in cell 8.
+Access page 13 in cell 8.
+Access page 15 in cell 10.
+Access page 13 in cell 8.
+Access page 4 in cell 3.
+Access page 11 in cell 9.
+Access page 2 in cell 1.
+Page 14 loaded into cell 7.
+Access page 1 in cell 4.
+Access page 7 in cell 5.
+Access page 9 in cell 6.
+There are a total of 22 page faults.
+
+Program 35
+Page 10 loaded into cell 1.
+Page 7 loaded into cell 2.
+Page 15 loaded into cell 3.
+Page 14 loaded into cell 4.
+Page 5 loaded into cell 5.
+Access page 10 in cell 1.
+Page 12 loaded into cell 6.
+Page 6 loaded into cell 7.
+Page 3 loaded into cell 8.
+Page 9 loaded into cell 9.
+Access page 12 in cell 6.
+Access page 6 in cell 7.
+Access page 6 in cell 7.
+Page 4 loaded into cell 10.
+Access page 4 in cell 10.
+Access page 12 in cell 6.
+Access page 14 in cell 4.
+Page 13 loaded into cell 1.
+Page 11 loaded into cell 2.
+Access page 14 in cell 4.
+Access page 9 in cell 9.
+Page 8 loaded into cell 3.
+Access page 8 in cell 3.
+Access page 9 in cell 9.
+Access page 6 in cell 7.
+Page 15 loaded into cell 5.
+Page 5 loaded into cell 6.
+Access page 15 in cell 5.
+Access page 9 in cell 9.
+Access page 3 in cell 8.
+Access page 3 in cell 8.
+Page 7 loaded into cell 10.
+Access page 9 in cell 9.
+Page 4 loaded into cell 4.
+Page 14 loaded into cell 7.
+Page 2 loaded into cell 8.
+Page 1 loaded into cell 1.
+Access page 4 in cell 4.
+Access page 9 in cell 9.
+Access page 14 in cell 7.
+Access page 8 in cell 3.
+Access page 8 in cell 3.
+Access page 8 in cell 3.
+Access page 14 in cell 7.
+Access page 8 in cell 3.
+Access page 15 in cell 5.
+Access page 1 in cell 1.
+Page 13 loaded into cell 2.
+Access page 9 in cell 9.
+Access page 7 in cell 10.
+There are a total of 21 page faults.
+
+Program 36
+Page 1 loaded into cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+There are a total of 1 page faults.
+
+Program 37
+Page 6 loaded into cell 1.
+Access page 6 in cell 1.
+Page 5 loaded into cell 1.
+Page 10 loaded into cell 1.
+Page 8 loaded into cell 1.
+There are a total of 4 page faults.
+
+Program 38
+Page 8 loaded into cell 1.
+Page 10 loaded into cell 2.
+Page 3 loaded into cell 1.
+Page 8 loaded into cell 2.
+Access page 3 in cell 1.
+There are a total of 4 page faults.
+
+Program 39
+Page 1 loaded into cell 1.
+Page 7 loaded into cell 1.
+Page 1 loaded into cell 1.
+Page 5 loaded into cell 1.
+Page 10 loaded into cell 1.
+Page 1 loaded into cell 1.
+Access page 1 in cell 1.
+Page 5 loaded into cell 1.
+Page 2 loaded into cell 1.
+Page 10 loaded into cell 1.
+Page 2 loaded into cell 1.
+Page 10 loaded into cell 1.
+Page 4 loaded into cell 1.
+Page 2 loaded into cell 1.
+Page 6 loaded into cell 1.
+There are a total of 14 page faults.
+
+Program 40
+Page 5 loaded into cell 1.
+Page 6 loaded into cell 2.
+Page 1 loaded into cell 1.
+Access page 1 in cell 1.
+Page 4 loaded into cell 2.
+Page 6 loaded into cell 1.
+Access page 4 in cell 2.
+Page 2 loaded into cell 2.
+Page 8 loaded into cell 1.
+Page 6 loaded into cell 2.
+Page 3 loaded into cell 1.
+Page 4 loaded into cell 2.
+Page 6 loaded into cell 1.
+Page 1 loaded into cell 2.
+Page 10 loaded into cell 1.
+There are a total of 13 page faults.
+
+Program 41
+Page 8 loaded into cell 1.
+Access page 8 in cell 1.
+Access page 8 in cell 1.
+Page 10 loaded into cell 2.
+Access page 10 in cell 2.
+Page 6 loaded into cell 3.
+Page 7 loaded into cell 1.
+Access page 6 in cell 3.
+Page 8 loaded into cell 2.
+Page 5 loaded into cell 3.
+Page 9 loaded into cell 1.
+Page 7 loaded into cell 2.
+Access page 7 in cell 2.
+Access page 7 in cell 2.
+Page 6 loaded into cell 3.
+There are a total of 9 page faults.
+
+Program 42
+Page 4 loaded into cell 1.
+Page 7 loaded into cell 2.
+Access page 4 in cell 1.
+Access page 4 in cell 1.
+Page 10 loaded into cell 3.
+Page 5 loaded into cell 4.
+Access page 7 in cell 2.
+Access page 10 in cell 3.
+Page 1 loaded into cell 1.
+Access page 5 in cell 4.
+Access page 5 in cell 4.
+Page 2 loaded into cell 2.
+Page 8 loaded into cell 3.
+Page 10 loaded into cell 4.
+Page 7 loaded into cell 1.
+There are a total of 9 page faults.
+
+Program 43
+Page 4 loaded into cell 1.
+Page 7 loaded into cell 2.
+Page 2 loaded into cell 3.
+Access page 4 in cell 1.
+Page 1 loaded into cell 4.
+Page 5 loaded into cell 1.
+Page 6 loaded into cell 2.
+Access page 5 in cell 1.
+Access page 5 in cell 1.
+Page 8 loaded into cell 3.
+Page 7 loaded into cell 4.
+Access page 7 in cell 4.
+Page 3 loaded into cell 1.
+Access page 6 in cell 2.
+Page 4 loaded into cell 3.
+There are a total of 10 page faults.
+
+Program 44
+Page 1 loaded into cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Page 2 loaded into cell 2.
+Access page 2 in cell 2.
+Access page 2 in cell 2.
+Access page 1 in cell 1.
+Access page 2 in cell 2.
+Access page 1 in cell 1.
+Access page 2 in cell 2.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 2 in cell 2.
+Access page 1 in cell 1.
+There are a total of 2 page faults.
+
+Program 45
+Page 1 loaded into cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+Access page 1 in cell 1.
+There are a total of 1 page faults.
+
+Program 46
+Page 3 loaded into cell 1.
+Page 8 loaded into cell 2.
+Page 4 loaded into cell 3.
+Access page 4 in cell 3.
+Access page 4 in cell 3.
+Page 1 loaded into cell 4.
+Access page 1 in cell 4.
+Page 6 loaded into cell 5.
+Access page 8 in cell 2.
+Access page 3 in cell 1.
+Access page 6 in cell 5.
+Access page 3 in cell 1.
+Page 7 loaded into cell 6.
+Access page 7 in cell 6.
+Access page 1 in cell 4.
+Access page 6 in cell 5.
+Page 5 loaded into cell 1.
+Access page 4 in cell 3.
+There are a total of 7 page faults.
+
+Program 47
+Page 8 loaded into cell 1.
+Access page 8 in cell 1.
+Page 10 loaded into cell 2.
+Page 2 loaded into cell 3.
+Page 3 loaded into cell 4.
+Access page 2 in cell 3.
+Page 4 loaded into cell 5.
+Page 1 loaded into cell 6.
+Access page 3 in cell 4.
+Page 5 loaded into cell 1.
+Page 8 loaded into cell 2.
+Access page 5 in cell 1.
+Page 7 loaded into cell 3.
+Page 2 loaded into cell 4.
+Page 3 loaded into cell 5.
+Access page 2 in cell 4.
+Page 6 loaded into cell 6.
+Page 10 loaded into cell 1.
+There are a total of 13 page faults.
+
