@@ -4,17 +4,20 @@ using namespace std;
 #define OK 1
 #define ERROR 0
 #define OVERFLOW -2          
+
 typedef struct LNode
 {
     int data;
     struct LNode *next;
 }LNode,*LinkList;
+
 int InitList_L(LinkList &L1)			
 {
     L1=new LNode;			
     L1->next=NULL;
 	return OK;
 }
+
 int Inverted_L(LinkList &L)		
 {
 	LinkList H=L;
@@ -51,6 +54,7 @@ int Inverted_L(LinkList &L)
 	}
 	return OK;
 }
+
 int main()
 {
     LinkList L;

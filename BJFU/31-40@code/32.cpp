@@ -1,19 +1,17 @@
-#include<iostream>
-#include<string>
-using namespace std;
 
+
+#include<iostream>
+using namespace std;
 typedef struct LNode
 {
     int data;                    	
     struct LNode *next;            	
 }LNode,*LinkList;
-
 void InitList(LinkList &L)        	
 {
       L=new LNode;                	
     L->next=NULL;                	
 }
-
 void Input(LinkList &L,int n)    	
 {
     LinkList p=L;                	
@@ -26,34 +24,20 @@ void Input(LinkList &L,int n)
         p=q;                    	
     }
 }
-
-void Delete(LinkList &L)        	
+void Locate(LinkList L)            	
 {
-    int min,max;
-    cin>>min>>max;                	
-    LinkList p=L;                	
-    while(p->next)                	
+    LinkList L1=L;                	
+    LinkList L2=L;                	
+    int k;
+    cin>>k;
+    while(k--)                    	
+        L1=L1->next;            
+    while(L1)                    	
     {
-        if(min<=p->next->data&&p->next->data<=max)
-        {
-            LinkList q=p->next;        	
-            p->next=p->next->next;    	
-            delete(q);                	
-        }
-        else
-            p=p->next;                	
+        L1=L1->next;            	
+        L2=L2->next;            	
     }
-}
-
-void Output(LinkList L)                
-{
-    LinkList p=L->next;                	
-    while(p->next)                    	
-    {
-        cout<<p->data<<" ";
-        p=p->next;
-    }
-    cout<<p->data<<endl;            	
+    cout<<L2->data<<endl;        	
 }
 int main()
 {
@@ -63,8 +47,7 @@ int main()
         LinkList L;                	
         InitList(L);            	
         Input(L,n);                	
-        Delete(L);                	
-        Output(L);                	
+        Locate(L);                	
     }
     return 0;
 }

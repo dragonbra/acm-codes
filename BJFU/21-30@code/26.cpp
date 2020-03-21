@@ -4,11 +4,13 @@ using namespace std;
 #define OK 1
 #define ERROR 0
 #define OVERFLOW -2
+
 typedef struct LNode
 {
 	int data;
 	struct LNode *next;
 }LNode,*LinkList;
+
 int InitList_L(LinkList &L,int n)
 {
   	L=new LNode;	
@@ -25,6 +27,7 @@ int InitList_L(LinkList &L,int n)
 	L=H;
 	return OK;
 }
+
 int Divide_L(LinkList &L,LinkList &L1,LinkList &L2)
 {
  	L1=new LNode;
@@ -49,8 +52,10 @@ int Divide_L(LinkList &L,LinkList &L1,LinkList &L2)
 			p=p->next;	
 		}
 	}
+	
 	p1->next=NULL;
 	p2->next=NULL;
+
 	p=L1->next;
 	while(p->next)
 	{
@@ -58,6 +63,7 @@ int Divide_L(LinkList &L,LinkList &L1,LinkList &L2)
 		p=p->next;
 	}
 	cout<<p->data<<endl;
+
 	p=L2->next;
 	while(p->next)
 	{
@@ -67,6 +73,7 @@ int Divide_L(LinkList &L,LinkList &L1,LinkList &L2)
 	cout<<p->data<<endl;
 	return OK; 
 }
+
 int main()
 {
 	int n;

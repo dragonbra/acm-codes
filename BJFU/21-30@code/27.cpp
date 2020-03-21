@@ -5,11 +5,13 @@ typedef struct LNode
     int data;
     struct LNode *next;
 }LNode,*LinkList;
+
 void InitList(LinkList &L)            
 {
     L=new LNode;            
     L->next=NULL;
 }
+
 int Max(LinkList L)
 {
     int max=L->next->data;		
@@ -22,6 +24,7 @@ int Max(LinkList L)
     }    
     return max;
 }
+
 void Input(LinkList &L)           	
 {
     LinkList p=L;                    	
@@ -39,7 +42,8 @@ void Input(LinkList &L)
         }
         cout<<Max(L)<<endl;         	
     }        
-}        
+}     
+   
 int main()
 {
     LinkList L;           		

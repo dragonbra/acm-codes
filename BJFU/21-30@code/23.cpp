@@ -4,17 +4,20 @@ using namespace std;
 #define OK 1
 #define ERROR 0
 #define OVERFLOW -2
+
 typedef struct LNode
 {
 	int data;
 	struct LNode *next;
 }LNode,*LinkList;
+
 int InitList_L(LinkList &L)			
 {
     L=new LNode;			
     L->next=NULL;
 	return OK;
 }
+
 int MergeList_L(LinkList &L1,LinkList &L2)
 {
 	LinkList H=L1,H1=L1,H2=L2;
@@ -76,6 +79,7 @@ int MergeList_L(LinkList &L1,LinkList &L2)
 	}
 	return OK;
 }
+
 int main()
 {
 	LinkList L1,L2;

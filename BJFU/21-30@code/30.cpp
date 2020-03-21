@@ -4,12 +4,14 @@ using namespace std;
 #define OK 1
 #define ERROR 0
 #define OVERFLOW -2
+
 typedef struct LNode
 {
 	int data;
 	struct LNode *next;
 	struct LNode *prior;
 }LNode,*LinkList;
+
 int InitList_L(LinkList &L,int n)
 {
   	L=new LNode;	
@@ -30,6 +32,7 @@ int InitList_L(LinkList &L,int n)
 	L=H;
 	return OK;
 }
+
 void Exchange(LinkList &L,int key)
 {
 	LinkList p=L;
@@ -49,6 +52,7 @@ void Exchange(LinkList &L,int key)
 	}
 	cout<<p->data<<endl; 
 }
+
 int main()
 {
 	int n,key;
