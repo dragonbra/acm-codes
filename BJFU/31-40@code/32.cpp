@@ -2,16 +2,19 @@
 
 #include<iostream>
 using namespace std;
+
 typedef struct LNode
 {
     int data;                    	
     struct LNode *next;            	
 }LNode,*LinkList;
+
 void InitList(LinkList &L)        	
 {
-      L=new LNode;                	
+    L=new LNode;                	
     L->next=NULL;                	
 }
+
 void Input(LinkList &L,int n)    	
 {
     LinkList p=L;                	
@@ -24,6 +27,7 @@ void Input(LinkList &L,int n)
         p=q;                    	
     }
 }
+
 void Locate(LinkList L)            	
 {
     LinkList L1=L;                	
@@ -39,6 +43,7 @@ void Locate(LinkList L)
     }
     cout<<L2->data<<endl;        	
 }
+
 int main()
 {
     int n;
