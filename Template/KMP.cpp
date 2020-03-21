@@ -21,7 +21,7 @@ void build(){
 	}
 }
 
-int KMP(){//return where substring 'pattern' starts in string 'text'
+int KMP() { //return where substring 'pattern' starts in string 'text'
 	int n=strlen(text),m=strlen(pattern);
 	for(int i=0,j=0;i<n;){
 		if(text[i]==pattern[j]){
