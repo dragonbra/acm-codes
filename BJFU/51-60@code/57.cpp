@@ -1,5 +1,6 @@
 #include<iostream>
 using namespace std;
+
 int IsEqual(int a[20][20],int m,int n)
 {
 	int i,j,p,k;
@@ -23,6 +24,7 @@ int IsEqual(int a[20][20],int m,int n)
   	cout<<"NO"<<endl;
 	return 0;
 } 
+
 int main()
 {
 	int m,n,i,j;

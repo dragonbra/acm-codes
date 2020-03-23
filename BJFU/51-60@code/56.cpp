@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 #define MAX 100
+
 void Insert(char a[],char b[],int pos)
 {
 	int m=0,n=0,len1=0,len2=0;
@@ -22,6 +23,7 @@ void Insert(char a[],char b[],int pos)
 			cout<<endl;
 	}
 }
+
 int main()
 {
 	int pos;

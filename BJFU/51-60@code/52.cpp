@@ -5,6 +5,7 @@ int sum;
 int flag;
 int p[MAX];
 int m[MAX][3];
+
 void DFS(int n)
 {
 	if(n==sum)
@@ -22,6 +23,7 @@ void DFS(int n)
 		}
 	}
 }
+
 int main()
 {
 	int n;

@@ -1,5 +1,6 @@
 #include<iostream>
 using namespace std;
+
 void F(char c[],int n,int m)
 {
 	char t;
@@ -13,6 +14,7 @@ void F(char c[],int n,int m)
 	else
 		cout<<c<<endl;
 }
+
 int main()
 {
 	char c[100]; 

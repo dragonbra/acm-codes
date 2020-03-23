@@ -1,5 +1,3 @@
-// http://www.bjfuacm.com/problem/301/
-
 #include <stdio.h>
 #include <stdlib.h>
 

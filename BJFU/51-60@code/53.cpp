@@ -2,7 +2,9 @@
 #include<cstring>
 using namespace std;
 #define MAX 100
+
 int m,n; 
+
 int BF(char s[],char p[])
 {
 	int i=1,j=1,t=1;
@@ -24,6 +26,7 @@ int BF(char s[],char p[])
 	else
 		return 0;
 }
+
 int main()
 {
 	char a[MAX],b[MAX],s[MAX],p[MAX];

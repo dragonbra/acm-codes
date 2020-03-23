@@ -4,12 +4,14 @@ using namespace std;
 #define  OK	0
 #define  ERROR -1
 #define  OVERFLOW -2
+
 typedef struct
 {
 	char *base;
 	char *top;
 	int stacksize;
 }SqStack;
+
 int InitStack(SqStack &S)
 {
 	S.base=new char[MAX];
@@ -18,6 +20,7 @@ int InitStack(SqStack &S)
 	S.stacksize=MAX;
 	return OK;
 }
+
 int Push(SqStack &S, char e)  
 {
 	if(S.top-S.base==S.stacksize)
@@ -26,6 +29,7 @@ int Push(SqStack &S, char e)
 	S.top++;
 	return OK;
 }
+
 int Pop(SqStack &S)  
 {
 	if(S.top==S.base)
@@ -33,12 +37,14 @@ int Pop(SqStack &S)
 	S.top--;
 	return OK;
 }
+
 char Top(SqStack S)  
 {
 	if(S.top==S.base)
 		return ERROR;
   	return *(S.top-1);
 }
+
 char Precede(char a,char b)
 {
 	if((a=='('&&b==')')||(a=='='&&b=='='))
@@ -48,6 +54,7 @@ char Precede(char a,char b)
 	else
 		return '>';
 } 
+
 int main()
 {
 	char s[100];

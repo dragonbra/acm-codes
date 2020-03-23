@@ -1,11 +1,13 @@
 #include<iostream>
 using namespace std;
 int flag;
+
 typedef struct BiTNode
 {
 	char data;
 	struct BiTNode *lchild,*rchild;
 }BiTNode,*BiTree;
+
 void CreateBiTree(BiTree &T,char S[],int &i)
 {
 	if(S[i]=='0')
@@ -18,6 +20,7 @@ void CreateBiTree(BiTree &T,char S[],int &i)
 		CreateBiTree(T->rchild,S,++i);
 	}
 }
+
 void Compare(BiTree T1,BiTree T2)
 {
 	if((T1&&!T2)||(!T1&&T2))
@@ -30,6 +33,7 @@ void Compare(BiTree T1,BiTree T2)
 		Compare(T1->rchild,T2->rchild);
 	}
 }
+
 int main()
 {
 	char S1[100],S2[100];
