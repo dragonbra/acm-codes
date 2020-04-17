@@ -1,35 +1,26 @@
-/*
-    124232018029 李奕岐
-*/
-#include <bits/stdc++.h>
-using namespace std;
+struct BinTreeNode;
+typedef struct BinTreeNode *PBinTreeNode;
 
-class Time{
-    private:
-        int hour, minute, sec;
-    public:
-        Time(int h, int m, int s) : hour(h), minute(m), sec(s) {}
-        void output(){
-            cout<<setw(4)<<hour<<':'<<minute<<':'<<sec<<endl;
-        }
-};
+const int MAXSIZE=20;
 
-class Data{
-    private:
-        int year, month, day;
-    public:
-        Data(int y, int m, int d) : year(y), month(m), day(d) {}
-        void output(Time &t){
-            cout<<year<<'/'<<month<<'/'<<day<<endl;
-            t.output();
-        }
-};
+struct BinTreeNode{
+	char info;
+	PBinTreeNode llink;
+	PBinTreeNode rlink; 
+}; 
 
-int main() {
+typedef struct BinTreeNode *BinTree;
+typdef BinTree *PBinTree;
 
-    Data d(2020,4,12);
-    Time t(15,30,59);
-    d.output(t);
-
-    return 0;
+PBinTree Build(char *pre,char *ops,int n){
+	PBinTree p;
+	char *rpre;
+	int k;
+	if(n<=0)return NULL;
+	p=(PBinTree)malloc(sizeof(BinNode));
+	p->data=*pre;
+	for(rpre=ops;(*rpre)==(*pre);rpre++)break;
+	int k=rops-ops;
+	p->llink=Build(pre+1,ops,k);
+	p->rlink=BUild(pre+k+1,ops+1,n-k+1);
 }
