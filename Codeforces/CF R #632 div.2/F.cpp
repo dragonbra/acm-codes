@@ -15,8 +15,8 @@ void redirect() {
 }
 
 ll n;
-bool vis[N];
-ll flag[N],prime[N],pnum;
+bool flag[N];
+ll prime[N],pnum;
 ll p[N];
 /*
 flag[n] 表示n是否是素数，1是素数，0不是
@@ -52,39 +52,21 @@ int main() {
     scanf("%lld",&n);
     CreatePrime();
 
-    cout<<pnum<<' '<<prime[pnum-1]<<endl;
-
-    int cnt = 0;
-    for(int i=0;i<=pnum;i++){
-        p[0] = 1;
-        while(p[cnt]*prime[i]<n) p[cnt+1] = p[cnt] * prime[i], cnt++;
-    }
-    sort(p+1,p+cnt+1);
+    priority_queue<int, vector<int>, greater<int> > Q;
 
     for(int i=2;i<=pnum+1;i++){
+        Q.push(prime[i-2]);
         printf("1 ");
     }
 
-    int ct = pnum+1; int j = 1;
-    bool f = false;
-    while(ct<n){
-        for(int i=0;prime[i]<=j&&j<cnt;i++) {
-            //cout<<p[j]<<' '<<0<<endl;
-            if( prime[i]*p[j] > n ) break;
-            if( vis[ prime[i]*p[j] ] ) continue;
-
-            vis[ prime[i] * p[j] ] = true;
-
-            //cout<<cnt<<endl;
-
-            printf("%d ",p[j]);
-            ct++;
-            if(ct==n) {
-                f = true; break;
-            }
+    int pt=0;
+    for(int i=pnum+2;i<=n;i++) {
+        int t = Q.top(); Q.pop();
+        while(flag[t]&&prime[pt]<t) pt++;
+        for(int j=0;j<=pt&&i<=n;i++,j++) {
+            Q.push(t*prime[j]);
+            printf("%d ",t);
         }
-        if(f) break;
-        j++;
     }
 
     return 0;

@@ -1,4 +1,4 @@
-//author： bjr
+//埃式筛法
 #define N 10000
 int flag[N+1],prime[N+1],pnum;
 /*
