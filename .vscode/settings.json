@@ -1,5 +1,27 @@
 {
-    "files.associations": {
-        "iosfwd": "cpp"
+    //这一行为字体大小
+    "editor.fontSize": 12,
+
+    //运行代码后将光标移到终端
+    "code-runner.preserveFocus": false,
+
+    //将 MacOS 终端集成到 VSCode 中
+    "code-runner.runInTerminal": true,
+
+    //运行代码前保存
+    "code-runner.saveFileBeforeRun": true,
+
+    //运行代码时清空之前的输出
+    //"code-runner.clearPreviousOutput": true,
+
+    //运行代码是 cd 到 cpp 文件所在目录
+    "code-runner.fileDirectoryAsCwd": true,
+
+    //executorMap - 编译命令修改
+    //这里只保存了 C/C++ 的编译命令
+    "code-runner.executorMap": {
+        //cd "/Users/cyd/Desktop/code/" && g++ 1.cpp -o 1 && "/Users/cyd/Desktop/code/"1
+        "c": "cd $dir && gcc -o $fileNameWithoutExt $fileName -DLOCAL && $dir$fileNameWithoutExt",
+        "cpp": "cd $dir && g++ -o $fileNameWithoutExt $fileName -std=c++11 -DLOCAL && $dir$fileNameWithoutExt",
     }
 }
