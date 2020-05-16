@@ -23,5 +23,8 @@
         //cd "/Users/cyd/Desktop/code/" && g++ 1.cpp -o 1 && "/Users/cyd/Desktop/code/"1
         "c": "cd $dir && gcc -o $fileNameWithoutExt $fileName -DLOCAL && $dir$fileNameWithoutExt",
         "cpp": "cd $dir && g++ -o $fileNameWithoutExt $fileName -std=c++11 -DLOCAL && $dir$fileNameWithoutExt",
+    },
+    "files.associations": {
+        "abb.C": "cpp"
     }
 }

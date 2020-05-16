@@ -1,7 +1,16 @@
+/*
+* @ author: dragon_bra
+* @ email: tommy514@foxmail.com
+* @ data: 2020-05-16 12:00
+*/
 #include <iostream>
-#include <algorithm>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <set>
 using namespace std;
 
 typedef long long ll;
@@ -17,18 +26,12 @@ void redirect() {
     #endif
 }
 
-int t, n;
+
 
 int main() {
     redirect();
 
-
+    
 
     return 0;
 }
-
-/*
------------------
-author:dragon_bra
------------------
-*/
