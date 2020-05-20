@@ -4,20 +4,15 @@
 
 const int N = 2e5 + 10;
 
-void insertSort(int array[], int n)
-{
-    for (int j = 1; j < n; j++)
-    {
-        int key = array[j]; //待排序第一个元素
-        int i = j - 1;  //代表已经排过序的元素最后一个索引数
-        while (i >= 0 && key < array[i])
-        {
-            //从后向前逐个比较已经排序过数组，如果比它小，则把后者用前者代替，
-            //其实说白了就是数组逐个后移动一位,为找到合适的位置时候便于Key的插入
-            array[i + 1] = array[i];
+void sort(int a[], int n) {
+    for (int j = 1; j < n; j++) {
+        int key = a[j];
+        int i = j - 1; 
+        while (i >= 0 && key < a[i]) {
+            a[i + 1] = a[i];
             i--;
         }
-        array[i + 1] = key;//找到合适的位置了，赋值,在i索引的后面设置key值。
+        a[i + 1] = key;
     }
 }
 
