@@ -25,6 +25,7 @@
         "cpp": "cd $dir && g++ -o $fileNameWithoutExt $fileName -std=c++11 -DLOCAL && $dir$fileNameWithoutExt",
     },
     "files.associations": {
-        "abb.C": "cpp"
+        "abb.C": "cpp",
+        "algorithm": "cpp"
     }
 }
