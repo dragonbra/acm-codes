@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-07-19 14:10
+* @ data: 2020-07-19 17:56
 */
 
 #include <algorithm>
@@ -32,42 +32,39 @@ void redirect() {
 }
 
 int T;
-int total;
-
-int arr[15] = {0, 95, 90, 85, 80, 75, 70, 67, 65, 62, 60};
-
-double gpa(int x) {
-    if (x >= 95) return 4.3;
-    if (x >= 90) return 4.0;
-    if (x >= 85) return 3.7;
-    if (x >= 80) return 3.3;
-    if (x >= 75) return 3.0;
-    if (x >= 70) return 2.7;
-    if (x >= 67) return 2.3;
-    if (x >= 65) return 2.0;
-    if (x >= 62) return 1.7;
-    if (x >= 60) return 1.0;
-    return 0.0;
-}
+ll l, r, m;
 
 int main() {
     redirect();
 
     cin >> T;
     while (T--) {
-        cin >> total;
-        double ans = 0;
-        for (int i1=0; i1<=10; i1++) {
-            for (int i2=0; i2<=10; i2++) {
-                for (int i3=0; i3<=10; i3++) {
-                    int i4 = total - arr[i1] - arr[i2] - arr[i3];
-                    if (i4<0) continue;
-                    //cout << arr[i1] << endl;
-                    ans = max(ans, gpa(arr[i1]) + gpa(arr[i2]) + gpa(arr[i3]) + gpa(i4));
+        scanf("%lld %lld %lld", &l, &r, &m);
+        ll len = r - l;
+        ll dif, a, b, c;
+        for (ll i=l; i<=r; i++) {
+            if (m/i>0) {
+                dif = min (m - m/i * i, (m/i+1) * i - m);
+                if (dif <= len) {
+                    a = i;
+                    break;
+                }
+            } else {
+                dif = (m/i+1) * i - m;
+                if (dif <= len) {
+                    a = i;
+                    break;
                 }
             }
         }
-        printf("%.1lf\n", ans);
+        if ((m/a+1) * a - m == dif) {
+            b = l;
+            c = l + dif;
+        } else {
+            c = l;
+            b = l + dif;
+        }
+        printf("%lld %lld %lld\n", a, b, c);
     }
 
     return 0;
