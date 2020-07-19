@@ -1,1 +1,1 @@
-a/b%mod=a*b^(mod-1)%mod
+a/b%mod = a*b^(mod-2) %mod
