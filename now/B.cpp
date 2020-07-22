@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-07-19 17:56
+* @ data: 2020-07-21 23:52
 */
 
 #include <algorithm>
@@ -32,39 +32,42 @@ void redirect() {
 }
 
 int T;
-ll l, r, m;
+int n; int cnt;
+vector<int> G; // 记录块的大小
+
+bool vis[N];
 
 int main() {
     redirect();
 
-    cin >> T;
+    scanf("%d", &T);
     while (T--) {
-        scanf("%lld %lld %lld", &l, &r, &m);
-        ll len = r - l;
-        ll dif, a, b, c;
-        for (ll i=l; i<=r; i++) {
-            if (m/i>0) {
-                dif = min (m - m/i * i, (m/i+1) * i - m);
-                if (dif <= len) {
-                    a = i;
-                    break;
-                }
+        scanf("%d", &n);
+        G.clear();
+
+        int mx = 0, res = 0;
+        for (int i=1; i<=n*2; i++) {
+            int t; scanf("%d", &t);
+            if (t > mx) {
+                mx = t;
+                G.push_back(res);
+                res = 1;
             } else {
-                dif = (m/i+1) * i - m;
-                if (dif <= len) {
-                    a = i;
-                    break;
-                }
+                res ++;
             }
         }
-        if ((m/a+1) * a - m == dif) {
-            b = l;
-            c = l + dif;
-        } else {
-            c = l;
-            b = l + dif;
+
+        for (int i=0; i<=n; i++) vis[i] = false;
+        cnt = G.size(); vis[0] = true;
+        for (int i=0; i<cnt; i++) {
+            for (int j=n; j>=0; j--) {
+                if (vis[j]) vis[j+G[i]] = true;
+            }
         }
-        printf("%lld %lld %lld\n", a, b, c);
+        //for (int i=1; i<=n; i++) cout << vis[i] << ' '; cout << endl;
+
+        if (vis[n]) puts("YES");
+        else puts("NO");
     }
 
     return 0;

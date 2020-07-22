@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-07-19 17:02
+* @ data: 2020-07-21 22:42
 */
 
 #include <algorithm>
@@ -22,7 +22,7 @@ typedef long long ll;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
 const double eps = 1e-5;
-const int N = 1e3 + 10;
+const int N = 2e5 + 10;
 
 void redirect() {
     #ifdef LOCAL
@@ -32,77 +32,62 @@ void redirect() {
 }
 
 int T;
-int n; 
-char s[N];
-char dest[N] = "abacaba";
-char ans[N];
-bool vis[N];
+int n;
+char s1[N], s2[N];
 
-bool check(int x) {
-    for (int i=0; i<strlen(dest); i++) {
-        if (dest[i]!=ans[i+x]) return false;
-    }
-    return true;
-}
-
-bool check2(int x) {
-    for (int i=0; i<strlen(dest); i++) {
-        if (dest[i]!=s[i+x] && s[i+x]!='?') return false;
-    }
-    return true;
-}
-
-void make(int x) {
-    for (int i=0; i<strlen(dest); i++) {
-        ans[i+x] = dest[i];
-    }
-}
-
-bool lstcheck(int x) {
-    for (int i=0; i<strlen(s); i++) {
-        if (s[i]=='?') ans[i] = 'z';
-        else ans[i] = s[i];
-    }
-    ans[strlen(s)] = '\0';
-    if(x>=0) make(x);
-    //cout << x << ' ' << ans << endl;
-
-    int cnt = 0;
-    for (int i=0; i<strlen(s)-6; i++) {
-        if (check(i)) {
-            cnt ++;
-        }
-    }
-    if (cnt==1) return true;
-    return false;
-}
+struct node {
+    int s, t;
+    node(){}
+    node(int s, int t) : s(s), t(t) {}
+};
 
 int main() {
     redirect();
 
-    cin >> T;
+    scanf("%d", &T);
     while (T--) {
-        cin >> n;
-        cin >> s;
-        //cout << n << endl;
-        //cout << s << endl;
-
-        bool f = false;
-        if (lstcheck(-1)) f = true;
-        for (int i=0; i<strlen(s)-6; i++) {
-            if (f) break;
-            if (check2(i)) {
-                if (lstcheck(i)) {
-                    f = true; break;
+        scanf("%d", &n);
+        scanf("%s", s1+1);
+        scanf("%s", s2+1);
+        vector<node> G;
+        int s = 0, t = 0;
+        for (int i=1; i<=n; i++) {
+            if (s==0) {
+                if (s1[i] != s2[i]) {
+                    s = i;
+                    if (i==n) {
+                        t = i;
+                        G.push_back(node(s, t));
+                        s = 0;
+                    }
+                }
+            } else {
+                if (s1[i] == s2[i]) {
+                    t = i-1;
+                    G.push_back(node(s, t));
+                    s = 0;
+                } else if (i==n) {
+                    t = i;
+                    G.push_back(node(s, t));
+                    s = 0;
                 }
             }
         }
+        //cout << G.size() << endl;
+        //for (auto x:G) { cout << x.s << ' ' << x.t << endl; }
 
-        if (f) {
-            puts("Yes");
-            printf("%s\n", ans);
+        //cout << "ans";
+        if (G.size()>0) {
+            int ans = G.size() * 2;
+            if (G[0].s==1) ans --;
+            printf("%d ", ans);
+            for (int i=0; i<G.size(); i++) {
+                if (i==0 && G[i].s==1) printf("%d ", G[i].t);
+                else printf("%d %d ", G[i].s-1, G[i].t);
+            }
+            printf("\n");
         } else {
-            puts("No");
+            printf("0\n");
         }
     }
 
