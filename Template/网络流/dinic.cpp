@@ -14,6 +14,11 @@ inline void addE(int u, int v, int w) {
     val[cnt] = w;
     nxt[cnt] = first[u];
     first[u] = cnt;
+
+    to[++cnt] = u;
+    val[cnt] = 0;
+    nxt[cnt] = first[v];
+    first[v] = cnt;
 }
 
 int dep[N], q[N];
@@ -73,7 +78,6 @@ int main() {
         int u, v, w;
         scanf("%d %d %d", &u, &v, &w);
         addE(u, v, w);
-        addE(v, u, 0);
     }
    
     ans = dinic();

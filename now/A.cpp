@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-07-21 22:42
+* @ data: 2020-08-10 13:19
 */
 
 #include <algorithm>
@@ -22,7 +22,7 @@ typedef long long ll;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
 const double eps = 1e-5;
-const int N = 2e5 + 10;
+const int N = 1e6 + 10;
 
 void redirect() {
     #ifdef LOCAL
@@ -31,63 +31,37 @@ void redirect() {
     #endif
 }
 
-int T;
-int n;
-char s1[N], s2[N];
-
-struct node {
-    int s, t;
-    node(){}
-    node(int s, int t) : s(s), t(t) {}
-};
+int T; int p; int cnt = 0;
+bool vis[N];
+int q[N];
 
 int main() {
     redirect();
 
     scanf("%d", &T);
     while (T--) {
-        scanf("%d", &n);
-        scanf("%s", s1+1);
-        scanf("%s", s2+1);
-        vector<node> G;
-        int s = 0, t = 0;
-        for (int i=1; i<=n; i++) {
-            if (s==0) {
-                if (s1[i] != s2[i]) {
-                    s = i;
-                    if (i==n) {
-                        t = i;
-                        G.push_back(node(s, t));
-                        s = 0;
-                    }
-                }
+        scanf("%d", &p);
+        for (int i=1; i<p; i++) vis[i] = false;
+
+        cnt = 1; q[1] = 1; vis[1] = true;
+        for (int i=2; i<p; i++) {
+            int lst = q[i-1];
+            int t2 = q[i-1] * 2 % p, t3 = q[i-1] * 3 % p;
+            if (!vis[t2]) {
+                q[i] = t2; vis[t2] = true; cnt ++;
+            } else if (!vis[t3]) {
+                q[i] = t3; vis[t3] = true; cnt ++;
             } else {
-                if (s1[i] == s2[i]) {
-                    t = i-1;
-                    G.push_back(node(s, t));
-                    s = 0;
-                } else if (i==n) {
-                    t = i;
-                    G.push_back(node(s, t));
-                    s = 0;
-                }
+                break;
             }
         }
-        //cout << G.size() << endl;
-        //for (auto x:G) { cout << x.s << ' ' << x.t << endl; }
 
-        //cout << "ans";
-        if (G.size()>0) {
-            int ans = G.size() * 2;
-            if (G[0].s==1) ans --;
-            printf("%d ", ans);
-            for (int i=0; i<G.size(); i++) {
-                if (i==0 && G[i].s==1) printf("%d ", G[i].t);
-                else printf("%d %d ", G[i].s-1, G[i].t);
-            }
-            printf("\n");
+        if (cnt != p-1) {
+            puts("-1");
         } else {
-            printf("0\n");
+            for (int i=1; i<p; i++) {
+                printf("%d ", q[i]);
+            } printf("\n");
         }
     }
 
