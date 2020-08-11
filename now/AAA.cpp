@@ -10,6 +10,7 @@
 #include "map"
 #include "unordered_map"
 using namespace std;
+
 typedef long long ll;
 typedef unsigned long long ull;
 const int INF=0x3f3f3f3f;
@@ -18,27 +19,27 @@ const ll MOD=998244353;
 const ll inf=1e18;
 const int maxn=1e5+10;
 const ull base=147;
-map<pair<ll, ll>,int>mp;
+
+map<pair<ll, ll>,ll>mp;
 queue<pair<ll,ll> > q;
 pair<ll,ll>cur;
-int dis[8][2];
+
+ll dis[8][2] = {
+    {-1, -1}, {-1, 0}, {-1, 1}, {0, -1},
+    {0, 1}, {1, -1}, {1, 0}, {1, 1}
+};
+
+int T;
+
 ll gcd(ll a,ll b){
     return a%b==0?b:gcd(b,a%b);
 }
+
 int main(){
     #ifdef LOCAL
         freopen("in.txt","r",stdin);
         freopen("out.txt","w",stdout);
     #endif
-    dis[0][0]=-1,dis[0][1]=-1;
-    dis[1][0]=-1,dis[1][1]=0;
-    dis[2][0]=-1,dis[2][1]=1;
-    dis[3][0]=0,dis[3][1]=-1;
-    dis[4][0]=0,dis[4][1]=1;
-    dis[5][0]=1,dis[5][1]=-1;
-    dis[6][0]=1,dis[6][1]=0;
-    dis[7][0]=1,dis[7][1]=1;
-    int T;
     scanf("%d",&T);
     while(T--){
         ll x,y;
@@ -49,50 +50,37 @@ int main(){
         }
         int flag=0;
         mp.clear();
-
-        while(!q.empty()) q.pop();
-
+        while(!q.empty())q.pop();
         q.push({x,y});
         mp[{x,y}]=1;
-
-        ll fz = 0, fm = 0;
+        ll fz=0,fm=0;
         while(!q.empty()){
             cur=q.front();q.pop();
+            int num=0;
             for(int i=0;i<8;i++){
-                int nx=cur.first+dis[i][0],ny=cur.second+dis[i][1];
+                ll nx=cur.first+dis[i][0],ny=cur.second+dis[i][1];
                 if(nx==ny){
                     flag=1;
                     break;
                 }
-                if (gcd(nx, ny) != 1) {
-                    fm ++;
+                
+                if(gcd(nx,ny)>1){
+                    num++;
                     if(mp[{nx,ny}]==0){
                         mp[{nx,ny}]=1;
                         q.push({nx,ny});
                     }
                 }
             }
+            if(cur.first==x && cur.second==y) fz=num+1;
+            fm = fm+num+1;
         }
-
-        cur = {x,y};
-        for(int i=0;i<8;i++){
-            int nx=cur.first+dis[i][0],ny=cur.second+dis[i][1];
-            if (gcd(nx, ny) != 1) {
-                fz ++;
-                if(mp[{nx,ny}]==0){
-                    mp[{nx,ny}]=1;
-                    q.push({nx,ny});
-                }
-            }
-        }
-
         if(flag){
             puts("0/1");
             continue;
-        } else {
-            printf("%lld/%lld\n", fz, fm);
         }
-        
+        ll g=gcd(fz,fm);
+        printf("%lld/%lld\n",fz/g,fm/g);
     }
     return 0;
 }
