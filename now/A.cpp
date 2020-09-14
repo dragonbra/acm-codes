@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-08-24 16:27
+* @ data: 2020-09-14 22:36
 */
 
 #include <algorithm>
@@ -25,19 +25,24 @@ const double eps = 1e-5;
 const int N = 2e5 + 10;
 
 void redirect() {
-	#ifdef LOCAL
-		freopen("in.txt","r",stdin);
-		freopen("out.txt","w",stdout);
-	#endif
+    #ifdef LOCAL
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
 }
 
-int $person;
+int T;
+ll x, y, k;
 
 int main() {
-	redirect();
+    redirect();
 
-	$person = 1;
-	cout << $person << endl;
+    cin >> T;
+    while (T--) {
+        cin >> x >> y >> k;
+        ll ans = ((y*k + k - 1 + (x-2)) / (x-1)) + k;
+        cout << ans << endl;
+    }
 
-	return 0;
+    return 0;
 }
