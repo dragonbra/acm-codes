@@ -1,8 +1,4 @@
 {
-    //这一行为字体大小
-    "editor.fontSize": 12,
-
-    //运行代码后将光标移到终端
     "code-runner.preserveFocus": false,
 
     //将 MacOS 终端集成到 VSCode 中
