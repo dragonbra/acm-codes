@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-09-14 23:00
+* @ data: 2020-09-17 22:58
 */
 
 #include <algorithm>
@@ -32,48 +32,68 @@ void redirect() {
 }
 
 int T;
-int n, a[N];
-int dp[N][3]; // friend - 0, me - 1
+int n;
+vector<int> G[N];
+int fa[N], dep[N];
+int size[N]; int ans[N];
+int ra, rb;
+
+void make_tree(int x, int dp) {
+    dep[x] = dp;
+    for (auto v:G[x]) {
+        if (dep[v] == 0) {
+            fa[v] = x;
+            make_tree(v, dp+1);
+            ans[x] = max(ans[x], size[v]);
+            size[x] += size[v];
+        }
+    }
+    ans[x] = max(ans[x], n - size[x]);
+}
 
 int main() {
     redirect();
 
-    scanf("%d", &T);
+    cin >> T;
     while (T--) {
-        scanf("%d", &n);
+        cin >> n;
         for (int i=1; i<=n; i++) {
-            scanf("%d", &a[i]);
+            G[i].clear(); size[i] = 1; ans[i] = 1; dep[i] = 0;
+        }
+        for (int i=1; i<n; i++) {
+            int u, v; cin >> u >> v;
+            G[u].push_back(v);
+            G[v].push_back(u);
         }
 
-        for (int i=n+1; i>=0; i--) {
-            dp[i][0] = dp[i][1] = INF;
-        }
+        make_tree(1, 1);
 
-        dp[0][1] = 0; dp[0][0] = INF;
-        for (int i=0; i<=n; i++) {
-            if (dp[i][1] != INF) {
-                int pos1 = a[i+1] == 1 ? 1 : 0;
-                int pos2 = a[i+2] == 1 ? 1 : 0;
-                dp[i+1][0] = min(dp[i+1][0], dp[i][1] + pos1);
-                dp[i+2][0] = min(dp[i+2][0], dp[i][1] + pos1 + pos2);
-            }
-            if (dp[i][0] != INF) {
-                dp[i+1][1] = min(dp[i+1][1], dp[i][0]);
-                dp[i+2][1] = min(dp[i+2][1], dp[i][0]);
+        ra = rb = 0; int mx = n;
+        for (int i=1; i<=n; i++) mx = min(mx, ans[i]);
+        for (int i=1; i<=n; i++) {
+            if (ans[i] == mx) {
+                if (!ra) ra = i;
+                else if (!rb) rb = i;
             }
         }
 
-        // for (int j=0; j<=1; j++) {
-        //     for (int i=1; i<=n+1; i++) {
-        //         if (dp[i][j] == INF) cout << "X" << ' ';
-        //         else cout << dp[i][j] << ' ';
-        //     } cout << endl;
-        // }
-
-        int ans = INF;
-        if (dp[n][1] != INF) ans = min(dp[n][1], ans);
-        if (dp[n][0] != INF) ans = min(dp[n][0], ans);
-        cout << ans << endl;
+        // cout << "hh" << ' ' << ra << ' ' << rb << endl;
+        // for (int i=1; i<=n; i++) cout << ans[i] << ' '; cout << endl;
+        if (rb == 0) {
+            cout << ra << ' ' << G[ra][0] << endl;
+            cout << ra << ' ' << G[ra][0] << endl;
+            continue;
+        }
+        if (dep[ra] < dep[rb]) swap(ra, rb);
+        int cut = 0;
+        for (auto v:G[ra]) {
+            if (v != fa[ra] && v != rb) {
+                cut = v;
+                break;
+            }
+        }
+        cout << cut << ' ' << ra << endl;
+        cout << cut << ' ' << rb << endl;
     }
 
     return 0;

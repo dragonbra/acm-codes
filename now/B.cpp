@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-09-14 22:46
+* @ data: 2020-09-17 22:37
 */
 
 #include <algorithm>
@@ -32,9 +32,7 @@ void redirect() {
 }
 
 int T;
-int n;
-int a[N], l[N];
-int b[N];
+int n, a[N], b[N];
 
 bool cmp (int a, int b) {
     return a > b;
@@ -46,28 +44,35 @@ int main() {
     cin >> T;
     while (T--) {
         cin >> n;
+        int acnt = 0, bcnt = 0;
+        ll res = 1;
         for (int i=1; i<=n; i++) {
-            cin >> a[i];
-        }
-        int cnt = 0;
-        for (int i=1; i<=n; i++) {
-            cin >> l[i];
-            if (l[i] == 0) {
-                b[++cnt] = a[i];
-            }
-        }
-        sort(b+1, b+cnt+1, cmp);
-
-        int pos = 0;
-        for (int i=1; i<=n; i++) {
-            if (l[i] == 0) {
-                a[i] = b[++pos];
-            }
+            int t; cin >> t; res *= t;
+            if (t > 0) a[++acnt] = t;
+            else b[++bcnt] = t;
         }
 
-        for (int i=1; i<=n; i++) {
-            cout << a[i] << ' ';
-        } cout << endl;
+        sort(a+1, a+acnt+1, cmp);
+        sort(b+1, b+bcnt+1);
+
+        ll ans = -1e18;
+        for (int i=0; i<=5; i++) {
+            ll res = 1;
+            if (bcnt >= i && acnt >= 5 - i) {
+                ll ares = res, bres = res;
+                for (int j=1; j<=i; j++) ares *= b[j];
+                for (int j=bcnt; j>=bcnt-i+1; j--) bres *= b[j];
+                
+                res = max(ares, bres);
+                ll resa = res, resb = res;
+                //cout << i << ' ' << resa << ' ' << resb << endl;
+                for (int j=1; j<=5 - i; j++) resa *= a[j];
+                for (int j=acnt; j>=acnt-4+i; j--) resb *= a[j];
+                ans = max(ans, max(resa, resb));
+                //cout << i << ' ' << resa << ' ' << resb << endl;
+            }
+        }
+        cout << ans << endl;
     }
 
     return 0;
