@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-09-17 22:29
+* @ data: 2020-09-19 22:39
 */
 
 #include <algorithm>
@@ -22,7 +22,7 @@ typedef long long ll;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
 const double eps = 1e-5;
-const int N = 1e2 + 10;
+const int N = 2e5 + 10;
 
 void redirect() {
     #ifdef LOCAL
@@ -31,38 +31,33 @@ void redirect() {
     #endif
 }
 
-int T;
-int n;
-int a[N], bucket[N];
+int T, n;
+string s;
 
 int main() {
     redirect();
 
-    cin >> T;
+    scanf("%d",&T);
     while (T--) {
-        for (int i=100; i>=0; i--) bucket[i] = 0;
         cin >> n;
-        for (int i=1; i<=n; i++) {
-            cin >> a[i];
-            bucket[a[i]] ++;
-        }
-
-        int ans = 0;
-        bool flag = false;
-        for (int i=0; i<=101; i++) {
-            // cout << i << ' ' << bucket[i] << endl;
-            if (!flag && bucket[i] < 2) {
-                ans += i; flag = true;
-            }
-            if (flag) {
-                if (bucket[i] == 0) {
-                    ans += i;
-                    break;
-                }
+        cin >> s;
+        bool odd = false, even = false;
+        for (int i=0; i<n; i++) {
+            if (i%2==1 && (s[i]-'0')%2==0) {
+                even = true;
+            } 
+            if (i%2==0 && (s[i]-'0')%2==1) {
+                odd = true;
             }
         }
 
-        cout << ans << endl;
+        if (n%2==0) {
+            if (even == true) puts("2");
+            else puts("1");
+        } else {
+            if (odd == true) puts("1");
+            else puts("2");
+        }
     }
 
     return 0;

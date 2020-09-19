@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-09-17 22:37
+* @ data: 2020-09-19 22:54
 */
 
 #include <algorithm>
@@ -19,6 +19,7 @@
 using namespace std;
 
 typedef long long ll;
+typedef unsigned long long ull;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
 const double eps = 1e-5;
@@ -31,45 +32,28 @@ void redirect() {
     #endif
 }
 
-int T;
-int n, a[N], b[N];
-
-bool cmp (int a, int b) {
-    return a > b;
-}
+int T, n;
+ull x;
 
 int main() {
     redirect();
 
-    cin >> T;
+    scanf("%d",&T);
     while (T--) {
-        cin >> n;
-        int acnt = 0, bcnt = 0;
-        ll res = 1;
-        for (int i=1; i<=n; i++) {
-            int t; cin >> t; res *= t;
-            if (t > 0) a[++acnt] = t;
-            else b[++bcnt] = t;
-        }
-
-        sort(a+1, a+acnt+1, cmp);
-        sort(b+1, b+bcnt+1);
-
-        ll ans = -1e18;
-        for (int i=0; i<=5; i++) {
-            ll res = 1;
-            if (bcnt >= i && acnt >= 5 - i) {
-                ll ares = res, bres = res;
-                for (int j=1; j<=i; j++) ares *= b[j];
-                for (int j=bcnt; j>=bcnt-i+1; j--) bres *= b[j];
-                
-                res = max(ares, bres);
-                ll resa = res, resb = res;
-                //cout << i << ' ' << resa << ' ' << resb << endl;
-                for (int j=1; j<=5 - i; j++) resa *= a[j];
-                for (int j=acnt; j>=acnt-4+i; j--) resb *= a[j];
-                ans = max(ans, max(resa, resb));
-                //cout << i << ' ' << resa << ' ' << resb << endl;
+        cin >> x;
+        int ans = 0;
+        ull acc = 0, cnt = 1;
+        ull lst = INF;
+        ull res = 1;
+        for (int i=1; i<=63; i++) {
+            res *= 2;
+            cnt = res - 1;
+            acc = (cnt+1)/2 * cnt;
+            if (acc < lst) cout << acc << endl;
+            if (acc <= x) {
+                //cout << acc << ' ';
+                x -= acc;
+                ans ++;
             }
         }
         cout << ans << endl;

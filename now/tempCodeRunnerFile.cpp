@@ -1,2 +1,2 @@
-cout << "hh" << ' ' << ra << ' ' << rb << endl;
-        
+prime) cout << p << ' '; cout << endl;
+        for (auto f:

@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-09-17 23:32
+* @ data: 2020-09-19 23:14
 */
 
 #include <algorithm>
@@ -31,61 +31,73 @@ void redirect() {
     #endif
 }
 
-int n, q;
-ll a[N];
-struct node {
-    int l, r;
-    ll x;
-} que[N];
-ll dif[N];
-ll change = 0;
+int n;
+int a[N], b[N];
+int b1[N], b2[N];
 
-ll cal(ll x) {
-    //cout << x << ' ';
-    if (x%2 == 1) x += 1;
-    return x / 2;
+void easySolve() {
+    sort(a+1,a+n+1);
+
+    int cnt = 1;
+    cout << (n-1)/2 << endl;
+    
+    for(int i=2; i<=n; i+=2) {
+        b[i] = a[cnt++];
+    }
+    for(int i=1; i<=n; i++) {
+        if(!b[i]) b[i] = a[cnt++];
+    }
+    for(int i=1; i<=n; i++) {
+        cout << b[i] << ' ';
+    }
 }
 
-void out() {
-    if (n == 1) cout << cal(a[1]) << endl;
-    else cout << cal(a[1] + change) << endl;
+void hardSolve() {
+    sort(a+1,a+n+1);
+
+    int cnt1 = 1, cnt2 = 1;
+
+    for(int i=2; i<=n; i+=2) {
+        b1[i] = a[cnt1++];
+    }
+
+    for (int i=n%2 == 0 ? n:n-1; i>=2; i-=2) {
+        b2[i] = a[cnt2++];
+    } 
+
+    for(int i=1; i<=n; i++) {
+        if(!b1[i]) b1[i] = a[cnt1++];
+    }
+
+    for(int i=1; i<=n; i++) {
+        if(!b2[i]) b2[i] = a[cnt2++];
+    }
+
+    int ans1 = 0, ans2 = 0;
+    for (int i=2; i<=n-1; i++) {
+        if (b1[i] < b1[i-1] && b1[i] < b1[i+1]) ans1 ++;
+        if (b2[i] < b2[i-1] && b2[i] < b2[i+1]) ans2 ++;
+    }
+
+    if (ans1 > ans2) {
+        cout << ans1 << endl;
+        for (int i=1; i<=n; i++) cout << b1[i] << ' ';
+    } else {
+        cout << ans2 << endl;
+        for (int i=1; i<=n; i++) cout << b2[i] << ' ';
+    }
 }
 
 int main() {
     redirect();
 
+    ios::sync_with_stdio(false);
     cin >> n;
-    for (int i=1; i<=n; i++) cin >> a[i];
-    cin >> q;
-    for (int i=1; i<=q; i++) {
-        cin >> que[i].l >> que[i].r >> que[i].x;
+    for(int i=1; i<=n; i++) {
+        cin >> a[i];
     }
 
-    for (int i=2; i<=n; i++) {
-        dif[i] = a[i] - a[i-1];
-        if (dif[i] > 0) change += dif[i];
-    }
-    out();
-
-    for (int i=1; i<=q; i++) {
-        int l = que[i].l, r = que[i].r;
-        ll x = que[i].x;
-
-        if (l <= 1) a[1] += x;
-        
-        if (l != 1) {
-            if (dif[l] > 0) change -= dif[l];
-            dif[l] += x;
-            if (dif[l] > 0) change += dif[l];
-        }
-        if (r+1 <= n) {
-            if (dif[r+1] > 0) change -= dif[r+1];
-            dif[r+1] -= x;
-            if (dif[r+1] > 0) change += dif[r+1];
-        }
-        out();
-    }
-
+    hardSolve();
 
     return 0;
 }

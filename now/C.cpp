@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-09-17 22:58
+* @ data: 2020-09-19 23:09
 */
 
 #include <algorithm>
@@ -31,69 +31,31 @@ void redirect() {
     #endif
 }
 
-int T;
-int n;
-vector<int> G[N];
-int fa[N], dep[N];
-int size[N]; int ans[N];
-int ra, rb;
-
-void make_tree(int x, int dp) {
-    dep[x] = dp;
-    for (auto v:G[x]) {
-        if (dep[v] == 0) {
-            fa[v] = x;
-            make_tree(v, dp+1);
-            ans[x] = max(ans[x], size[v]);
-            size[x] += size[v];
-        }
-    }
-    ans[x] = max(ans[x], n - size[x]);
-}
+int T, n, x;
+int a[N];
 
 int main() {
     redirect();
 
-    cin >> T;
+    scanf("%d",&T);
     while (T--) {
-        cin >> n;
+        cin >> n >> x;
+
+        int sum = 0; bool flag = false; bool f2 = true;
         for (int i=1; i<=n; i++) {
-            G[i].clear(); size[i] = 1; ans[i] = 1; dep[i] = 0;
-        }
-        for (int i=1; i<n; i++) {
-            int u, v; cin >> u >> v;
-            G[u].push_back(v);
-            G[v].push_back(u);
+            scanf("%d", &a[i]);
+            sum += a[i];
+            if (a[i] == x) flag = true;
+            if (a[i] != x) f2 = false;
         }
 
-        make_tree(1, 1);
+        if (sum / n == x) flag = true;
 
-        ra = rb = 0; int mx = n;
-        for (int i=1; i<=n; i++) mx = min(mx, ans[i]);
-        for (int i=1; i<=n; i++) {
-            if (ans[i] == mx) {
-                if (!ra) ra = i;
-                else if (!rb) rb = i;
-            }
+        if (f2) puts("0");
+        else {
+            if (flag) puts("1");
+            else puts("2");
         }
-
-        // cout << "hh" << ' ' << ra << ' ' << rb << endl;
-        // for (int i=1; i<=n; i++) cout << ans[i] << ' '; cout << endl;
-        if (rb == 0) {
-            cout << ra << ' ' << G[ra][0] << endl;
-            cout << ra << ' ' << G[ra][0] << endl;
-            continue;
-        }
-        if (dep[ra] < dep[rb]) swap(ra, rb);
-        int cut = 0;
-        for (auto v:G[ra]) {
-            if (v != fa[ra] && v != rb) {
-                cut = v;
-                break;
-            }
-        }
-        cout << cut << ' ' << ra << endl;
-        cout << cut << ' ' << rb << endl;
     }
 
     return 0;
