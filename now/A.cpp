@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-09-19 22:39
+* @ data: 2020-09-24 23:20
 */
 
 #include <algorithm>
@@ -31,34 +31,28 @@ void redirect() {
     #endif
 }
 
-int T, n;
-string s;
+int T;
+int n, a[N];
 
 int main() {
     redirect();
-
     scanf("%d",&T);
-    while (T--) {
-        cin >> n;
-        cin >> s;
-        bool odd = false, even = false;
-        for (int i=0; i<n; i++) {
-            if (i%2==1 && (s[i]-'0')%2==0) {
-                even = true;
-            } 
-            if (i%2==0 && (s[i]-'0')%2==1) {
-                odd = true;
+    while(T--){
+        scanf("%d",&n);
+        for(int i=1; i<=n; i++) {
+            scanf("%d",&a[i]);
+        }
+
+        bool flag = false;
+        for(int i=2;i<=n;i++) {
+            if (a[i-1] <= a[i]) {
+                flag = true;
+                break;
             }
         }
-
-        if (n%2==0) {
-            if (even == true) puts("2");
-            else puts("1");
-        } else {
-            if (odd == true) puts("1");
-            else puts("2");
-        }
+        if(flag) puts("YES");
+        else puts("NO");
     }
-
+    
     return 0;
 }

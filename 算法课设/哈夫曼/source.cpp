@@ -1,7 +1,89 @@
-/**
- * huffman.cpp
- */
-#include "huffman.h"
+#include <cstdlib>
+#include <string>
+#include <string.h>
+#include <queue>
+#include <map>
+#include <fstream>
+#include <iostream>
+#include <cstdio>
+
+using namespace std;
+
+#define MAX_SIZE 270
+#define WRITE_BUFF_SIZE 10
+#define PSEUDO_EOF 256
+
+struct Huffman_node
+{
+    int id; // 使用int类型，因为要插入值为256的pseudo-EOF
+    unsigned int freq;
+    string code;
+    Huffman_node  *left, 
+                  *right,
+                  *parent; 
+};
+
+typedef Huffman_node* Node_ptr;
+
+class Huffman
+{
+private:
+    Node_ptr node_array[MAX_SIZE]; // 叶子节点数组
+    Node_ptr root;  // 根节点
+    int size;  // 叶子节点数
+    fstream in_file, out_file; // 输入、输出文件流
+    map<int, string> table;  // 字符->huffman编码映射表
+
+    class Compare
+    {
+        public:
+            bool operator()(const Node_ptr& c1, const Node_ptr& c2) const
+            {
+                return (*c1).freq > (*c2).freq;
+            }
+    };
+
+    // 用于比较优先队列中元素间的顺序
+    priority_queue< Node_ptr, vector<Node_ptr>, Compare > pq;
+
+    // 根据输入文件构造包含字符及其频率的数组
+    void create_node_array();
+
+    // 根据构造好的Huffman树建立Huffman映射表
+    void create_map_table(const Node_ptr node, bool left);
+
+    // 构造优先队列
+    void create_pq();
+
+    // 构造Huffman树
+    void create_huffman_tree();
+
+    // 计算Huffman编码
+    void calculate_huffman_codes();
+
+    // 开始压缩过程
+    void do_compress();
+
+    // 从huffman编码文件中重建huffman树
+    void rebuid_huffman_tree();
+
+    // 根据重建好的huffman树解码文件
+    void decode_huffman();
+
+public:
+    // 根据输入和输出流初始化对象
+    Huffman(string in_file_name, string out_file_name);
+
+    // 析构函数
+    ~Huffman();
+
+    // 压缩文件
+    void compress();
+
+    // 解压文件
+    void decompress();
+};
+
 
 void Huffman::create_node_array()
 {
@@ -82,22 +164,25 @@ void Huffman::create_huffman_tree()
 {
     root = NULL;
 
-    while( !pq.empty() )
-    {       
+    while( !pq.empty() ) { 
+        // 使用优先队列存储文本数据中出现的文本内容和频率，根据频率使用优先队列排序建立哈夫曼树  
         Node_ptr first = pq.top();
         pq.pop();
         if( pq.empty() )
         {
+            //建立完毕，结束
             root = first;
             break;
         }
         Node_ptr second = pq.top();
+        // 寻找第一个和第二个节点
         pq.pop();
         Node_ptr new_node = new Huffman_node();
         new_node->freq = first->freq + second->freq;
 
         if(first->freq <= second->freq)
         {
+            // 根据频率大小决定建树顺序
             new_node->left = first;
             new_node->right = second;
         }
@@ -391,4 +476,83 @@ void Huffman::decompress()
 {
     rebuid_huffman_tree();
     decode_huffman();
+}
+/**
+ * main.cpp 
+ */
+
+void choose() {
+    int x = 0;
+    while (x > 9 || x < 1) {
+        cin >> x;
+    }
+    if (x == 1) {
+        string in, out;
+        cout << "请输入压缩的源文件名：" << endl;
+        cin >> in;
+        cout << "请输入压缩的输出文件名：" << endl;
+        cin >> out;
+
+        Huffman h(in, out);
+        h.compress();
+
+        cout << endl;
+        cout << "----压缩完成!" << endl;
+        cout << endl;
+    } else if (x == 2) {
+        string in, out;
+        cout << "请输入解压的源文件名：" << endl;
+        cin >> in;
+        cout << "请输入解压的输出文件名：" << endl;
+        cin >> out;
+
+        Huffman h(in, out);
+        h.decompress();
+
+        cout << endl;
+        cout << "----解压完成!" << endl;
+        cout << endl;
+    } else if (x == 3) {
+        char in[110], out[110];
+        cout << "请输入文件名-1：" << endl;
+        cin >> in;
+        cout << "请输入文件名-2：" << endl;
+        cin >> out;
+
+        FILE* file = fopen(in, "rb");  
+        fseek(file,0,SEEK_END);  //先用fseek将文件指针移到文件末尾
+        int size1 = ftell(file);    //再用ftell获取文件内指针当前的文件位置。
+        //这个位置就是文件大小。
+        FILE* file_2 = fopen(out, "rb");
+        fseek(file_2, 0, SEEK_END);
+        int size2 = ftell(file_2);
+
+        cout << endl;
+        cout << "文件-1：" << in << " 的大小为 " << size1 << " 字节" << endl;
+        cout << "文件-2：" << out << " 的大小为 " << size2 << " 字节" << endl;
+        cout << endl;
+        cout << "（因为压缩后文件中头部存储哈夫曼树，在压缩文件较小的情况下可能会出现文件体积增大）" << endl;
+    } else if (x == 4) {
+        //选择退出
+        exit(1);
+    }
+}
+
+void printMenu() {
+    printf("---------------------------------------------\n");
+    printf("|       欢迎使用Huffman编码压缩/解压文件        \n");
+    printf("|       输入以选择：                          \n");
+    printf("|       1. 压缩文件                          \n");
+    printf("|       2. 解压文件                          \n");
+    printf("|       3. 对比文件大小                       \n");
+    printf("|       4. 退出                              \n");
+    printf("---------------------------------------------\n");
+
+    choose();
+}
+
+int main(int argc, char *argv[]) {
+    while (true) {
+        printMenu();
+    }
 }

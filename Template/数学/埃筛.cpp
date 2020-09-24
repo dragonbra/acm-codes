@@ -1,6 +1,6 @@
 //埃氏筛法
 #define N 10000
-int flag[N+1],prime[N+1],pnum;
+int flag[N+1],p[N+1],pnum;
 /*
 flag[n] 表示n是否是素数，1是素数，0不是
 prime   中是所有的素数按从小到大排列、

@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-09-19 22:54
+* @ data: 2020-09-24 23:24
 */
 
 #include <algorithm>
@@ -19,7 +19,6 @@
 using namespace std;
 
 typedef long long ll;
-typedef unsigned long long ull;
 const int INF = 0x3f3f3f3f;
 const int mod = 1e9+7;
 const double eps = 1e-5;
@@ -33,30 +32,44 @@ void redirect() {
 }
 
 int T, n;
-ull x;
+ll a[N];
+map<int,int>mp;
+int cnt = 0;
+
+void init() {
+    mp.clear();
+}
 
 int main() {
     redirect();
 
+    int T;
     scanf("%d",&T);
-    while (T--) {
-        cin >> x;
-        int ans = 0;
-        ull acc = 0, cnt = 1;
-        ull lst = INF;
-        ull res = 1;
-        for (int i=1; i<=63; i++) {
-            res *= 2;
-            cnt = res - 1;
-            acc = (cnt+1)/2 * cnt;
-            if (acc < lst) cout << acc << endl;
-            if (acc <= x) {
-                //cout << acc << ' ';
-                x -= acc;
-                ans ++;
-            }
+    while(T--){
+        init();
+
+        scanf("%d", &n);
+        for(int i=1; i<=n; i++) {
+            scanf("%lld", &a[i]);
         }
-        cout << ans << endl;
+        sort(a+1,a+n+1);
+        
+        for(int i=1; i<=n; i++) {
+            ll now = a[i];
+            int res = 0;
+            while(now){
+                now >>= 1;
+                res ++;
+            }
+            mp[res] ++;
+        }
+
+        ll ans = 0;
+        for(auto x:mp) {
+            ll res = (ll)x.second;
+            ans += (res) * (res-1) / 2;
+        }
+        printf("%lld\n",ans);
     }
 
     return 0;

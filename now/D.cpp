@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-09-19 23:14
+* @ data: 2020-09-24 22:39
 */
 
 #include <algorithm>
@@ -20,9 +20,9 @@ using namespace std;
 
 typedef long long ll;
 const int INF = 0x3f3f3f3f;
-const int mod = 1e9+7;
+const ll mod = 998244353;
 const double eps = 1e-5;
-const int N = 2e5 + 10;
+const int N = 3e5 + 10;
 
 void redirect() {
     #ifdef LOCAL
@@ -31,73 +31,58 @@ void redirect() {
     #endif
 }
 
-int n;
-int a[N], b[N];
-int b1[N], b2[N];
+int n, k;
+struct node {
+    int pos, val;
+} a[N*2];
 
-void easySolve() {
-    sort(a+1,a+n+1);
-
-    int cnt = 1;
-    cout << (n-1)/2 << endl;
-    
-    for(int i=2; i<=n; i+=2) {
-        b[i] = a[cnt++];
-    }
-    for(int i=1; i<=n; i++) {
-        if(!b[i]) b[i] = a[cnt++];
-    }
-    for(int i=1; i<=n; i++) {
-        cout << b[i] << ' ';
-    }
+bool cmp (node a, node b) {
+    if (a.pos == b.pos) return a.val > b.val;
+    return a.pos < b.pos;
 }
 
-void hardSolve() {
-    sort(a+1,a+n+1);
-
-    int cnt1 = 1, cnt2 = 1;
-
-    for(int i=2; i<=n; i+=2) {
-        b1[i] = a[cnt1++];
-    }
-
-    for (int i=n%2 == 0 ? n:n-1; i>=2; i-=2) {
-        b2[i] = a[cnt2++];
-    } 
-
-    for(int i=1; i<=n; i++) {
-        if(!b1[i]) b1[i] = a[cnt1++];
-    }
-
-    for(int i=1; i<=n; i++) {
-        if(!b2[i]) b2[i] = a[cnt2++];
-    }
-
-    int ans1 = 0, ans2 = 0;
-    for (int i=2; i<=n-1; i++) {
-        if (b1[i] < b1[i-1] && b1[i] < b1[i+1]) ans1 ++;
-        if (b2[i] < b2[i-1] && b2[i] < b2[i+1]) ans2 ++;
-    }
-
-    if (ans1 > ans2) {
-        cout << ans1 << endl;
-        for (int i=1; i<=n; i++) cout << b1[i] << ' ';
-    } else {
-        cout << ans2 << endl;
-        for (int i=1; i<=n; i++) cout << b2[i] << ' ';
-    }
-}
+ll C[N];
+ll Inv(ll a, int m) {
+    ll d, x, y, t = (ll)m;	
+	d = Ext_gcd(a, t, x, y);	
+	if (d == 1) return (x%t + t) % t;	
+	return -1;
+} 
 
 int main() {
     redirect();
 
-    ios::sync_with_stdio(false);
-    cin >> n;
-    for(int i=1; i<=n; i++) {
-        cin >> a[i];
+    cin >> n >> k;
+    int cnt = 0;
+    for (int i=1; i<=n; i++) {
+        int l, r;
+        scanf("%d %d", &l, &r);
+        a[++cnt].pos = l; a[cnt].val = 1;
+        a[++cnt].pos = r; a[cnt].val = -1;
     }
+    sort (a+1, a+cnt+1, cmp);
 
-    hardSolve();
+
+    C[k-1] = 1;
+    // cout << C[k-1] << ' ';
+    for (int i=k; i<=n; i++) {
+        ll div = i - k + 1;
+        div = Inv(div, mod);
+        C[i] = C[i-1] * div % mod * i % mod;
+        // cout << C[i] << ' ';
+    }
+    // cout << endl;
+    ll in = 0, ans = 0;
+    for (int i=1; i<=cnt; i++) {
+        if (a[i].val == 1) {
+            if (in >= k-1) {
+                ans += C[in];
+                ans %= mod;
+            }
+        }
+        in += a[i].val;
+    }
+    cout << ans << endl;
 
     return 0;
 }

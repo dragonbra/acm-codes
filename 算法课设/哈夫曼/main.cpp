@@ -32,7 +32,7 @@ void choose() {
         cin >> out;
 
         Huffman h(in, out);
-        h.compress();
+        h.decompress();
 
         cout << endl;
         cout << "----解压完成!" << endl;
