@@ -1,9 +1,3 @@
-/*
-* @ author: dragon_bra
-* @ email: tommy514@foxmail.com
-* @ data: 2020-09-24 23:24
-*/
-
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
@@ -18,59 +12,35 @@
 
 using namespace std;
 
-typedef long long ll;
-const int INF = 0x3f3f3f3f;
-const int mod = 1e9+7;
-const double eps = 1e-5;
-const int N = 2e5 + 10;
+const int N = 1e5 + 10;
 
-void redirect() {
-    #ifdef LOCAL
-        freopen("in.txt","r",stdin);
-        freopen("out.txt","w",stdout);
-    #endif
-}
+int n, k;
+// int dp[N][N];
+map<int, int> dp[N];
 
-int T, n;
-ll a[N];
-map<int,int>mp;
-int cnt = 0;
-
-void init() {
-    mp.clear();
+int dfs(int n, int k) {
+    if(n < 1 || k < 1) return 0;
+    if(n == 1 || k == 1){
+		dp[n][k]=1;
+        return 1;
+    } if(n < k) {
+		dp[n][n]=dp[n][n]? dp[n][n] : dfs(n, n);
+		return dp[n][n];
+    } if(n == k) {
+		dp[n][k]=dp[n][n-1]?1+dp[n][n-1]:1 + dfs(n, n - 1);
+		return dp[n][k];
+    } else {
+		dp[n][k]=dp[n - k][k]? (dp[n - k][k]) : dfs(n - k, k);
+		dp[n][k]+=dp[n][k-1]? (dp[n][k-1]): dfs(n, k - 1);	
+        return dp[n][k];
+    }
 }
 
 int main() {
-    redirect();
 
-    int T;
-    scanf("%d",&T);
-    while(T--){
-        init();
-
-        scanf("%d", &n);
-        for(int i=1; i<=n; i++) {
-            scanf("%lld", &a[i]);
-        }
-        sort(a+1,a+n+1);
-        
-        for(int i=1; i<=n; i++) {
-            ll now = a[i];
-            int res = 0;
-            while(now){
-                now >>= 1;
-                res ++;
-            }
-            mp[res] ++;
-        }
-
-        ll ans = 0;
-        for(auto x:mp) {
-            ll res = (ll)x.second;
-            ans += (res) * (res-1) / 2;
-        }
-        printf("%lld\n",ans);
-    }
+    cin >> n >> k;
+    dp[n][n] = dfs(n, n);
+    cout << dp[n][k] << endl;
 
     return 0;
 }
