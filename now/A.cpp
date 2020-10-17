@@ -1,42 +1,47 @@
-#include <stdio.h>
-int main()
-{
-	int n,max,p,k;
-	int c[1001];
-    int T;
-	while (~scanf("%d", &T)) {
-        scanf("%d",&T);
-        while(T--)
-        {
-            for(int j=0;j<26;j++)
-            {
-                c[j]=0;
-            }
-            char s[1001];
-            scanf("%s",&s);
-            for(int j=0;s[j]!='\0';j++)
-            {
-                if(s[j]>='A'&&s[j]<='Z')
-                {
-                    s[j]+=32;
-                } 
-            }
-            for(int j=0;s[j]!='\0';j++)
-            {
-                c[s[j]-'a']+=1;
-            }
-            max=0;
-            p=0;
-            for(int j=0;j<26;j++)
-            {
-                if(c[j]>max)
-                {
-                    max=c[j];
-                    p=j;
-                }
-            }
-            printf("%c\n",p+'a');
+#include <algorithm>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <sstream>
+#include <map>
+#include <set>
+#include <queue>
+#include <vector>
+
+using namespace std;
+
+const int N = 2e5 + 10;
+
+int n, q;
+int a[N];
+int pre[N][110];
+
+int main() {
+    #ifdef LOCAL
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
+
+    scanf("%d%d", &n, &q);
+    for (int i=1; i<=n; i++) {
+        scanf("%d", &a[i]);
+        for (int j=0; j<=100; j++) {
+            pre[i][j] = pre[i-1][j];
         }
+        pre[i][a[i]] ++;
+    }    
+
+    for (int i=1; i<=q; i++) {
+        int l, r; scanf("%d%d", &l, &r);
+        l ++; r ++;
+        int ans = 0;
+        for (int j=0; j<=100; j++) {
+            if (pre[r][j] - pre[l-1][j]) ans ++;
+        }
+        printf("%d\n", ans);
     }
-	return 0;
+
+    return 0;
 }

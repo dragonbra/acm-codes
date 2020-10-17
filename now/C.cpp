@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ data: 2020-09-24 23:33
+* @ data: 2020-09-25 14:48
 */
 
 #include <algorithm>
@@ -31,68 +31,81 @@ void redirect() {
     #endif
 }
 
-int T, n, q;
-ll a[N];
-int mk[N];
+int n;
+string a, b;
 
-ll ans = 0;
+string permu[7] = {"", " abc", " acb", " bac", " bca", " cab", " cba"};
 
-void modi(int x) {
-    if (x<1 || x>n) return;
-    if (mk[x] == 1) {
-        ans -= a[x]; mk[x] = 0;
-    }
-    if (mk[x] == -1) {
-        ans += a[x]; mk[x] = 0;
-    }
-}
+vector<string> all[7]; // 1-abc, 2-acb, 3-bac, 4-bca, 5-cab, 6-cba
+vector<string> per[7];
+string ls1[4] = {"", "aa", "bb", "cc"};
+string ls2[7][4] = { {},
+                    {"", "ab", "bc", "ca"},
+                    {"", "ac", "cb", "ba"},
+                    {"", "ba", "ac", "cb"},
+                    {"", "bc", "ca", "ab"},
+                    {"", "ca", "ab", "bc"},
+                    {"", "cb", "ba", "ac"}};
 
-void check(int x) {
-    if (x<1 || x>n) return;
-    if (mk[x] == 0 && a[x] > a[x-1] && a[x] > a[x+1]) {
-        ans += a[x]; mk[x] = 1;
-    }
-    if (mk[x] == 0 && a[x] < a[x-1] && a[x] < a[x+1]) {
-        ans -= a[x]; mk[x] = -1;
-    }
-}
+char s[N];
 
 int main() {
     redirect();
 
-    scanf("%d",&T);
-    while (T--) {
-        scanf("%d %d", &n, &q);
-        for (int i=1; i<=n; i++) {
-            scanf("%lld", &a[i]);
-            mk[i] = 0;
-        } a[0] = 0; a[n+1] = 0;
-
-        ans = 0; bool flag = true;
-        for (int i=1; i<=n; i++) {
-            if (a[i] > a[i-1] && a[i] > a[i+1]) {
-                ans += a[i]; mk[i] = 1;
-            }
-            else if (a[i] < a[i-1] && a[i] < a[i+1]) {
-                ans -= a[i]; mk[i] = -1;
-            }
-        }
-
-        //for (int i=1; i<=n; i++) cout << mk[i] << ' '; cout << endl;
-        
-        printf("%lld\n", ans);
-
-        for (int i=1; i<=q; i++) {
-            int l, r;
-            scanf("%d%d", &l, &r);
-
-            modi(l); modi(r); modi(l-1); modi(l+1); modi(r-1); modi(r+1);
-            swap(a[l], a[r]);
-            check(l); check(r); check(l-1); check(l+1); check(r-1); check(r+1);
-
-            printf("%lld\n", ans);
+    cin >> n >> a >> b;
+    for (int i=1; i<=6; i++) {
+        for (int j=1; j<=3; j++) {
+            all[i].push_back(ls1[j]);
+            if (j!=3) all[i].push_back(ls2[i][j]);
+            if (n==1 && j==3) continue;
+            per[i].push_back(ls2[i][j]);
         }
     }
+
+    bool flag = false; int cnt = 0;
+    if (n>1) {
+        for (int i=1; i<=6; i++) {
+            flag = true;
+            for (auto str:all[i]) {
+                if (a == str || b == str) {
+                    flag = false; break;
+                }
+            }
+            if (flag) { cnt = i; break; }
+        }
+    }
+
+    if (flag) {
+        int pos = 0;
+        for (int i=1; i<=3; i++) {
+            for (int j=1; j<=n; j++) {
+                s[++pos] = permu[cnt][i];
+            }
+        }
+        printf("YES\n%s\n", s+1);
+    } else {
+        for (int i=1; i<=6; i++) {
+            flag = true;
+            for (auto str:per[i]) {
+                if (a == str || b == str) {
+                    flag = false; break;
+                }
+            }
+            if (flag) { cnt = i; break; }
+        } if (flag) {
+            int pos = 0;
+            for (int j=1; j<=n; j++) {
+                for (int i=1; i<=3; i++) {
+                    s[++pos] = permu[cnt][i];
+                }
+            }
+            printf("YES\n%s\n", s+1);
+        } else {
+            printf("NO\n");
+        }
+    }
+
+    
 
     return 0;
 }
