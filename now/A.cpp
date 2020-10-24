@@ -1,3 +1,9 @@
+/*
+* @ author: dragon_bra
+* @ email: tommy514@foxmail.com
+* @ data: 2020-10-24 12:24
+*/
+
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
@@ -12,35 +18,32 @@
 
 using namespace std;
 
+typedef long long ll;
+const int INF = 0x3f3f3f3f;
+const int mod = 1e9+7;
+const double eps = 1e-5;
 const int N = 2e5 + 10;
 
-int n, q;
-int a[N];
-int pre[N][110];
-
-int main() {
+void redirect() {
     #ifdef LOCAL
         freopen("in.txt","r",stdin);
         freopen("out.txt","w",stdout);
     #endif
+}
 
-    scanf("%d%d", &n, &q);
-    for (int i=1; i<=n; i++) {
-        scanf("%d", &a[i]);
-        for (int j=0; j<=100; j++) {
-            pre[i][j] = pre[i-1][j];
-        }
-        pre[i][a[i]] ++;
-    }    
+ll fac(ll l, ll r) {
+    if (l >= r) {
+        return l;
+    }
+    return fac(l, (l+r)/2) * fac((l+r)/2+1, r) % mod;
+}
 
-    for (int i=1; i<=q; i++) {
-        int l, r; scanf("%d%d", &l, &r);
-        l ++; r ++;
-        int ans = 0;
-        for (int j=0; j<=100; j++) {
-            if (pre[r][j] - pre[l-1][j]) ans ++;
-        }
-        printf("%d\n", ans);
+int main() {
+    redirect();
+    
+    int T; cin >> T;
+    while (T--) {
+        
     }
 
     return 0;
