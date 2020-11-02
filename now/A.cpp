@@ -1,102 +1,74 @@
-<<<<<<< Updated upstream
-=======
-/*
-* @ author: dragon_bra
-* @ email: tommy514@foxmail.com
-* @ data: 2020-10-28 20:33
-*/
-
->>>>>>> Stashed changes
-#include <algorithm>
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <iostream>
-#include <sstream>
-#include <map>
-#include <set>
-#include <queue>
-#include <stack>
-#include <vector>
-
+#include<bits/stdc++.h>
 using namespace std;
-
+typedef long long ll;
+typedef unsigned long long ull;
 const int N = 2e5 + 10;
+const ll mod = 1e9 + 7;
+const ll INF = 1e15;
+const double eps = 1e-8;
 
-<<<<<<< Updated upstream
-int main() {
-
-    cout << "Hello world" << endl;
-=======
-void redirect() {
-    #ifdef LOCAL
-        freopen("in.txt","r",stdin);
-        freopen("out.txt","w",stdout);
-    #endif
+ll n;
+char s[N];
+ll cnt=0,sum=0,pos=0;
+ll a[N],b[N];
+ll ch[30][N],c[N],p[N];
+ll f[N*4];
+map<char,ll>mp;
+ll lowbit(ll x){
+    return x&-x;
+}
+void add(ll x,ll k){
+    for(ll i=x;i<=cnt;i+=lowbit(i))f[i]+=k;
 }
 
-int n;
-bool vis[N];
-bool out[N];
-int mi;
-int a[N];
-int Q[N];
-struct node {
-    int val, s;
-    node (int val, int s):s(s), val(val){}
-};
-stack<node> S;
-priority_queue<int,vector<int>,greater<int> > PQ;
-int cnt = 0, in = 0;
+ll find(ll x){
+    ll ans=0;
+    for(ll i=x;i>0;i-=lowbit(i))ans+=f[i];
+    return ans;
+}
 
-char s[N][10]; int b[N];
-
-int main() {
-    redirect();
-
-    scanf("%d", &n);
-    bool flag = true;
-    mi = n+1;
-    for (int i=1; i<=2*n; i++) {
-        scanf("%s", s[i]);
-        if (s[i][0] == '+') {
-            while(vis[mi-1]) mi--;
-            mi --; vis[mi] = true;
-            Q[++in] = mi;
-            S.push(node(mi, in));
-        } else {
-            scanf("%d", &b[i]); int x = b[i];
-            if (S.empty() || S.top().val < x) {
-                flag = false; break;
+int main(){
+    int T;
+    T=1;
+    while(T--){
+        memset(f,0,sizeof(f));
+        scanf("%lld",&n);
+        scanf("%s",&s);
+        ll l=0,r=n-1;
+        a[++cnt]=++sum;
+        ch[s[0]-'a'][++c[s[0]-'a']]=sum;
+        for(ll i=l+1;i<=r;i++){
+            if(s[i]==s[i-1]){
+                a[cnt+1]=a[cnt];
+                ch[s[i]-'a'][++c[s[i]-'a']]=a[cnt];
+                cnt++;
+            }else{
+                a[++cnt]=++sum;
+                ch[s[i]-'a'][++c[s[i]-'a']]=sum;
             }
-            node now = S.top(); S.pop();
-            vis[now.val] = false; vis[x] = true;
-            Q[now.s] = x;
-            if (S.empty()) mi = n+1;
-            else mi = S.top().val;
+        }   
+      //  for(int i=1;i<=cnt;i++)printf("%d ",a[i]);puts("");
+        ll ans=0,sum=0;
+        for(int i=1;i<=cnt;i++)b[i]=a[cnt-i+1];
+        reverse(s,s+n);
+        for(int i=1;i<=cnt;i++)
+            b[i]=ch[s[i-1]-'a'][++p[s[i-1]-'a']];
+        //for(int i=1;i<=cnt;i++)printf("%d ",b[i]);puts("");
+        for(ll i=1;i<=cnt;i++){
+            ll x=b[i];
+            add(x,1);
+            ans+=i-find(x);
         }
-    }
+        printf("%lld\n",ans);
+        // memset(f,0,sizeof(f));
+        // for(ll i=1;i<=cnt;i++){
+        //     ll x=a[i];
+        //     add(x,1);
+        //     sum+=i-find(x);
+        // }
+        // printf("%lld\n",abs(ans-sum));
 
-    in = 0;
-    for (int i=1; i<=2*n; i++) {
-        if (s[i][0] == '+') {
-            PQ.push(Q[++in]);
-        } else {
-            if (PQ.empty() || PQ.top() != b[i]) {
-                flag = false; break;
-            }
-            PQ.pop();
-        }
-    }
 
-    if (flag) {
-        puts("YES");
-        for (int i=1; i<=n; i++) printf("%d ", Q[i]);
-    } else {
-        puts("NO");
     }
->>>>>>> Stashed changes
-
     return 0;
 }
