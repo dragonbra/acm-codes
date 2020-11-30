@@ -1,28 +1,4 @@
-/*
-* @ author: dragon_bra
-* @ email: tommy514@foxmail.com
-* @ data: 2020-11-30 16:26
-*/
-
-#include <bits/stdc++.h>
-using namespace std;
-
-typedef long long ll;
-const int INF = 0x3f3f3f3f;
-const int mod = 1e9+7;
-const double eps = 1e-5;
-const int N = 1e2 + 10;
-
-void redirect() {
-    #ifdef LOCAL
-        freopen("in.txt","r",stdin);
-        freopen("out.txt","w",stdout);
-    #endif
-}
-
-int T;
-int n, x, y; int q;
-
+int n;
 double matrix[N][N];
 double ans[N];
 
@@ -73,36 +49,4 @@ bool Gauss() {
 	}
 
 	return true;
-}
-
-int main() {
-    redirect();
-
-    scanf("%d", &T);
-    while (T--) {
-        scanf("%d %d %d", &n, &x, &y);
-
-        for (int i=1; i<=n; i++) {
-            for (int j=1; j<=n+1; j++) {
-                matrix[i][j] = 0;
-            }
-        }
-
-        matrix[1][1] = 1; matrix[1][n+1] = -x;
-        matrix[n][n] = 1; matrix[n][n+1] = y;
-        for (int i=2; i<n; i++) {
-            matrix[i][i] = 1; matrix[i][n+1] = 0;
-            for (int j=1; j<=i; j++) matrix[i][j] -= 0.5 * (1.0 / (double)i);
-            for (int j=i; j<=n; j++) matrix[i][j] -= 0.5 * (1.0 / (double)(n-i+1));
-        }
-
-        bool flag = Gauss();
-        scanf("%d", &q);
-        while (q--) {
-            int t; scanf("%d", &t);
-            printf("%.6lf\n", ans[t]);
-        }
-    }
-
-    return 0;
 }
