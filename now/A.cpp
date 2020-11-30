@@ -1,74 +1,56 @@
-#include<bits/stdc++.h>
+/*
+* @ author: dragon_bra
+* @ email: tommy514@foxmail.com
+* @ data: 2020-11-30 10:03
+*/
+
+#include <bits/stdc++.h>
 using namespace std;
+
 typedef long long ll;
-typedef unsigned long long ull;
-const int N = 2e5 + 10;
-const ll mod = 1e9 + 7;
-const ll INF = 1e15;
-const double eps = 1e-8;
+const int INF = 0x3f3f3f3f;
+const int mod = 1e9+7;
+const double eps = 1e-5;
+const int N = 60 + 10;
 
-ll n;
-char s[N];
-ll cnt=0,sum=0,pos=0;
-ll a[N],b[N];
-ll ch[30][N],c[N],p[N];
-ll f[N*4];
-map<char,ll>mp;
-ll lowbit(ll x){
-    return x&-x;
-}
-void add(ll x,ll k){
-    for(ll i=x;i<=cnt;i+=lowbit(i))f[i]+=k;
+void redirect() {
+    #ifdef LOCAL
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
 }
 
-ll find(ll x){
-    ll ans=0;
-    for(ll i=x;i>0;i-=lowbit(i))ans+=f[i];
-    return ans;
-}
+int n;
+int a[N];
+int f[N][N]; // means the xor result from i to j
 
-int main(){
-    int T;
-    T=1;
-    while(T--){
-        memset(f,0,sizeof(f));
-        scanf("%lld",&n);
-        scanf("%s",&s);
-        ll l=0,r=n-1;
-        a[++cnt]=++sum;
-        ch[s[0]-'a'][++c[s[0]-'a']]=sum;
-        for(ll i=l+1;i<=r;i++){
-            if(s[i]==s[i-1]){
-                a[cnt+1]=a[cnt];
-                ch[s[i]-'a'][++c[s[i]-'a']]=a[cnt];
-                cnt++;
-            }else{
-                a[++cnt]=++sum;
-                ch[s[i]-'a'][++c[s[i]-'a']]=sum;
-            }
-        }   
-      //  for(int i=1;i<=cnt;i++)printf("%d ",a[i]);puts("");
-        ll ans=0,sum=0;
-        for(int i=1;i<=cnt;i++)b[i]=a[cnt-i+1];
-        reverse(s,s+n);
-        for(int i=1;i<=cnt;i++)
-            b[i]=ch[s[i-1]-'a'][++p[s[i-1]-'a']];
-        //for(int i=1;i<=cnt;i++)printf("%d ",b[i]);puts("");
-        for(ll i=1;i<=cnt;i++){
-            ll x=b[i];
-            add(x,1);
-            ans+=i-find(x);
-        }
-        printf("%lld\n",ans);
-        // memset(f,0,sizeof(f));
-        // for(ll i=1;i<=cnt;i++){
-        //     ll x=a[i];
-        //     add(x,1);
-        //     sum+=i-find(x);
-        // }
-        // printf("%lld\n",abs(ans-sum));
+int main() {
+    redirect();
 
-
+    cin >> n;
+    if (n > 60) {
+        puts("1");
+        return 0;
     }
+
+    for (int i=1; i<=n; i++) cin >> a[i];
+
+    int ans = n;
+    for (int i=1; i<=n; i++) {
+        int x = 0;
+        for (int j=i; j<=n; j++) {
+            x ^= a[j];
+            f[i][j] = x;
+            for (int k=1; k<i; k++) {
+                if (f[k][i-1] > x) {
+                    ans = min(ans, (j-k-1));
+                }
+            }
+        }
+    }
+
+    if (ans >= n) puts("-1");
+    else cout << ans << endl;
+
     return 0;
 }
