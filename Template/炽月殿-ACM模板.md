@@ -165,6 +165,258 @@ author:dragon_bra
 */
 ```
 
+## 主席树
+
+```cpp
+#include<iostream>
+#include<algorithm>
+#include<cstdio>
+#include<cstring>
+using namespace std;
+const int N = 200500;
+
+void redirect() {
+    #ifdef LOCAL
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
+}
+
+struct node{
+	int l, r, sum;
+	#define l(x) tree[x].l
+	#define r(x) tree[x].r
+	#define sum(x) tree[x].sum
+}tree[N<<5];
+
+int n, m, a[N], b[N];
+int q, cnt, t[N];
+int build(int l, int r) {
+	int rt = ++cnt;
+	sum(rt) = 0;
+	int mid = (l + r) >> 1;
+	if (l < r) {
+		l(rt) = build(l, mid);
+		r(rt) = build(mid + 1, r);
+	}
+	return rt;
+}
+inline int update(int pre,int l,int r,int x) {
+	int rt = ++cnt;
+	l(rt) = l(pre), r(rt) = r(pre);
+	sum(rt) = sum(pre) + 1;
+	int mid = (l + r) >> 1;
+	if (l < r) {
+		if (x <= mid) l(rt) = update(l(pre), l, mid, x);
+		else r(rt) = update(r(pre), mid + 1, r, x);
+	}
+	return rt;
+}
+inline int query(int u,int v,int l,int r,int k) {
+	if (l >= r) return l;
+	int x = sum(l(v)) - sum(l(u));
+	int mid = (l + r) >> 1;
+	if (x >= k) return query(l(u), l(v), l, mid, k);
+	else return query(r(u), r(v), mid + 1, r, k - x);
+}
+int main() {
+    redirect();
+	cin >> n >> q;
+	for (int i = 1;i <= n; i++) {
+        cin >> a[i]; b[i] = a[i];
+    }
+	sort(b + 1,b + n + 1);
+	m = unique(b + 1,b + n + 1) - b - 1;
+
+	t[0] = build(1, m);
+	for (int i = 1;i <= n; i++) {
+		int T = lower_bound(b + 1,b + m + 1, a[i]) - b;
+		t[i] = update(t[i-1], 1, m, T);
+	}
+
+	while (q--) {
+        int l, r, k;
+		cin >> l >> r >> k;
+		printf ("%d\n", b[query(t[l-1], t[r], 1, m, k)]);
+	}
+	return 0;
+}
+```
+
+## 主席树前k小的和
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN=100010;
+const int M=MAXN*30;
+int n,q,m,tot;
+int a[MAXN],t[MAXN];
+int T[MAXN],lson[M],rson[M],c[M];
+long long sum[M];
+void Init_hash(){
+    for(int i=1;i<=n;i++){
+        t[i] = a[i];
+    }
+    sort(t+1,t+1+n);
+    m=unique(t+1,t+1+n)-t-1;
+}
+int build(int l,int r){
+    int root=tot++;
+    c[root]=0; sum[root] = 0;
+    if(l!=r){
+        int mid=(l+r)>>1;
+        lson[root] = build(l,mid);
+        rson[root] = build(mid+1,r);
+    }
+    return root;
+}
+int Hash(int x){
+    return lower_bound(t+1,t+1+m,x)-t;
+}
+int update(int root,int pos, int val){
+    int newroot = tot++,tmp = newroot;
+    c[newroot] = c[root] + val;
+    sum[newroot] = sum[root] + t[pos];
+    int l=1,r=m;
+    while(l<r){
+        int mid = (l+r)>>1;
+        if(pos <= mid){
+            lson[newroot]= tot++; rson[newroot] = rson[root];
+            newroot = lson[newroot];root = lson[root];
+            r = mid;
+        }
+        else{
+            rson[newroot] = tot++; lson[newroot] = lson[root];
+            newroot = rson[newroot]; root = rson[root];
+            l = mid+1;
+        }
+        c[newroot] = c[root] + val;
+        sum[newroot] = sum[root] + t[pos];
+    }
+    return tmp;
+}
+int query(int left_root,int right_root,int k){
+    int l=1,r=m;
+    long long res = 0;
+    while( l < r ){
+        int mid = (l+r)>>1;
+        if(c[lson[left_root]]-c[lson[right_root]]>=k){
+            r = mid;
+            left_root = lson[left_root];
+            right_root = lson[right_root];
+        }
+        else{
+            l = mid + 1;
+            k -= c[lson[left_root]]-c[lson[right_root]];
+            res += sum[lson[left_root]] - sum[lson[right_root]];
+            left_root = rson[left_root];
+            right_root = rson[right_root];
+        }
+    }
+    return res;
+}
+int main(){
+    #ifdef LOCAL
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
+    while(scanf("%d%d",&n,&q) == 2){
+        tot = 0;
+        for(int i = 1; i <= n;i++){
+            scanf("%d",&a[i]);
+        }
+        Init_hash();
+        T[n+1] = build(1,m);
+        for(int i = n;i ;i--){
+            int pos = Hash(a[i]);
+            T[i] = update(T[i+1], pos ,1);
+        }
+        while(q--){
+            int l,r,k;
+            scanf("%d%d%d",&l,&r,&k);
+            k = (r-l+1 + 1) - k; // 第k小变成第k大
+            printf("%d\n",query(T[l],T[r+1],k));
+        }
+    }
+}
+```
+
+## RBtree
+
+```cpp
+template<class T>
+struct RBtree{
+    #define l _M_left
+    #define r _M_right
+    #define p _M_parent
+    #define node _Rb_tree_node_base
+#if __cplusplus<=199711L
+    #define key _M_value_field.first
+    #define size _M_value_field.second
+#else  //c++11
+    #define key _M_storage._M_ptr()->first
+    #define size _M_storage._M_ptr()->second
+#endif
+    typedef _Rb_tree_node<pair<const T,int> > Node; map<T,int> M;
+    void fix_size(node *it){
+        int &it_size=static_cast<Node*>(it)->size;it_size=1;
+        if (it->l)it_size+=static_cast<Node*>(it->l)->size;
+        if (it->r)it_size+=static_cast<Node*>(it->r)->size;
+    }
+    void fix_all(node *it,node *end){
+        for (;;it=it->p){
+            if (it->l)fix_size(it->l);if (it->r)fix_size(it->r);
+            if (it->p==end){fix_size(it);break;}
+        }
+    }
+    void insert(const T &x){
+        pair<typename map<T,int>::iterator,bool> it=M.insert(make_pair(x,0));
+        if (!it.second)return;
+        fix_all(it.first._M_node,M.end()._M_node);
+    }
+    int select(int k){
+        node *p=get_root();
+        while (k){
+            int sizel=p->l?static_cast<Node*>(p->l)->size:0;
+            if (k==sizel+1)break;
+            if (k<=sizel)p=p->l;
+            else k-=sizel+1,p=p->r;
+        }
+        return static_cast<Node*>(p)->key;
+    }
+    int rank(int x){
+        node *p=get_root(); int res=0;
+        while (p){
+            int y=static_cast<Node*>(p)->key;
+            int s=p->l?static_cast<Node*>(p->l)->size:0;
+            if (y<=x)res+=s+1,p=p->r;
+            else p=p->l;
+        }
+        return res;
+    }
+    node *get_root(){
+        node *it=M.begin()._M_node;
+        while (it->p!=M.end()._M_node)it=it->p;
+        return it;
+    }
+    void print(){print_node(get_root(),"");}
+    void print_node(const node *it,string str){
+        if (!it){cout<<str<<"nil (0)"<<endl;return;}
+        cout<<str<<static_cast<const Node*>(it)->key;
+        cout<<"("<<static_cast<const Node*>(it)->size<<")"<<endl;
+        print_node(it->l,str+"    "); print_node(it->r,str+"    ");
+    }
+    #undef l
+    #undef r
+    #undef p
+    #undef node
+    #undef key
+    #undef size
+};
+RBtree<int> a;
+```
+
 ## splay
 
 ```cpp
@@ -621,6 +873,63 @@ int main()
         cout<<div(a,b)<<endl;
     }
     return 0;
+}
+```
+
+## 高斯-约旦消元
+
+```cpp
+int n;
+double matrix[N][N];
+double ans[N];
+
+bool Gauss() {
+	for (int i=1; i<=n; ++i) {   
+        //枚举列（项） 
+		int mx=i;
+		for (int j=i+1; j<=n; ++j) {
+            //选出该列最大系数 
+			if ( fabs(matrix[j][i]) > fabs(matrix[mx][i]) ) {
+                //fabs是取浮点数的绝对值的函数
+				mx = j;
+			}
+		}
+		for (int j=1; j<=n+1; ++j) {
+		    //交换
+			swap( matrix[i][j], matrix[mx][j] );
+		}
+
+		if (!matrix[i][i]) {
+            //最大值等于0则说明该列都为0，肯定无解 
+			// puts("No Solution");
+			return false;
+		}
+
+		for(int j=1; j<=n; ++j) {
+            //每一项都减去一个数（就是小学加减消元）
+			if(j != i) {
+				double temp = matrix[j][i] / matrix[i][i];
+				for(int k=i+1;k<=n+1;++k) {
+					matrix[j][k] -= matrix[i][k]*temp;
+				}
+			}
+		}
+	}
+    //上述操作结束后，矩阵会变成这样
+    /*
+    k1*a=e1
+    k2*b=e2
+    k3*c=e3
+    k4*d=e4
+    */
+    //所以输出的结果要记得除以该项系数，消去常数
+	for(int i=1;i<=n;++i) {
+        ans[i] = matrix[i][n+1] / matrix[i][i];
+        if ( fabs(ans[i] - 0) < eps ) ans[i] = 0;
+		// printf("%.2lf\n",matrix[i][n+1]/matrix[i][i]);
+	}
+
+	return true;
 }
 ```
 
@@ -1651,6 +1960,48 @@ author:dragon_bra
 
 # STL&杂项
 
+## 二分（标准）
+
+```cpp
+/**
+ * struct Interval {
+ *	int start;
+ *	int end;
+ *	Interval(int s, int e) : start(start), end(e) {}
+ * };
+ */
+
+class Solution {
+public:
+    /**
+     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+     * 
+     * @param n int整型 玩偶数
+     * @param m int整型 区间数
+     * @param intervals Interval类vector 表示区间
+     * @return int整型
+     */
+    static bool cmp(Interval a, Interval b) {
+        return a.start < b.start;
+    }
+    
+    int doll(int n, int m, vector<Interval>& intervals) {
+        // write code here
+        long long l = 1, r = n;
+        while (l <= r) {
+            mid = (l+r) / 2;
+            // check code here
+            if (flag) {
+                ans = mid; l = mid + 1;
+            }
+            else r = mid - 1;
+        }
+        
+        return ans;
+    }
+};
+```
+
 ## 优先队列
 
 ```cpp
@@ -1763,6 +2114,31 @@ int main() {
 author:dragon_bra
 -----------------
 */
+```
+
+## highbit
+
+```cpp
+int highbit(int x) {
+    // leftest digit of 1
+    // nearly O(1)
+    union { double a; int b[2]; };
+    a = x;
+    return (b[1] >> 20) - 1023;
+}
+
+{   // 我爱发明
+    vector<long long> p(32);
+
+    void init() {
+        p[0] = 1;
+        for (int i=1; i<=31; i++) p[i] = p[i-1] * 2;
+    }
+
+    int highbit(int x) {
+        return upper_bound(p.begin(), p.end(), x) - p.begin() - 1;
+    }
+}
 ```
 
 ## LIS
