@@ -1,3 +1,4 @@
+// 高斯-约旦消元
 int n;
 double matrix[N][N];
 double ans[N];

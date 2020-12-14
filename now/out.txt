@@ -1,0 +1,25 @@
+while not at the end of the tape do
+
+    if (a)
+        
+        write a symbol to the red auxiliary tape
+        move the red auxiliary tape head to the right
+
+    if marble is blue then
+        write a symbol to the blue auxiliary tape
+        move the blue auxiliary tape head to the right
+
+    move the input tape head to the right
+
+rewind the red tape to the front
+rewind the blue tape head to the front
+
+until you reach the end of the red tape do
+
+    move the red tape head to the right
+    move the blue tape head to the right
+
+    if at the end of the blue tape and not at the end of the red tape then
+        return Accepted
+
+return Rejected

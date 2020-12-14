@@ -1,7 +1,7 @@
 /*
-* @ author: dragon_bra
-* @ email: tommy514@foxmail.com
-* @ data: 2020-09-20 13:59
+ccpc网络赛1002
+Min_25筛可以在 O(n^(3/4) / logn) 的时间内求解积性函数 f(x) 的前缀和
+此处 f(x) = ？， 作用是求n以内所有质数的和
 */
 // n以内素数和
 #include <algorithm>

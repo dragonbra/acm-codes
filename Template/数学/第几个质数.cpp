@@ -1,4 +1,12 @@
 //G++ 1560ms  6544k
+
+/*
+
+O(n^3/4) 筛一个大质数是第几个质数
+疑似 Meisell-Lehmer算法
+
+*/
+
 #include <bits/stdc++.h>
 #define ll long long
 using namespace std;
@@ -23,9 +31,3 @@ int main(){
     }
     return 0;
 }
-/*
-
-O(n^3/4) 筛一个大质数是第几个质数
-疑似 Meisell-Lehmer算法
-
-*/
