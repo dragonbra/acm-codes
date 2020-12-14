@@ -6,4 +6,4 @@ Codeforces HANDLE: [dragon_bra](https://codeforces.com/profile/dragon_bra)
 
 QQ: 1277037638
 
-![image](https://github.com/dragonbra/acm-codes/blob/master/Codeforces/Ratings/Rd.idk.png)
+![image](./Ratings/Rd.idk.png)
