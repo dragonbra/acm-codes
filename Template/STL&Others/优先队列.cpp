@@ -4,21 +4,18 @@
 using namespace std;
 int tmp[100];
 struct cmp1{
-	bool operator()(int x,int y)
-	{
+	bool operator()(int x,int y) {
 		return x>y;//小的优先级高 ,从小到大排 
 	}
 }; 
 struct cmp2{
-	bool operator()(const int x,const int y)
-	{
+	bool operator()(const int x,const int y) {
 		return tmp[x]>tmp[y];
 	}
 }; 
 struct node{
 	int x,y;
-	friend bool operator<(node a,node b)
-	{
+	friend bool operator<(node a,node b) {
 		return a.x>b.x;//按x从小到大排 
 	}
 };
@@ -26,6 +23,7 @@ priority_queue<int>q1;
 priority_queue<int,vector<int>,cmp1>q2;
 priority_queue<int,vector<int>,cmp2>q3;
 priority_queue<node>q4;
+priority_queue <int,vector<int>,greater<int> > q;
 int main()
 {
 	int i,j,k,m,n;
