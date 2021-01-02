@@ -1,53 +1,25 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-const int N = 1e6+10;
-char text[N],pattern[N];
-int temp[N];
-
-void build(){
-	int n=strlen(pattern); temp[0]=0;
-	for(int i=1,j=0;i<n;){
-		if(pattern[i]==pattern[j]){
-			temp[i]=j+1;
-			i++;j++;
-		}
-		else if(j!=0){
-			j=temp[j-1];
-		}
-		else if(j==0){
-			temp[i]=0;i++;
-		}
-	}
+void makeNext(string s) {
+    int i = 0, k = -1;
+    next[0] = -1;
+    int len = strlen(s);
+    while (i < len-1) {
+        while (k >= 0 && s[i] != s[k]) k = next[k];
+        i ++; k ++;
+        if (s[i] == s[k]) next[i] = next[k];
+        else next[i] = k;
+    }
 }
 
-int KMP() { //return where substring 'pattern' starts in string 'text'
-	int n=strlen(text),m=strlen(pattern);
-	for(int i=0,j=0;i<n;){
-		if(text[i]==pattern[j]){
-			if(j==m-1) return i-m+1;//matched and return the value
-			else{
-				i++;j++;
-			}
-		}
-		else if(j!=0){
-			j=temp[j-1];
-		}
-		else if(j==0){
-			i++;
-		}
-	}
-	return -1;
+int kmpMatch(string t, string p) {
+    int i = 0, j = 0;
+    int len_1 = strlen(t), len2 = strlen(p);
+    while (i < len_1 && j < len_2) {
+        if (i == -1 || p[i] == c[j]) {
+            i ++; j ++;
+        } else {
+            i = next[i];
+        }
+    }
+    if (i >= len_1) return j - len_1 + 1;
+    else return 0;
 }
-
-int main(){
-	cin>>text>>pattern;
-	build();
-	for(int i=0;i<strlen(pattern);i++){
-		cout<<temp[i]<<' ';
-	}
-	cout<<endl;
-	cout<<KMP();
-	return 0;
-}
-
