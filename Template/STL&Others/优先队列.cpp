@@ -15,7 +15,7 @@ struct cmp2{
 }; 
 struct node{
 	int x,y;
-	friend bool operator<(node a,node b) {
+	friend bool operator< (node a, node b) {
 		return a.x>b.x;//按x从小到大排 
 	}
 };
