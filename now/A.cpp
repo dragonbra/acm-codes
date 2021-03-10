@@ -5,13 +5,12 @@
 */
 
 #include <bits/stdc++.h>
-#define fastio ios::sync_with_stdio(false); cin.tie(0);
 using namespace std;
 
 typedef long long LL;
 const int N = 20 + 10, P = 1e9 + 7;
 
-void redirect() {
+int main() {
     #ifdef LOCAL
         freopen("in.txt","r",stdin);
         freopen("out.txt","w",stdout);
