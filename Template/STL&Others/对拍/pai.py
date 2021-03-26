@@ -1,9 +1,9 @@
 import os
 tc = 0
 while True:
-    os.system("python gen.py > A.in")
-    os.system("time ./F < A.in > std.out")
-    os.system("./Fstd < A.in > bf.out")
+    os.system("python gen.py > in.txt")
+    os.system("time ./B < in.txt > std.out")
+    os.system("./A < in.txt > bf.out")
     if os.system("diff bf.out std.out"):
         print "WA"
         exit(0)
