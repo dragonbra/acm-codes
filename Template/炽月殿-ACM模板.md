@@ -1,5 +1,99 @@
 [toc]
 
+# 动态规划dp
+
+## 数位dp
+
+```cpp
+/*
+    LOJ 10163
+    ACWing, 1081 度的数量
+* @ author: dragon_bra
+* @ email: tommy514@foxmail.com
+* @ date: 2021-03-10 16:31
+*/
+
+#include <bits/stdc++.h>
+#define fastio ios::sync_with_stdio(false); cin.tie(0);
+using namespace std;
+
+typedef long long ll;
+const int N = 35 + 10;
+
+void redirect() {
+#ifdef LOCAL
+    freopen("in.txt", "r", stdin);
+    freopen("out.txt", "w", stdout);
+#endif
+}
+
+int B, K;
+int f[N][N] = {0};
+
+void init() {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j <= i; j++) {
+            if (j == 0)
+                f[i][j] = 1;
+            else
+                f[i][j] = f[i - 1][j - 1] + f[i - 1][j];
+        }
+    }
+}
+
+int dp(int n) {
+    if (!n)
+        return 0;
+
+    vector<int> nums;
+
+    while (n)
+        nums.push_back(n % B), n /= B;
+
+    int res = 0;
+    int last = 0; // 当前已有1的个数
+
+    for (int i = nums.size() - 1; i >= 0; i--) {
+        int x = nums[i];
+
+        if (x) {
+            res += f[i][K - last];
+
+            if (x > 1) {
+                if (K - last - 1 >= 0)
+                    res += f[i][K - last - 1];
+
+                break;
+            } else {
+                last ++;
+
+                if (last > K)
+                    break;
+            }
+        }
+
+        if (i == 0 && last == K)
+            res ++;
+    }
+
+    return res;
+}
+
+int main() {
+    redirect();
+    init();
+
+    int l, r;
+    cin >> l >> r >> K >> B;
+
+    cout << dp(r) - dp(l - 1) << endl;
+
+    return 0;
+}
+```
+
+
+
 # 数据结构
 
 ## 树状数组[区间修改单点查询
@@ -497,6 +591,270 @@ void insert(int now,node p){
 	splay(now);
 }
 ```
+
+## treap比x大的数有多少个
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+#define fastio ios::sync_with_stdio(false); cin.tie(0);
+const int N = 2500 + 5;
+
+struct Point{
+	int x,y;
+} p[N];
+
+bool cmp1 (Point a, Point b) {
+    return a.y < b.y;
+}
+
+bool cmp2 (Point a, Point b) {
+    return a.x < b.x;
+}
+
+void redirect() {
+    #ifdef LOCAL
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
+}
+
+struct treap {
+    int l[N], r[N], val[N], rnd[N], size[N], w[N];
+    int sz, ans, rt;
+    inline void pushup(int x) { size[x] = size[l[x]] + size[r[x]] + w[x]; }
+    void lrotate(int &k) {
+        int t = r[k];
+        r[k] = l[t];
+        l[t] = k;
+        size[t] = size[k];
+        pushup(k);
+        k = t;
+    }
+  void rrotate(int &k) {
+    int t = l[k];
+    l[k] = r[t];
+    r[t] = k;
+    size[t] = size[k];
+    pushup(k);
+    k = t;
+  }
+  void insert(int &k, int x) {
+    if (!k) {
+      sz++;
+      k = sz;
+      size[k] = 1;
+      w[k] = 1;
+      val[k] = x;
+      rnd[k] = rand();
+      return;
+    }
+    size[k]++;
+    if (val[k] == x) {
+      w[k]++;
+    } else if (val[k] < x) {
+      insert(r[k], x);
+      if (rnd[r[k]] < rnd[k]) lrotate(k);
+    } else {
+      insert(l[k], x);
+      if (rnd[l[k]] < rnd[k]) rrotate(k);
+    }
+  }
+
+  void del(int &k, int x) {
+    if (!k) return;
+    if (val[k] == x) {
+      if (w[k] > 1) {
+        w[k]--;
+        size[k]--;
+        return;
+      }
+      if (l[k] == 0 || r[k] == 0)
+        k = l[k] + r[k];
+      else if (rnd[l[k]] < rnd[r[k]]) {
+        rrotate(k);
+        del(k, x);
+      } else {
+        lrotate(k);
+        del(k, x);
+      }
+    } else if (val[k] < x) {
+      size[k]--;
+      del(r[k], x);
+    } else {
+      size[k]--;
+      del(l[k], x);
+    }
+  }
+
+  int queryrank(int k, int x) {
+    if (!k) return 0;
+    if (val[k] == x)
+      return size[l[k]] + 1;
+    else if (x > val[k]) {
+      return size[l[k]] + w[k] + queryrank(r[k], x);
+    } else
+      return queryrank(l[k], x);
+  }
+
+  int querynum(int k, int x) {
+    if (!k) return 0;
+    if (x <= size[l[k]])
+      return querynum(l[k], x);
+    else if (x > size[l[k]] + w[k])
+      return querynum(r[k], x - size[l[k]] - w[k]);
+    else
+      return val[k];
+  }
+
+  void querypre(int k, int x) {
+    if (!k) return;
+    if (val[k] < x)
+      ans = k, querypre(r[k], x);
+    else
+      querypre(l[k], x);
+  }
+
+  void querysub(int k, int x) {
+    if (!k) return;
+    if (val[k] > x)
+      ans = k, querysub(l[k], x);
+    else
+      querysub(r[k], x);
+  }
+} T[N];
+
+map<int, int> mpx;
+map<int, int> mpy;
+
+ll check(int i,int j){    
+	int l = min(p[i].y,p[j].y), r = max(p[i].y,p[j].y);
+    T[i].insert(T[i].rt, p[j].y);
+    ll lcnt = T[i].queryrank(T[i].rt, l), rcnt = (j - i + 1) - T[i].queryrank(T[i].rt, r) + 1;
+	return lcnt*rcnt;
+}
+
+int main(){
+    fastio;
+    redirect();
+    srand(unsigned(time(NULL)));
+	ll ans=0;
+	int n; cin >> n;
+	for(int i=0;i<n;i++){
+		cin>>p[i].x>>p[i].y;
+	}
+    sort (p, p + n, cmp1);
+    for (int i=0; i<n; i++) mpy[p[i].y] = i;
+    
+    sort (p, p + n, cmp2);
+    for (int i=0; i<n; i++) mpx[p[i].x] = i;
+
+    for (int i=0; i<n; i++) {
+        p[i].x = mpx[p[i].x];
+        p[i].y = mpy[p[i].y];
+    }
+
+	for(int i=0;i<n;i++){
+		for(int j=i; j<n; j++){
+			ans += check(i,j);
+		}
+	}
+	cout<<ans+1<<endl;
+}
+```
+
+## trie思想建树
+
+```cpp
+#include <bits/stdc++.h>
+// codeforces 1416C XOR Inverse
+ 
+#define mp make_pair
+#define pb push_back
+#define f first
+#define s second
+#define ll long long
+#define forn(i, a, b) for(int i = (a); i <= (b); ++i)
+#define forev(i, b, a) for(int i = (b); i >= (a); --i)
+#define VAR(v, i) __typeof( i) v=(i)
+#define forit(i, c) for(VAR(i, (c).begin()); i != (c).end(); ++i)
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((int)(x).size())
+#define file(s) freopen(s".in","r",stdin); freopen(s".out","w",stdout);
+ 
+using namespace std;
+ 
+const int maxn = (int)5e6 + 100;
+const int maxm = (int)1e6 + 100;
+const int mod = (int)1e9 + 7;
+const int P = (int) 1e6 + 7; 
+const double pi = acos(-1.0);
+ 
+#define inf mod
+ 
+typedef long double ld;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+typedef vector<int> vi;   
+typedef vector<ll> Vll;               
+typedef vector<pair<int, int> > vpii;
+typedef vector<pair<ll, ll> > vpll;                        
+
+int n, t[2][maxn], id = 1;
+ll dp[2][30];
+vi g[maxn];
+
+void add(int x, int pos){
+	int v = 0;
+	forev(i, 29, 0){
+		int bit = ((x >> i) & 1);
+		if(!t[bit][v]) t[bit][v] = id++;
+		v = t[bit][v];
+		g[v].pb(pos);	
+	}
+}
+void go(int v, int b = 29){
+	int l = t[0][v], r = t[1][v];
+	if(l) go(l, b - 1);
+	if(r) go(r, b - 1);
+	if(!l || !r) return;
+	ll res = 0;
+	int ptr = 0;
+	for(auto x : g[l]){
+		while(ptr < sz(g[r]) && g[r][ptr] < x) ptr++;
+		res += ptr;
+	}
+	dp[0][b] += res;
+	dp[1][b] += sz(g[l]) * 1ll * sz(g[r]) - res;
+}
+void solve(){
+	scanf("%d", &n);
+	forn(i, 1, n){
+		int x;
+		scanf("%d", &x);
+		add(x, i);
+	}
+	go(0);
+	ll inv = 0;
+	int res = 0;
+	forn(i, 0, 29){
+		inv += min(dp[0][i], dp[1][i]);
+		if(dp[1][i] < dp[0][i])
+			res += (1 << i);
+	}
+	printf("%lld %d", inv, res);
+}
+ 
+int main () {
+	int t = 1;
+	//scanf("%d", &t);
+	while(t--) solve();
+}
+```
+
+
 
 # 数学
 
@@ -1461,9 +1819,13 @@ int Day(int year, int month, int day){
 }
 ```
 
-# 网络流
+# 图论
 
-## 二分图最大流
+
+
+## 网络流
+
+### 二分图最大流
 
 ```cpp
 const int maxn = 200005;
@@ -1554,7 +1916,7 @@ int max_flow()
 }
 ```
 
-## Dinic（Node版本）
+### Dinic（Node版本）
 
 ```cpp
 //以下是网络流模板
@@ -1605,6 +1967,840 @@ int Dinic(){
     return ans;
 }
 ```
+
+## 次小生成树
+
+```cpp
+//AcWing 356. 次小生成树
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long LL;
+
+const int N = 100010, M = 300010, INF = 0x3f3f3f3f;
+
+int n, m;
+struct Edge {
+    int a, b, w;
+    bool used;
+    bool operator< (const Edge &t) const {
+        return w < t.w;
+    }
+} edge[M];
+int p[N];
+int h[N], e[M], w[M], ne[M], idx;
+int depth[N], fa[N][17], d1[N][17], d2[N][17];
+int q[N];
+
+void add(int a, int b, int c) {
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++;
+}
+
+int find(int x) {
+    return p[x] == x ? x : p[x] = find(p[x]);
+}
+
+LL kruskal() {
+    for (int i = 1; i <= n; i ++ ) p[i] = i;
+    sort (edge, edge + m);
+
+    LL res = 0;
+    for (int i = 0; i < m; i ++ ) {
+        int a = find(edge[i].a), b = find(edge[i].b), w = edge[i].w;
+        if (a != b) {
+            p[a] = b;
+            res += w;
+            edge[i].used = true;
+        }
+    }
+
+    return res;
+}
+
+void build() {
+    memset(h, -1, sizeof h);
+    for (int i = 0; i < m; i ++ ) {
+        if (edge[i].used) {
+            int a = edge[i].a, b = edge[i].b, w = edge[i].w;
+            add(a, b, w); add(b, a, w);
+        }
+    }
+}
+
+void bfs() {
+    memset(depth, 0x3f, sizeof depth);
+    depth[0] = 0, depth[1] = 1;
+    q[0] = 1;
+    int hh = 0, tt = 0;
+    while (hh <= tt) {
+        int t = q[hh ++ ];
+        for (int i = h[t]; ~i; i = ne[i]) {
+            int j = e[i];
+            if (depth[j] > depth[t] + 1) {
+                depth[j] = depth[t] + 1;
+                q[ ++ tt] = j;
+                fa[j][0] = t;
+                d1[j][0] = w[i], d2[j][0] = -INF;
+                for (int k = 1; k <= 16; k ++ ) {
+                    int anc = fa[j][k - 1];
+                    fa[j][k] = fa[fa[j][k - 1]][k - 1];
+                    int distance[4] = {d1[j][k - 1], d2[j][k - 1], d1[anc][k - 1], d2[anc][k - 1]};
+                    d1[j][k] = d2[j][k] = -INF;
+                    for (int u = 0; u < 4; u ++ ) {
+                        int d = distance[u];
+                        if (d > d1[j][k]) d2[j][k] = d2[j][k], d1[j][k] = d;
+                        else if (d != d1[j][k] && d > d2[j][k]) d2[j][k] = d;
+                    }
+                }
+            }
+        }
+    }
+}
+
+int lca(int a, int b, int w) {
+    static int distance[N * 2];
+    int cnt = 0;
+    if (depth[a] < depth[b]) swap(a, b);
+    for (int k = 16; k >= 0; k -- ) {
+        if (depth[fa[a][k]] >= depth[b]) {
+            distance[cnt ++ ] = d1[a][k];
+            distance[cnt ++ ] = d2[a][k];
+            a = fa[a][k];
+        }
+    }
+    if (a != b) {
+        for (int k = 16; k >= 0; k -- ) {
+            if (fa[a][k] != fa[b][k]) {
+                distance[cnt ++ ] = d1[a][k];
+                distance[cnt ++ ] = d2[a][k];
+                distance[cnt ++ ] = d1[b][k];
+                distance[cnt ++ ] = d2[b][k];
+                a = fa[a][k], b = fa[b][k];
+            }
+        }
+        distance[cnt ++ ] = d1[a][0];
+        distance[cnt ++ ] = d1[b][0];
+    }
+
+    int dist1 = -INF, dist2 = -INF;
+    for (int i = 0; i < cnt; i ++ ) {
+        int d = distance[i];
+        if (d > dist1) dist2 = dist1, dist1 = d;
+        else if (d != dist1 && d > dist2) dist2 = d;
+    }
+
+    if (w > dist1) return w - dist1;
+    if (w > dist2) return w - dist2;
+    return INF;
+}
+
+int main() {
+    cin >> n >> m;
+    for (int i = 0; i < m; i ++ ) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        edge[i] = {a, b, c};
+    }
+
+    LL sum = kruskal();
+    build();
+
+    bfs(); // 倍增初始化部分
+
+    LL res = 1e18 + 10;
+    for (int i = 0; i < m; i ++ ) {
+        if (!edge[i].used) {
+            int a = edge[i].a, b = edge[i].b, w = edge[i].w;
+            res = min(res, sum + lca(a, b, w));
+        }
+    }
+
+    cout << res << "\n";
+}//AcWing 356. 次小生成树
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long LL;
+
+const int N = 100010, M = 300010, INF = 0x3f3f3f3f;
+
+int n, m;
+struct Edge {
+    int a, b, w;
+    bool used;
+    bool operator< (const Edge &t) const {
+        return w < t.w;
+    }
+} edge[M];
+int p[N];
+int h[N], e[M], w[M], ne[M], idx;
+int depth[N], fa[N][17], d1[N][17], d2[N][17];
+int q[N];
+
+void add(int a, int b, int c) {
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++;
+}
+
+int find(int x) {
+    return p[x] == x ? x : p[x] = find(p[x]);
+}
+
+LL kruskal() {
+    for (int i = 1; i <= n; i ++ ) p[i] = i;
+    sort (edge, edge + m);
+
+    LL res = 0;
+    for (int i = 0; i < m; i ++ ) {
+        int a = find(edge[i].a), b = find(edge[i].b), w = edge[i].w;
+        if (a != b) {
+            p[a] = b;
+            res += w;
+            edge[i].used = true;
+        }
+    }
+
+    return res;
+}
+
+void build() {
+    memset(h, -1, sizeof h);
+    for (int i = 0; i < m; i ++ ) {
+        if (edge[i].used) {
+            int a = edge[i].a, b = edge[i].b, w = edge[i].w;
+            add(a, b, w); add(b, a, w);
+        }
+    }
+}
+
+void bfs() {
+    memset(depth, 0x3f, sizeof depth);
+    depth[0] = 0, depth[1] = 1;
+    q[0] = 1;
+    int hh = 0, tt = 0;
+    while (hh <= tt) {
+        int t = q[hh ++ ];
+        for (int i = h[t]; ~i; i = ne[i]) {
+            int j = e[i];
+            if (depth[j] > depth[t] + 1) {
+                depth[j] = depth[t] + 1;
+                q[ ++ tt] = j;
+                fa[j][0] = t;
+                d1[j][0] = w[i], d2[j][0] = -INF;
+                for (int k = 1; k <= 16; k ++ ) {
+                    int anc = fa[j][k - 1];
+                    fa[j][k] = fa[fa[j][k - 1]][k - 1];
+                    int distance[4] = {d1[j][k - 1], d2[j][k - 1], d1[anc][k - 1], d2[anc][k - 1]};
+                    d1[j][k] = d2[j][k] = -INF;
+                    for (int u = 0; u < 4; u ++ ) {
+                        int d = distance[u];
+                        if (d > d1[j][k]) d2[j][k] = d2[j][k], d1[j][k] = d;
+                        else if (d != d1[j][k] && d > d2[j][k]) d2[j][k] = d;
+                    }
+                }
+            }
+        }
+    }
+}
+
+int lca(int a, int b, int w) {
+    static int distance[N * 2];
+    int cnt = 0;
+    if (depth[a] < depth[b]) swap(a, b);
+    for (int k = 16; k >= 0; k -- ) {
+        if (depth[fa[a][k]] >= depth[b]) {
+            distance[cnt ++ ] = d1[a][k];
+            distance[cnt ++ ] = d2[a][k];
+            a = fa[a][k];
+        }
+    }
+    if (a != b) {
+        for (int k = 16; k >= 0; k -- ) {
+            if (fa[a][k] != fa[b][k]) {
+                distance[cnt ++ ] = d1[a][k];
+                distance[cnt ++ ] = d2[a][k];
+                distance[cnt ++ ] = d1[b][k];
+                distance[cnt ++ ] = d2[b][k];
+                a = fa[a][k], b = fa[b][k];
+            }
+        }
+        distance[cnt ++ ] = d1[a][0];
+        distance[cnt ++ ] = d1[b][0];
+    }
+
+    int dist1 = -INF, dist2 = -INF;
+    for (int i = 0; i < cnt; i ++ ) {
+        int d = distance[i];
+        if (d > dist1) dist2 = dist1, dist1 = d;
+        else if (d != dist1 && d > dist2) dist2 = d;
+    }
+
+    if (w > dist1) return w - dist1;
+    if (w > dist2) return w - dist2;
+    return INF;
+}
+
+int main() {
+    cin >> n >> m;
+    for (int i = 0; i < m; i ++ ) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        edge[i] = {a, b, c};
+    }
+
+    LL sum = kruskal();
+    build();
+
+    bfs(); // 倍增初始化部分
+
+    LL res = 1e18 + 10;
+    for (int i = 0; i < m; i ++ ) {
+        if (!edge[i].used) {
+            int a = edge[i].a, b = edge[i].b, w = edge[i].w;
+            res = min(res, sum + lca(a, b, w));
+        }
+    }
+
+    cout << res << "\n";
+}
+```
+
+## 二分图匹配-匈牙利算法
+
+```cpp
+/*
+Problem: HDU 2063 过山车 匈牙利算法-二分图匹配模板题
+* @ author: dragon_bra
+* @ email: tommy514@foxmail.com
+* @ date: 2021-01-26 22:11
+*/
+
+#include <bits/stdc++.h>
+#define fastio ios::sync_with_stdio(false); cin.tie(0);
+using namespace std;
+
+typedef long long ll;
+const int N = 500 + 10;
+
+void redirect() {
+    #ifdef LOCAL
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
+}
+
+int k, m, n;
+int line[N][N], used[N], nxt[N];
+
+bool Find(int x) {
+    for (int i=1; i<=m; i++) {
+        if (line[x][i] && !used[i]) {
+            used[i] = 1;
+            if (nxt[i] == 0 || Find(nxt[i])) {
+                nxt[i] = x;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+int match() {
+    int sum = 0;
+    for (int i=1; i<=n; i++) {
+        memset(used, 0, sizeof(used));
+        if (Find(i)) sum ++;
+    }
+    return sum;
+}
+
+int main() {
+    redirect();
+
+    while (cin >> k && k) {
+        memset(line, 0, sizeof(line));
+        memset(nxt, 0, sizeof(nxt));
+        cin >> n >> m;
+        for (int i=1; i<=k; i++) {
+            int u, v;
+            cin >> u >> v;
+            line[u][v] = true;
+        }
+        cout << match() << "\n";
+    }
+
+    return 0;
+}
+```
+
+
+
+## dijkstra
+
+```cpp
+
+// Problem: C. Dijkstra?
+// Contest: Codeforces - Codeforces Alpha Round #20 (Codeforces format)
+// URL: https://codeforces.com/problemset/problem/20/C
+// Memory Limit: 64 MB
+// Time Limit: 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
+/*
+  @ author: dragon_bra
+  @ QQ: 1277037638
+  @ email: tommy514@foxmail.com
+*/
+
+#include <bits/stdc++.h>
+#define fastio ios_base::sync_with_stdio(false); cin.tie(0);
+using namespace std;
+
+typedef long long ll;
+const ll INF = 1e18;
+const int N = 2e5 + 10;
+
+int n, m;
+struct edge {
+	int v; ll w;
+	edge(int v, ll w):v(v), w(w){}
+};
+vector<edge> G[N];
+struct node {
+	int u; ll dis;
+	node(int u, ll dis):u(u), dis(dis){}
+	friend bool operator<(node a, node b) {
+		return a.dis > b.dis;
+	}
+};
+ll dis[N];
+ll f[N];
+bool vis[N];
+int ans[N];
+
+void init() {
+	for (int i=1; i<=n; i++) {
+		dis[i] = INF;
+		vis[i] = false;
+	}
+}
+
+int main() {
+
+    fastio;
+    cin >> n >> m;
+    
+    init();
+    
+    for (int i=1; i<=m; i++) {
+    	int u, v; ll w;
+    	cin >> u >> v >> w;
+    	G[u].push_back(edge(v, w));
+    	G[v].push_back(edge(u, w));
+    }
+    
+    priority_queue<node> Q; Q.push(node(1, 0)); dis[1] = 0;
+	while (!Q.empty()) {
+		node now = Q.top(); Q.pop();
+		int u = now.u; ll d = now.dis;
+		if (vis[u]) continue;
+		vis[u] = true;
+		// cout << u << ' ' << d << endl;
+		for (auto nxt: G[u]) {
+			int v = nxt.v; ll w = nxt.w;
+			if (d + w < dis[v]) {
+				dis[v] = d + w;
+				f[v] = u;
+				Q.push(node(v, dis[v]));
+			}
+		}
+	}
+	
+	int cnt = 0; int x = n;
+	while (x != 1) {
+		if (f[x] == 0) break;
+		ans[++cnt] = x;
+		x = f[x];
+	}
+	if (cnt == 0) {
+		puts("-1");
+	} else {
+		ans[++cnt] = 1;
+		for (int i=cnt; i>=1; i--) {
+			cout << ans[i] << ' ';
+		}
+	}
+	
+    return 0;
+}
+
+```
+
+
+
+## LCA
+
+### LCA-倍增
+
+```cpp
+/*
+    洛谷P3379，LCA模板
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 5e5 + 10, M = N * 2;
+const int LOG = 30 + 1;
+
+int n, m;
+int h[N], e[M], ne[M], idx;
+int depth[N], fa[N][LOG];
+int q[N];
+
+void add(int a, int b) {
+    e[idx] = b, ne[idx] = h[a], h[a] = idx ++;
+}
+
+void bfs(int root) {
+    memset(depth, 0x3f3f3f3f, sizeof depth);
+    depth[0] = 0, depth[root] = 1;
+    int hh = 0, tt = 0;
+    q[0] = root;
+    while (hh <= tt) {
+        int t = q[hh ++ ];
+        for (int i = h[t]; ~i; i = ne[i] ) {
+            int j = e[i];
+            if (depth[j] > depth[t] + 1) {
+                depth[j] = depth[t] + 1;
+                q[ ++ tt] = j;
+                fa[j][0] = t;
+                for (int k = 1; k < LOG; k ++ )
+                    fa[j][k] = fa[fa[j][k - 1]][k - 1];
+            }
+        }
+    }
+}
+
+int lca(int a, int b) {
+    if (depth[a] < depth[b]) swap(a, b);
+    for (int k = LOG - 1; k >= 0; k -- ) {
+        if (depth[fa[a][k]] >= depth[b]) // 哨兵解决depth['0'] = '0' 满足不成立的条件
+            a = fa[a][k];
+    }
+    
+    if (a == b) return a;
+    for (int k = LOG - 1; k >= 0; k -- ) {
+        if (fa[a][k] != fa[b][k]) { // 哨兵解决跳出去后
+            a = fa[a][k];
+            b = fa[b][k];
+        }
+    }
+    return fa[a][0];
+}
+
+int main() {
+    #ifdef LOCAL
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
+    int root = 0;
+    cin >> n >> m >> root;
+    memset(h, -1, sizeof h);
+    
+    for (int i = 1; i < n; i ++ ) {
+        int a, b;
+        scanf("%d%d", &a, &b);
+        add(a, b), add(b, a);
+    }
+    
+    bfs(root);
+    
+    while (m -- ) {
+        int a, b;
+        scanf("%d%d", &a, &b);
+        int p = lca(a, b);
+        printf("%d\n", p);
+    }
+
+}
+```
+
+### LCA-tarjan
+
+```cpp
+//AcWing 1171. 距离
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef pair<int, int> PII;
+
+const int N = 2e4 + 10, M = N * 2;
+
+int n, m;
+int h[N], e[M], w[M], ne[M], idx;
+int dist[N];
+int p[N];
+int st[N];
+int res[N];
+vector<PII> query[N]; // first存查询的另外一个点，second存查询编号
+
+void add(int a, int b, int c) {
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++;
+}
+
+void dfs(int u, int fa) {
+    for (int i = h[u]; ~i; i = ne[i]) {
+        int j = e[i];
+        if (j == fa) continue;
+        dist[j] = dist[u] + w[i];
+        dfs(j, u);
+    }
+}
+
+int find(int x) {
+    return p[x] == x ? x : p[x] = find(p[x]);
+}
+
+void tarjan(int u) {
+    st[u] = 1;
+    for (int i = h[u]; ~i; i = ne[i]) {
+        int j = e[i];
+        if (!st[j]) {
+            tarjan(j);
+            p[j] = u;
+        }
+    }
+
+    for (auto item : query[u]) {
+        int y = item.first, id = item.second;
+        if (st[y] == 2) {
+            int anc = find(y);
+            res[id] = dist[u] + dist[y] - 2 * dist[anc]; 
+        }
+    }
+
+    st[u] = 2;
+}
+
+int main() {
+    cin >> n >> m;
+    memset(h, -1, sizeof h);
+    for (int i = 1; i < n; i ++ ) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        add(a, b, c); add(b, a, c);
+    }
+
+    for (int i = 1; i <= m; i ++ ) {
+        int a, b;
+        cin >> a >> b;
+        if (a != b) {
+            query[a].push_back({b, i});
+            query[b].push_back({a, i});
+        }
+    }
+
+    for (int i = 1; i <= n; i ++ ) p[i] = i;
+
+    dfs(1, -1);
+    tarjan(1);
+
+    for (int i = 1; i <= m; i ++ ) cout << res[i] << "\n";
+}
+```
+
+
+
+## tarjan求割点
+
+```cpp
+
+// Problem: P3388 【模板】割点（割顶）
+// Contest: Luogu
+// URL: https://www.luogu.com.cn/problem/P3388
+// Memory Limit: 125 MB
+// Time Limit: 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
+/*
+  @ author: dragon_bra
+  @ QQ: 1277037638
+  @ email: tommy514@foxmail.com
+*/
+
+#include <bits/stdc++.h>
+#define fastio ios_base::sync_with_stdio(false); cin.tie(0);
+using namespace std;
+
+const int N = 2e5 + 10;
+
+int n,m;
+struct edge {
+	int next,to;
+} p[N];
+
+int head[N], num; // num stands for edge number
+
+void addEdge(int x,int y) {
+	p[++num].next=head[x];
+	p[num].to=y;
+	head[x]=num;
+}
+int dfn[N], low[N], tim, cut[N];
+// tim 代表入栈的顺序是第几个
+// cut[i]代表该点是否是割点
+
+void tag (int x,int zx) {
+	// zx 代表最早出现的祖先
+	int kid = 0;
+	dfn[x] = low[x] = ++tim;
+	
+	for(int i=head[x]; i; i=p[i].next) {
+		int v = p[i].to;
+		
+		if(!dfn[v]) {
+			tag(v, zx);
+			low[x] = min(low[v], low[x]);
+			if(low[v] >= dfn[x] && x!=zx) cut[x]=1;
+			if(x==zx) kid++;
+		}
+		
+		low[x] = min(low[x], dfn[v]);
+	}
+	if(kid>1 && x==zx) cut[x]=1;
+	// 如果有两个及以上的儿子，则也是割点
+}
+
+int ans;
+
+int main() {
+	fastio;
+	cin >> n >> m;
+	for (int i=1; i<=m; i++) {
+		int u, v;
+		cin >> u >> v;
+		addEdge(u, v);
+		addEdge(v, u);
+	}
+	
+	for(int i=1;i<=n;i++) if(!dfn[i]) tag(i,i);
+	
+	for(int i=1;i<=n;i++) ans += cut[i];
+	printf("%d\n",ans);
+	for(int i=1;i<=n;i++)
+		if(cut[i]) printf("%d ",i);
+		
+	return 0;
+}
+
+```
+
+## tarjan缩点
+
+```cpp
+
+// Problem: P3387 【模板】缩点
+// Contest: Luogu
+// URL: https://www.luogu.com.cn/problem/P3387
+// Memory Limit: 125 MB
+// Time Limit: 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
+/*
+  @ author: dragon_bra
+  @ QQ: 1277037638
+  @ email: tommy514@foxmail.com
+*/
+
+#include <bits/stdc++.h>
+#define fastio ios_base::sync_with_stdio(false); cin.tie(0);
+using namespace std;
+
+const int N = 10000+15;
+int n, m;
+vector<int> G[N];
+vector<int> G2[N];
+int tim, top;
+int p[N], belong[N], dfn[N], low[N];
+//DFN(u)为节点u搜索被搜索到时的次序编号(时间戳)，Low(u)为u或u的子树能够追溯到的最早的栈中节点的次序号 
+int stac[N], vis[N];
+//栈只为了表示此时是否有父子关系 
+int in[N], dist[N];
+
+void tarjan(int x) {
+	// tarjan 缩点核心代码
+	low[x]=dfn[x]=++tim;
+	stac[++top]=x;vis[x]=1;
+	for (int v:G[x]) {
+		if (!dfn[v]) {
+			tarjan(v);
+			low[x] = min(low[x], low[v]);
+		} else if (vis[v]) {
+	    	low[x] = min(low[x], low[v]);
+		}
+	}
+	if (dfn[x]==low[x]) {
+		int y;
+		while (y=stac[top--]) {
+			belong[y] = x;
+			vis[y] = 0;
+			if (x==y) break;
+			p[x] += p[y]; // 增加点权，本题有效
+		}
+	}
+}
+
+int topo() {
+	queue <int> Q;
+	for (int i=1; i<=n; i++) {
+		if (belong[i]==i && !in[i]) {
+			Q.push(i);
+	        dist[i] = p[i];
+		} 
+	}
+	 
+	while (!Q.empty()) {
+		int now = Q.front(); Q.pop();
+		for (int v:G2[now]) {
+			dist[v] = max(dist[v], dist[now] + p[v]);
+			in[v] --;
+			if (in[v]==0) Q.push(v);
+		}
+	}
+	
+    int ans = 0;
+    for (int i=1;i<=n;i++) ans = max(ans, dist[i]);
+    
+    return ans;
+}
+
+int main() {
+	fastio;
+	cin >> n >> m;
+	for (int i=1;i<=n;i++) cin >> p[i];
+	
+	for (int i=1; i<=m; i++) {
+		int u, v; cin >> u >> v;
+		G[u].push_back(v);
+	}
+	
+	for (int i=1; i<=n; i++) 
+		if (!dfn[i]) tarjan(i);
+		
+	for (int i=1; i<=n; i++) {
+		for (int v:G[i]) {
+			if (belong[i] == belong[v]) continue;
+			G2[belong[i]].push_back(belong[v]);
+			in[belong[v]] ++;
+		}
+	}
+	
+	printf("%d",topo());
+	
+	return 0;
+}
+```
+
+
 
 # 字符串
 
@@ -1841,6 +3037,65 @@ int main(){
     return 0;
 }
 ```
+
+## 最大字典序子串
+
+```cpp
+string lastSubstring(string s) {
+    int left=0;
+    int right=left+1;
+    int step=0;
+    while(right + step <s.size()){
+        if(s[left+step]<s[right+step]){
+            left=right;
+            right=left+1;
+            step=0;                
+        }
+        else if(s[left+step]==s[right+step]){
+            step++;
+        }
+        else{ // s[left+step]>s[right+step]
+            right+=step+1;
+            step=0;
+        }
+    }
+    return s.substr(left, s.size()-left);
+}
+```
+
+## 最大最小表示法
+
+```cpp
+int min_max_express(bool flag) // flag=true的时候为字典序最小，=false的时候为字典序最大
+{
+    int i = 0, j = 1, k = 0, t;
+    while(i < len && j < len && k < len)
+    {
+        t = str[(i + k) % len] - str[(j + k) % len];
+        if(!t) k++;
+        else
+        {
+            if(flag)
+            {
+                if(t > 0) i = i + k + 1;
+                else j = j + k + 1;
+            }
+            else
+            {
+                if(t > 0) j = j + k + 1;
+                else i = i + k + 1;
+            }
+
+            if(j == i) j++;
+            k = 0;
+        }
+    }
+
+    return i < j ? i : j;
+}
+```
+
+
 
 # DFS
 
@@ -2143,7 +3398,7 @@ int highbit(int x) {
 }
 ```
 
-## LIS
+## LIS（最长上升子序列）
 
 ```cpp
 /*
@@ -2261,5 +3516,20 @@ void solve()
         if (!DFN[i])
             tarjan(i);
 }
+```
+
+## 对拍.bat
+
+```cpp
+:loop
+
+rand.exe
+A.exe
+A2.exe
+
+fc 1.out baoli.cout
+if errorlevel==1 pause
+
+goto loop
 ```
 
