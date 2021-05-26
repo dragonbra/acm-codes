@@ -96,7 +96,71 @@ int main() {
 
 # 数据结构
 
-## 树状数组[区间修改单点查询
+## 树状数组[单点修改区间查询]
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const int maxn=1e5+10;
+const int mod=1e9+7;
+const int INF=0x3f3f3f3f;
+char s[maxn];
+int f[30][maxn];
+int tree[30][maxn],len;
+ll read(){
+    ll f=1,x=0;char ch;
+    do{ch=getchar();if(ch=='-')f=-1;}while(ch<'0'||ch>'9');
+    do{x=x*10+ch-'0';ch=getchar();}while(ch>='0'&&ch<='9');
+    return f*x;
+}
+int lowbit(int k){return k&-k;}
+void add(int j,int x,int k){
+	while(x<=len){
+		tree[j][x]+=k;
+		x+=lowbit(x);
+	}
+}
+int sum(int j,int x){
+	int res=0;
+	while(x!=0){
+		res+=tree[j][x];
+		x-=lowbit(x);
+	}
+	return res;
+}
+int main(){
+	scanf("%s",&s);
+	len=strlen(s);
+	for(int i=0;i<len;i++)
+		for(int j='a'-'a';j<='z'-'a';j++)if(j==s[i]-'a')f[j][i+1]=1;
+	for(int j=0;j<='z'-'a';j++)
+		for(int i=1;i<=len;i++)add(j,i,f[j][i]);
+	int T;
+	scanf("%d",&T);
+	while(T--){
+		int opt;
+		scanf("%d",&opt);
+		if(opt==2){
+			int l,r,ans=0;
+			scanf("%d%d",&l,&r);
+			for(int i=0;i<26;i++)
+				if(sum(i,r)-sum(i,l-1)==0)continue;
+				else ans++;
+			printf("%d\n",ans);
+		}else{
+			char opt[3];int x;
+			scanf("%d%s",&x,&opt);
+			add(s[x]-'a',x,-1);
+			add(opt[0]-'a',x,1);
+			s[x]=opt[0];
+		}
+	}
+	return 0;
+}
+```
+
+## 树状数组[区间修改单点查询]
 
 ```cpp
 int n,m;
@@ -139,7 +203,7 @@ int main(){
 }
 ```
 
-## 线段树[单点修改区间查询
+## 线段树[单点修改区间查询]
 
 ```cpp
 #include <cstdio>
@@ -1075,13 +1139,52 @@ O(n^3/4) 筛一个大质数是第几个质数
 */
 ```
 
+## 调和级数求和公式
+
+n · (1 + 1/2 + 1/3 + ...)
+上界 ln(n) + c
+c = 0.57...
+
 ## 费马小定理
 
 $$
 \frac{a}{b} \% mod = a*b^{mod-2} \%mod
 $$
 
-## 高精度
+## 高精度除单精度
+
+```cpp
+#include<iostream>
+#include<algorithm>
+using namespace std;
+string div(string a,int b)//高精度a除以单精度b
+{
+    string r,ans;
+    int d=0;
+    if(a=="0") return a;//特判
+    for(int i=0;i<a.size();i++)
+    {
+            r+=(d*10+a[i]-'0')/b+'0';//求出商
+            d=(d*10+(a[i]-'0'))%b;//求出余数
+    }
+    int p=0;
+    for(int i=0;i<r.size();i++)
+    if(r[i]!='0') {p=i;break;}
+    return r.substr(p);
+}
+int main()
+{
+    string a;
+    int b;
+    while(cin>>a>>b)
+    {
+        cout<<div(a,b)<<endl;
+    }
+    return 0;
+}
+```
+
+## 高精度加减乘
 
 ```cpp
 #include<iostream>
@@ -1203,39 +1306,6 @@ int main(){
 }
 ```
 
-## 高精度除法
-
-```cpp
-#include<iostream>
-#include<algorithm>
-using namespace std;
-string div(string a,int b)//高精度a除以单精度b
-{
-    string r,ans;
-    int d=0;
-    if(a=="0") return a;//特判
-    for(int i=0;i<a.size();i++)
-    {
-            r+=(d*10+a[i]-'0')/b+'0';//求出商
-            d=(d*10+(a[i]-'0'))%b;//求出余数
-    }
-    int p=0;
-    for(int i=0;i<r.size();i++)
-    if(r[i]!='0') {p=i;break;}
-    return r.substr(p);
-}
-int main()
-{
-    string a;
-    int b;
-    while(cin>>a>>b)
-    {
-        cout<<div(a,b)<<endl;
-    }
-    return 0;
-}
-```
-
 ## 高斯-约旦消元
 
 ```cpp
@@ -1292,6 +1362,82 @@ bool Gauss() {
 	return true;
 }
 ```
+
+## 卡特兰数
+
+```cpp
+/*
+Lucas定理是用来求 C(n,m) MOD p，p为素数的值。
+时间复杂度 O（logp(n)∗p)：）
+
+卡特兰数：有一个长度为2n的01序列，其中1,0各n个，要求对于任意的整数k ∈ [ 1 , 2 n ] k \in [1,2n]k∈[1,2n]，数列的前k kk个数中，1的个数不少于0
+f(n) = C(n, 2n) - C(n-1, 2n);
+
+Lucas定理：我们令n=sp+q,m=tp+r.（q，r≤p）
+那么：（在编程时你只要继续对 调用 Lucas 定理即可。代码可以递归的去完成这个过程，其中递归终点为 t=0 ；
+*/
+
+// Problem: P1641 [SCOI2010]生成字符串
+// Contest: Luogu
+// URL: https://www.luogu.com.cn/problem/P1641
+// Memory Limit: 125 MB
+// Time Limit: 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
+
+#include <bits/stdc++.h>
+#define fastio ios_base::sync_with_stdio(false); cin.tie(0);
+using namespace std;
+
+typedef long long ll;
+const int N = 2e5 + 10;
+const int LUCAS_CON = 2e6;
+
+long long F[LUCAS_CON + 10];
+
+void init(long long p) {
+    F[0] = 1;
+    for(int i = 1;i <= LUCAS_CON;i++)
+        F[i] = F[i-1]*i % (p);
+}
+
+long long inv(long long a,long long m) {
+    if(a == 1)return 1;
+    return inv(m%a,m)*(m-m/a)%m;
+}
+
+long long Lucas(long long m,long long n,long long p) {
+	// return C(m, n) % p;
+    long long ans = 1;
+    while(n&&m)
+    {
+        long long a = n%p;
+        long long b = m%p;
+        if(a < b)return 0;
+        ans = ans*F[a]%p*inv(F[b]*F[a-b]%p,p)%p;
+        n /= p;
+        m /= p;
+    }
+    return ans%p;
+}
+
+ll n, m, p;
+int ans1 = 0, ans2 = 0;
+
+int main() {
+
+    cin >> n >> m; p = 20100403;
+    init(p);
+    ll ans = Lucas(n, m+n, p) - Lucas(m-1, m+n, p);
+    ans += p*2; ans %= p;
+    cout << ans << endl;
+
+    return 0;
+}
+
+```
+
+
 
 ## 矩阵快速幂
 
@@ -1435,6 +1581,27 @@ void init() {
     }
   }
 }
+```
+
+## 位运算结论
+
+$$a + b = a ^ b + 2 * (a \& b)$$
+
+```cpp
+'''
+class Solution {
+public:
+    int add(int num1, int num2){
+        while (num2) {
+            int sum = num1 ^ num2;
+            int carry = (num1 & num2) << 1;
+            num1 = sum;
+            num2 = carry;
+        }
+        return num1;
+    }
+};
+'''
 ```
 
 ## 线性基
@@ -1793,6 +1960,91 @@ int main() {
         printf("%lld\n", ans);
     }
 }
+```
+
+## Pollard Rho
+
+```cpp
+#include<cstdio>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+const int MAXN = 65;
+long long x[MAXN];
+vector<long long> f;
+
+long long multi(long long a, long long b, long long p) {
+    long long ans = 0;
+    while(b) {
+        if(b&1LL) ans = (ans+a)%p;
+        a = (a+a)%p;
+        b >>= 1;
+    }
+    return ans;
+}
+
+long long qpow(long long a, long long b, long long p) {
+    long long ans = 1;
+    while(b) {
+        if(b&1LL) ans = multi(ans, a, p);
+        a = multi(a, a, p);
+        b >>= 1;
+    }
+    return ans;
+}
+
+bool Miller_Rabin(long long n) {
+    if(n == 2) return true;
+    int s = 20, i, t = 0;
+    long long u = n-1;
+    while(!(u & 1)) {
+        t++;
+        u >>= 1;
+    }
+    while(s--) {
+        long long a = rand()%(n-2)+2;
+        x[0] = qpow(a, u, n);
+        for(i = 1; i <= t; i++) {
+            x[i] = multi(x[i-1], x[i-1], n);
+            if(x[i] == 1 && x[i-1] != 1 && x[i-1] != n-1) return false;
+        }
+        if(x[t] != 1) return false;
+    }
+    return true;
+}
+
+long long gcd(long long a, long long b) {
+    return b ? gcd(b, a%b) : a;
+}
+
+long long Pollard_Rho(long long n, int c) {
+    long long i = 1, k = 2, x = rand()%(n-1)+1, y = x;
+    while(true) {
+        i++;
+        x = (multi(x, x, n) + c)%n;
+        long long p = gcd((y-x+n)%n, n);
+        if(p != 1 && p != n) return p;
+        if(y == x) return n;
+        if(i == k) {
+            y = x;
+            k <<= 1;
+        }
+    }
+}
+
+void find(long long n, int c) {
+    if(n == 1) return;
+    if(Miller_Rabin(n)) {
+        f.push_back(n);
+        return;
+    }
+    long long p = n, k = c;
+    while(p >= n) p = Pollard_Rho(p, c--);
+    find(p, k);
+    find(n/p, k);
+}
+
 ```
 
 ## Zeller Formula
@@ -2332,7 +2584,267 @@ int main() {
 }
 ```
 
+## 树的最长路径
 
+```cpp
+/*
+    树的最长路径
+    https://www.acwing.com/problem/content/description/1074/
+*/
+#include <cstring>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 10010, M = N * 2;
+
+int n;
+int h[N], e[M], w[M], ne[M], idx;
+int ans;
+
+void add(int a, int b, int c) {
+    e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx ++ ;
+}
+
+int dfs(int u, int father) {
+    int dist = 0; // 往下的最大长度
+    int d1 = 0, d2 = 0; // 从该点出发的最长距离和次长距离
+    
+    for (int i = h[u]; i != -1; i = ne[i]) {
+        int j = e[i];
+        if (j == father) continue;
+        int d = dfs(j, u) + w[i];
+        dist = max(dist, d);
+        
+        if (d >= d1) d2 = d1, d1 = d;
+        else if (d > d2) d2 = d;
+    }
+    
+    ans = max(ans, d1 + d2);
+    
+    return dist;
+}
+
+int main() {
+    cin >> n;
+    
+    memset(h, -1, sizeof h);
+    for (int i = 1; i < n; i ++ ) {
+        int a, b, c; cin >> a >> b >> c;
+        add(a, b, c), add(b, a, c);
+    }
+    
+    dfs(1, -1);
+    
+    cout << ans << "\n";
+    
+    return 0;
+}
+```
+
+## 树形背包
+
+```cpp
+/*
+EOJ https://acm.ecnu.edu.cn/contest/405/problem/G/
+* @ author: dragon_bra
+* @ email: tommy514@foxmail.com
+* @ date: 2021-05-09 13:58
+*/
+
+#include <bits/stdc++.h>
+#define fastio ios::sync_with_stdio(false); cin.tie(0);
+using namespace std;
+
+typedef long long ll;
+const int N = 5e3 + 10;
+const ll mod = 998244353;
+
+void redirect() {
+    #ifdef LOCAL
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
+}
+
+ll qp(ll x, ll p) {
+    ll res = 1;
+    while (p) {
+        if (p & 1) res *= x, res %= mod;
+        x *= x, x %= mod;
+        p >>= 1;
+    }
+    return res;
+}
+
+int n;
+int f[N]; int sz[N];
+vector<int> G[N];
+ll dp[N][N];
+ll cnt[N];
+
+void dfs(int x) {
+    // cout << x << endl;
+    dp[x][1] = 1; sz[x] = 1;
+    for (auto v : G[x]) {
+        dfs(v);
+        for (int i = sz[x]; i >= 1; i -- ) {
+            for (int j = sz[v]; j >= 1; j -- ) {
+                dp[x][i + j] += dp[x][i] * dp[v][j];
+                dp[x][i + j] %= mod;
+            }
+        }
+        sz[x] += sz[v];
+    }
+
+    for (int i = 1; i <= sz[x]; i ++ ) {
+        cnt[i] += dp[x][i];
+    }
+    // cout << x << endl;
+}
+
+int main() {
+    redirect();
+    fastio;
+
+    while(cin >> n) {
+        for (int i = 1; i <= n; i ++ ) G[i].clear();
+        for (int i = 1; i <= n; i++ ) {
+            for (int j = 1; j <= n; j ++ ) dp[i][j] = 0;
+            cnt[i] = 0;
+        }
+
+        for (int i = 2; i <= n; i ++ ) {
+            cin >> f[i];
+            G[f[i]].push_back(i);
+        }
+
+
+        dfs(1);
+
+        ll sum = 0, num = 0;
+        for (int i = 1; i <= n; i ++ ) {
+            // cout << cnt[i] << ' ';
+            sum += cnt[i] * i;
+            num += cnt[i];
+        }
+        // cout << endl;
+
+        sum %= mod, num %= mod;
+        cout << sum * qp(num, mod - 2) % mod << "\n";
+    }
+
+    return 0;
+}
+```
+
+## 树形背包(hard)
+
+```cpp
+/*
+2020 南京 Mhttps://ac.nowcoder.com/acm/contest/10272/M
+* @ author: dragon_bra
+* @ email: tommy514@foxmail.com
+* @ date: 2021-03-26 12:33
+*/
+
+#include <bits/stdc++.h>
+#define fastio ios::sync_with_stdio(false); cin.tie(0);
+using namespace std;
+
+typedef long long ll;
+const int N = 2e3 + 10;
+const ll INF = 1e15 + 10;
+
+void redirect() {
+    #ifdef LOCAL
+        freopen("in.txt","r",stdin);
+        freopen("out.txt","w",stdout);
+    #endif
+}
+
+int T;
+int n, f[N], sz[N];
+vector<int> G[N];
+ll val[N];
+ll dp[N][N][2], tmp[N][N][2];
+
+void dfs(int x) {
+    sz[x] = 1;
+    
+    for (int v: G[x]) {
+        dfs(v);
+        
+        for (int i = 0; i <= sz[x] + sz[v]; i ++ ) {
+            tmp[x][i][0] = tmp[x][i][1] = INF;
+        }
+
+        for (int i = 0; i <= sz[x]; i ++ ) {
+            for (int j = 0; j <= sz[v]; j ++ ) {
+                tmp[x][i + j][0] = min(tmp[x][i + j][0], dp[x][i][0] + dp[v][j][0] + val[v]);
+                if (j > 0)
+                    tmp[x][i + j][0] = min(tmp[x][i + j][0], dp[x][i][0] + dp[v][j][1]);
+                if (i > 0) 
+                    tmp[x][i + j][1] = min(tmp[x][i + j][1], dp[x][i][1] + dp[v][j][0]);
+                if (i > 0 && j > 0) 
+                    tmp[x][i + j][1] = min(tmp[x][i + j][1], dp[x][i][1] + dp[v][j][1]);
+            }
+        }
+        
+        sz[x] += sz[v];
+        for (int i = 0; i <= sz[x]; i ++ ) {
+            dp[x][i][0] = tmp[x][i][0];
+            dp[x][i][1] = tmp[x][i][1];
+        }
+    }
+
+    for (int i = 0; i <= sz[x]; i ++ ) {
+        dp[x][i][0] += val[x];
+    }
+}
+
+void debug() {
+    for (int i = 1; i <= n; i ++ ) {
+        cout << i << ": " << "\n";
+        for (int j = 0; j <= n; j ++ ) cout << dp[i][j][0] << ' '; cout << endl;
+        for (int j = 0; j <= n; j ++ ) cout << dp[i][j][1] << ' '; cout << endl;
+        cout << "---------------------------------------------" << endl;
+    }
+}
+
+int main() {
+    redirect();
+
+    cin >> T;
+    while (T -- ) {
+        cin >> n;
+        for (int i = 1; i <= n; i ++ ) {
+            G[i].clear();
+            for (int j = 0; j <= n; j ++ ) {
+                dp[i][j][0] = dp[i][j][1] = 0;
+            }
+            // dp[i][1][1] = 0;
+        }
+
+        for (int i = 2; i <= n; i ++ ) {
+            cin >> f[i];
+            G[f[i]].push_back(i);
+        }
+        for (int i = 1; i <= n; i ++ ) cin >> val[i];
+
+        dfs(1);
+
+        // debug();
+
+        for (int i = 0; i <= n; i ++ ) {
+            cout << min(dp[1][i][0], dp[1][i][1]) << (i == n ? "\n" : " ");
+        }
+    }
+
+    return 0;
+}
+```
 
 ## dijkstra
 
@@ -2804,6 +3316,8 @@ int main() {
 
 # 字符串
 
+## AC自动机
+
 ```cpp
 #include <cstdio>
 #include <iostream>
@@ -3257,6 +3771,102 @@ public:
         return ans;
     }
 };
+```
+
+## 二进制枚举方案
+
+```cpp
+/*
+    金明的预算方案
+    https://www.acwing.com/problem/content/489/
+*/
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+#define fastio ios::sync_with_stdio(false); cin.tie(NULL);
+#define v first
+#define w second
+
+using namespace std;
+
+typedef pair<int, int> PII;
+
+const int N = 60 + 10;
+const int M = 32000 + 10;
+
+int n, m;
+PII master[N];
+vector<PII> servent[N];
+int f[M];
+
+int main() {
+    fastio;
+    cin >> m >> n;
+    for (int i = 1; i <= n; i ++ ) {
+        int v, w, q;
+        cin >> v >> w >> q;
+        if (!q) master[i] = {v, v * w};
+        else servent[q].push_back({v, v * w});
+    }
+    
+    for (int i = 1; i <= n; i ++ ) {
+        if (master[i].v) {
+            auto &sv = servent[i];
+            for (int j = m; j >= 0; j -- ) {
+                // 很快的二进制枚举方案
+                // here !!!
+                for (int k = 0; k < 1 << sv.size(); k ++ ) {
+                    int v = master[i].v, w = master[i].w;
+                    for (int u = 0; u < sv.size(); u ++ ) {
+                        if (k >> u & 1) {
+                            v += sv[u].v;
+                            w += sv[u].w;
+                        }
+                    }
+                    if (j >= v) f[j] = max(f[j], f[j - v] + w);
+                }
+            }
+        }
+    }
+    
+    cout << f[m] << endl;
+    
+    return 0;
+}
+```
+
+## 二维前缀和
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const int maxn=1e5+10;
+const int mod=1e9+7;
+const int INF=0x3f3f3f3f;
+ll read(){
+    ll f=1,x=0;char ch;
+    do{ch=getchar();if(ch=='-')f=-1;}while(ch<'0'||ch>'9');
+    do{x=x*10+ch-'0';ch=getchar();}while(ch>='0'&&ch<='9');
+    return f*x;
+}
+int main(){
+	scanf("%d%lld",&n,&s);
+	for(int i=1;i<=n;i++)
+		for(int j=1;j<=n;j++){
+			scanf("%lld",&a[i][j]);
+			f[i][j]=f[i-1][j]+f[i][j-1]-f[i-1][j-1]+a[i][j];
+		}
+	printf("%lld\n",f[n][n]+f[0][0]-f[0][n]-f[n][0]);
+	/*
+		二维前缀和
+		f[x][y]+f[i][j]-f[i][y]-f[x][j]
+		表示矩形(i,j)-(x,y)的面积 
+	*/ 
+	return 0;
+}
+
 ```
 
 ## 优先队列
