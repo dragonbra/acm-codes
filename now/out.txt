@@ -1,1 +1,10 @@
-26
+Case 1: 3 5
+Case 2: 3 5
+Case 3: 3 5
+Case 4: 3 5
+Case 5: 3 5
+Case 6: 3 5
+Case 7: 3 5
+Case 8: 3 5
+Case 9: 3 5
+Case 10: 3 5

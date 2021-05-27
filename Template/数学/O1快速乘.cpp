@@ -1,10 +1,9 @@
+// https://codeforces.com/gym/102055/problem/K
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 ll n,c,x,y;
 ll mulit(ll x,ll y,ll mod){
-	
-
 	long long tmp=(x*y-(long long)((long double)x*y/mod+0.5)*mod);
 	return tmp<0 ? tmp+mod : tmp;
 //	ll res=0;
@@ -39,13 +38,13 @@ ll exgcd(ll a,ll b,ll& x,ll& y){
 int main(){
 	int T,tttt=0;
 	scanf("%d",&T);
+    ll d=(1<<30) + 3;
 	while(T--){
 		ll p,q;
 		scanf("%lld%lld",&n,&c);
 		for(long long i=sqrt((long long)n);i>=1;i--)
 			if(n%i==0){p=i,q=n/i;break;}
 		ll e=(p-1)*(q-1);
-        ll d=(quick(2,30,e)+3)%e;
 		//printf("%lld\n",d);
 		assert(d > 0);
 		

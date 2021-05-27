@@ -1,7 +1,7 @@
 /*
 * @ author: dragon_bra
 * @ email: tommy514@foxmail.com
-* @ date: 2021-05-26 21:04
+* @ date: 2021-05-27 18:16
 */
 
 #include <bits/stdc++.h>
@@ -19,21 +19,13 @@ void redirect() {
     #endif
 }
 
-int n = 4;
-
-bool vis[N * 2];
-vector<PII> wl;
-
-void dfs(int x, int num) {
-    for (int i = x; i <= n * 2; i++ ) {
-        
-    }
-}
+int n = 1e5;
 
 int main() {
     redirect();
 
-    dfs(1, 1);
+    cout << n << endl;
+    for (int i = 1; i <= n; i ++ ) cout << i << ' ' << i << endl;
 
     return 0;
 }
