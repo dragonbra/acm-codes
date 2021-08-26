@@ -1,105 +1,54 @@
-//#pragma GCC optimize(2)
-//#pragma GCC optimize("Ofast","inline","-ffast-math")
-//#pragma GCC target("avx,sse2,sse3,sse4,mmx")
-#include<iostream>
-#include<cstdio>
-#include<string>
-#include<ctime>
-#include<cmath>
-#include<cstring>
-#include<algorithm>
-#include<stack>
-#include<climits>
-#include<queue>
-#include<map>
-#include<set>
-#include<sstream>
-#include<cassert>
-#include<bitset>
+#include <iostream>
+#include <cstring>
+#include <cmath>
+#include <algorithm>
+#include <vector>
+#include <queue>
+#include <map>
+#include <unordered_map>
 using namespace std;
-     
-typedef long long LL;
-     
-typedef unsigned long long ull;
-     
-const int inf=0x3f3f3f3f;
- 
-const int N=1e6+100;
- 
-char s[N];
- 
-int n;
- 
-vector<int>node1,node2;
- 
-bool check(int mid)
-{
-	if(node1.size()<mid*2)
-		return false;
-	for(int i=0;i<mid;i++)
-		if(node1[i]>node2[mid-i-1])
-			return false;
-	return true;
+const double eps = 1e-8;
+const double pi = acos(-1.0);
+const int maxn = 1e6+10;
+struct Round {
+	double x, y, r, r2;
+}R[5];
+double d;
+double cal(Round a, Round b) {
+	return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }
- 
-void init()
-{
-	node1.clear(),node2.clear();
-	int pos=1;
-	for(int i=1;i<=n;i++)
-		if(s[i]=='0')
-		{
-			while(pos<i&&s[pos]!='2')
-				pos++;
-			if(pos==i)
-				continue;
-			pos++;
-			node1.push_back(i); 
-		}
-	pos=n;
-	for(int i=n;i>=1;i--)
-		if(s[i]=='2')
-		{
-			while(pos>i&&s[pos]!='0')
-				pos--;
-			if(pos==i)
-				continue;
-			pos--;
-			node2.push_back(i);
-		}
-
-    
-    // cout << "--------" << endl;
-    // for (int x : node1) cout << x - 1 << ' '; cout << endl;
-    // for (int x : node2) cout << x - 1 << ' '; cout << endl;
-    // cout << "--------" << endl;
-}
- 
-int main()
-{
-#ifndef ONLINE_JUDGE
-//  freopen("data.in.txt","r",stdin);
-//  freopen("data.out.txt","w",stdout);
-#endif
-//  ios::sync_with_stdio(false);
-	while(scanf("%d",&n)!=EOF)
-	{
-		scanf("%s",s+1);
-		init();
-		int l=0,r=inf,ans=-1;
-		while(l<=r)
-		{
-			int mid=l+r>>1;
-			if(check(mid))
-			{
-				ans=mid;
-				l=mid+1;
-			}
-			else
-				r=mid-1;
-		}
-		printf("%d\n",ans);
+double solve(Round a, Round b) {
+	double d = cal(a, b);
+	if(d >= a.r + b.r) return 0;
+	if(d <= fabs(a.r - b.r)) {
+		double r = a.r < b.r ? a.r : b.r;
+		return pi * r * r;
 	}
-
-    return 0;
+	double ang1 = acos((a.r * a.r + d * d - b.r * b.r) / (2 * a.r * d));
+	double ang2 = acos((b.r * b.r + d * d - a.r * a.r) / (2 * b.r * d));
+	double res = ang1 * a.r * a.r + ang2 * b.r * b.r - d * a.r * sin(ang1);
+	return res;
+}
+int main(){
+	int T;
+	scanf("%d", &T);
+	while(T--) {
+		scanf("%lf %lf %lf", &R[0].r, &R[0].x, &R[0].y);
+		scanf("%lf %lf %lf", &R[1].r, &R[1].x, &R[1].y);
+		scanf("%lf", &d);
+		// R[2].r = R[0].r - sqrt(2 * (d/2) * (d/2));
+		R[2].r = sqrt(R[0].r * R[0].r - (d / 2) * (d / 2)) - d / 2;
+        R[2].x = R[0].x; R[2].y = R[0].y;
+		// R[3].r = R[1].r - sqrt(2 * (d/2) * (d/2));
+		R[3].r = sqrt(R[1].r * R[1].r - (d / 2) * (d / 2)) - d / 2;
+        R[3].x = R[1].x; R[3].y = R[1].y;
+		//double ans = pi * R[2].r * R[2].r + pi * R[3].r * R[3].r - solve(R[2], R[3]);
+        
+        if (R[3].r < 0) {
+            printf("0.000000\n");
+            continue;
+        }
+		double ret = pi * R[2].r * R[2].r;
+		printf("%.6lf\n", solve(R[2], R[3]) / ret);
+	}
 }

@@ -29,7 +29,7 @@ vector<edge> G[N];
 struct node {
 	int u; ll dis;
 	node(int u, ll dis):u(u), dis(dis){}
-	friend bool operator<(node a, node b) {
+	friend bool operator < (node a, node b) {
 		return a.dis > b.dis;
 	}
 };
