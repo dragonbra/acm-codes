@@ -1,5 +1,5 @@
 
-// Problem: P3805 【模板】manacher算法
+// Problem: P3805 【模板】manachar算法
 // Contest: Luogu
 // URL: https://www.luogu.com.cn/problem/P3805
 // Memory Limit: 512 MB

@@ -1,86 +1,45 @@
-/*
-*  @ author: dragon_bra
-*  @ created at: 2021-11-11 16:48:31
-*/
-
-#include <iostream>
-#include <cstring>
-#include <cmath>
-#include <algorithm>
-#include <vector>
-#include <queue>
-#include <map>
-#include <unordered_map>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-typedef long long LL;
+const int N = 2e5 + 10;
 
-const LL N = 200 + 10;
-
-LL n, m;
-LL c[N], w[N];
-int G[N][N];
-LL ans[N];
-vector<LL> st[N];
-unordered_map<LL, bool> arr[N];
-unordered_map<LL, LL> rem;
-
-void dfs(LL u, LL status) {
-    if (arr[u][status]) {
-        return;
-    }
-
-    arr[u][status] = true;
-    st[u].push_back(status);
-
-    for (int v = 1; v <= n; v ++ ) {
-        if (!G[u][v]) continue;
-        dfs(v, status | (1ll << c[v]) );
-    }
-}
-
-LL getAns(LL status) {
-    if (rem[status]) return rem[status];
-    LL res = 0;
-    for (LL i = 1; i <= n; i ++ ) {
-        // cout << ((status >> i) & 1);
-        if ((status >> i) & 1ll) res += w[i];
-    }
-    // cout << endl;
-    rem[status] = res;
-    return res;
-}
+int n, m;
+int sorted[N], a[N];
+bool vis[N];
 
 int main() {
-    ios::sync_with_stdio(false); cin.tie(0);
 
-    cin >> n >> m;
-    for (LL i = 1; i <= n; i ++ ) cin >> c[i];
-    for (LL i = 1; i <= n; i ++ ) cin >> w[i];
+    unordered_map<int, int> idx; 
+    // 存储排序后的数字和其在数组中的位置
+    // idx[x] 表示 x 这个数字在排序后的数组中的位置
+    vector<int> ans; // 存储答案
 
-    for (LL i = 1; i <= m; i ++ ) {
-        LL u, v; cin >> u >> v;
-        G[u][v] = true;
+    cin >> n ;
+
+    for (int i = 1; i <= n; i++) {
+        cin >> sorted[i];
+        idx[sorted[i]] = i;
+    }
+
+    cin >> m ;
+
+    for (int i = 1; i <= m; i++) {
+        cin >> a[i];
+        // idx[a[i]]可以找到a[i]在排序后的数组中的位置，把对应位置标记为存在，后续存入结果数组
+        vis[idx[a[i]]] = true;
     }
 
     for (int i = 1; i <= n; i ++ ) {
-        for (int j = i + 1; j <= n; j ++ ) {
-            for (int k = j + 1; k <= n; k ++ ) {
-                if (G[i][j] && G[j][k] && G[i][k]) {
-                    G[i][k] = false;
-                }
-            }
+        if (vis[i]) {
+            // 如果该位置标记为存在，则把该数字存入结果数组
+            ans.push_back(sorted[i]);
         }
     }
 
-    dfs(1, 0 | (1ll << c[1]) );
-
-    for (LL i = 1; i <= n; i ++ ) {
-        // cout << i << ": " << endl;
-        for (auto s:st[i]) {
-            ans[i] = max(ans[i], getAns(s));
-        }
-        cout << ans[i] << endl;
+    for (auto x : ans) {
+        // 输出结果
+        cout << x << ' ';
     }
+
+    return 0;
 }

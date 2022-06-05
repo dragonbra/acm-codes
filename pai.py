@@ -4,7 +4,7 @@ kase = 0
 while True:
     print("----------")
     os.system("python3 gen.py >_.in")
-    os.system("time ./B <_.in >_std.out")
+    os.system("time ./A_brute <_.in >_std.out")
     os.system("./A <_.in >_.out")
     print()
     

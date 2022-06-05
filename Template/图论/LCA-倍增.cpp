@@ -38,18 +38,13 @@ void bfs(int root) {
 
 int lca(int a, int b) {
     if (depth[a] < depth[b]) swap(a, b);
-    for (int k = LOG - 1; k >= 0; k -- ) {
-        if (depth[fa[a][k]] >= depth[b]) // 哨兵解决depth['0'] = '0' 满足不成立的条件
-            a = fa[a][k];
-    }
-    
+    for (int i = LOG - 1; i >= 0; i -- )
+        if (depth[fa[a][i]] >= depth[b])
+            a = fa[a][i];
     if (a == b) return a;
-    for (int k = LOG - 1; k >= 0; k -- ) {
-        if (fa[a][k] != fa[b][k]) { // 哨兵解决跳出去后
-            a = fa[a][k];
-            b = fa[b][k];
-        }
-    }
+    for (int i = LOG - 1; i >= 0; i -- )
+        if (fa[a][i] != fa[b][i])
+            a = fa[a][i], b = fa[b][i];
     return fa[a][0];
 }
 
