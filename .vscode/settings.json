@@ -1,9 +1,9 @@
 {
-    "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
         "*.cjson": "jsonc",
         "*.wxss": "css",
         "*.wxs": "javascript",
+<<<<<<< Updated upstream
         "iostream": "cpp",
         "unordered_map": "cpp",
         "vector": "cpp",
@@ -23,5 +23,8 @@
         "variant": "cpp",
         "bitset": "cpp",
         "set": "cpp"
+=======
+        "iostream": "cpp"
+>>>>>>> Stashed changes
     }
 }
